@@ -88,6 +88,14 @@ public class LoginControlador {
 		return "home";
 	}
 	
+	@GetMapping("/privada/banco")
+	public String homeBanco(Model model, Authentication authentication) {
+		model.addAttribute("nombreUsuario", authentication.getName());
+		model.addAttribute("apellidoUsuario", authentication.getCredentials());
+		System.out.println(authentication.getAuthorities());
+		return "banco";
+	}
+	
 	@GetMapping("/privada/listado")
 	public String listadoUsuarios(Model model, HttpServletRequest request,Authentication authentication) {
 		List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
