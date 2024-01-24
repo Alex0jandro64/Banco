@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
+import ProyectoFinal.Banco.servicios.ICuentaServicio;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
+import ProyectoFinal.Banco.servicios.Util;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -24,6 +28,9 @@ public class LoginControlador {
 
 	@Autowired
 	private IUsuarioServicio usuarioServicio;
+	
+	@Autowired
+	private ICuentaServicio cuentaServicio;
 
 	/**
 	 * Gestiona la solicitud HTTP GET para /auth/login y muestra la página de inicio de sesión
@@ -63,6 +70,10 @@ public class LoginControlador {
 		if (nuevoUsuario != null && nuevoUsuario.getDniUsuario() != null) {
 			// Si el usuario y el DNI no son null es que el registro se completo correctamente
 			model.addAttribute("mensajeRegistroExitoso", "Registro del nuevo usuario OK");
+			Usuario usuarioDao = Util.usuarioToDao(usuarioDTO);
+			CuentaBancaria cuentaNueva = new CuentaBancaria();
+			cuentaNueva.setUsuarioCuenta(usuarioDao);
+			cuentaServicio.registrarCuenta(cuentaNueva);
 			return "login";
 		} else {
 			// Se verifica si el DNI ya existe para mostrar error personalizado en la vista

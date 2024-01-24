@@ -35,7 +35,7 @@
 
 	<h3 class="text-dark text-center mt-5">Bienvenido <span th:text="${usuario.nombreUsuario} + ' ' + ${usuario.apellidosUsuario}">usuario</span></h3>
 	
-	<h2>Saldo de la cuenta: <span id="saldo" th:text="${cuentasBancaria.getSaldo()+ ' €'}"></span></h2>
+	<h2>Saldo de la cuenta: <span id="saldo" th:text="${cuentaBancaria.getSaldo()+ ' €'}"></span></h2>
 	<script th:if="${not #strings.isEmpty(noAdmin)}">
 	    mostrarNotificacion("¡Prohibido!", "No tiene permisos para acceder a este recurso", 'error');
 	</script>

@@ -8,4 +8,6 @@ public interface ICuentaServicio {
 
 	
 	public List<CuentaBancaria> obtenerCuentasDeUsuario(Long usuarioId);
+	
+	public CuentaBancaria registrarCuenta(CuentaBancaria cuenta);
 }

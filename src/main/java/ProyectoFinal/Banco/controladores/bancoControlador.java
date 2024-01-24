@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +32,8 @@ public class bancoControlador {
 	 */
 	@GetMapping("/privada/home")
 	public String loginCorrecto(Model model, Authentication authentication) {
+		try {
+			
 		// Obtener el nombre de usuario de la autenticación
         String mail = authentication.getName();
         System.out.println(mail);
@@ -53,9 +53,12 @@ public class bancoControlador {
 		UsuarioDTO usuariodto = Util.usuarioToDto(usuario);
 		
 				
-		model.addAttribute("cuentasBancaria", cuentaDTO);
+		model.addAttribute("cuentaBancaria", cuentaDTO);
 		model.addAttribute("usuario", usuariodto);
 		System.out.println(authentication.getAuthorities());
+		}catch (Exception e) {
+			System.out.println("Error [bancoControlador-loginCorrecto]");// TODO: handle exception
+		}
 		return "home";
 	}
 	
