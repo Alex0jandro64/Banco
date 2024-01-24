@@ -1,6 +1,7 @@
 package ProyectoFinal.Banco.dao;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -8,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -15,7 +17,7 @@ import jakarta.persistence.Table;
  * mapea con esta 1:1 y ejerce como modelo virtual de la tabla en la aplicación.
  */
 @Entity
-@Table(name = "usuarios", schema = "gbp_operacional")
+@Table(name = "usuarios", schema = "bf_operacional")
 public class Usuario {
 
 	// ATRIBUTOS
@@ -48,14 +50,20 @@ public class Usuario {
 	@Column(name = "fch_baja_usuario", nullable = true, updatable = false)
 	private Calendar fchBajaUsuario;
 
-	@Column(name = "token_recuperacion", nullable = true, length = 100)
+	@Column(name = "tokenRecuperacion_usuario", nullable = true, length = 100)
 	private String token;
 
-	@Column(name = "expiracion_token", nullable = true, length = 100)
+	@Column(name = "expiracionToken_usuario", nullable = true, length = 100)
 	private Calendar expiracionToken;
 	
 	@Column(name = "rol", nullable = true, length = 20)
 	private String rol;
+	
+	@Column(name = "rutaImagen_usuario", nullable = true)
+	private String rutaImagenUsuario;
+	
+	@OneToMany(mappedBy = "usuarioCuenta")
+	private List<CuentaBancaria>cuentasBancarias;
 
 
 	// CONSTRUCTORES
@@ -168,8 +176,21 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	
+	public List<CuentaBancaria> getCuentasBancarias() {
+		return cuentasBancarias;
+	}
+
+
+	public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
+		this.cuentasBancarias = cuentasBancarias;
+	}
+	
 
 	// METODOS
+
+	
+
 
 	@Override
 	public int hashCode() {
@@ -204,7 +225,7 @@ public class Usuario {
 				+ ", apellidosUsuario=" + apellidosUsuario + ", tlfUsuario=" + tlfUsuario + ", emailUsuario="
 				+ emailUsuario + ", claveUsuario=" + claveUsuario + ", fchAltaUsuario=" + fchAltaUsuario
 				+ ", fchBajaUsuario=" + fchBajaUsuario + ", token=" + token + ", expiracionToken=" + expiracionToken
-				+ ", rol=" + rol + "]";
+				+ ", codigoRolUsuario=" + rol + "]";
 	}
 
 }

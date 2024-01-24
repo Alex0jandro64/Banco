@@ -40,5 +40,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	 * @return true si existe un usuario con el nombre de usuario especificado, false en caso contrario.
 	 */
 	public boolean existsByNombreUsuario(String nombreUsuario);
+	
+	public Usuario findByNombreUsuario(String nombreUsuario);
 
 }

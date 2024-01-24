@@ -21,7 +21,7 @@ public class UsuarioDTO {
 	private String password;
 	private String password2;
 	private Calendar expiracionToken;
-
+	private String rutaImagenUsuario;
 	//CONSTRUCTORES
 	public UsuarioDTO() {
 	}
@@ -121,6 +121,14 @@ public class UsuarioDTO {
 
 	public void setExpiracionToken(Calendar expiracionToken) {
 		this.expiracionToken = expiracionToken;
+	}
+	
+	public String getRutaImagenUsuario() {
+		return rutaImagenUsuario;
+	}
+
+	public void setRutaImagenUsuario(String rutaImagenUsuario) {
+		this.rutaImagenUsuario = rutaImagenUsuario;
 	}
 
 	//METODOS

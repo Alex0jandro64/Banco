@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
@@ -77,24 +76,9 @@ public class LoginControlador {
 		}
 	}
 
-	/**
-	 * Gestiona la solicitud HTTP GET para llevar a la página de home una vez logeado con exito.
-	 * @return La vista de home.html
-	 */
-	@GetMapping("/privada/home")
-	public String loginCorrecto(Model model, Authentication authentication) {
-		model.addAttribute("nombreUsuario", authentication.getName());
-		System.out.println(authentication.getAuthorities());
-		return "home";
-	}
 	
-	@GetMapping("/privada/banco")
-	public String homeBanco(Model model, Authentication authentication) {
-		model.addAttribute("nombreUsuario", authentication.getName());
-		model.addAttribute("apellidoUsuario", authentication.getCredentials());
-		System.out.println(authentication.getAuthorities());
-		return "banco";
-	}
+	
+	
 	
 	@GetMapping("/privada/listado")
 	public String listadoUsuarios(Model model, HttpServletRequest request,Authentication authentication) {

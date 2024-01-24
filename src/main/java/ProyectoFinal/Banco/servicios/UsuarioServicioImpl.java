@@ -10,8 +10,10 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
+import ProyectoFinal.Banco.repositorios.CuentaRepositorio;
 import ProyectoFinal.Banco.repositorios.UsuarioRepositorio;
 import jakarta.transaction.Transactional;
 
@@ -25,7 +27,10 @@ import jakarta.transaction.Transactional;
 public class UsuarioServicioImpl implements IUsuarioServicio {
 
 	@Autowired
-	private UsuarioRepositorio repositorio;
+	private UsuarioRepositorio repositorioUsuario;
+	
+	@Autowired
+	private CuentaRepositorio repositorioCuenta;
 
 	@Autowired
 	private IUsuarioToDao toDao;
@@ -44,14 +49,14 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 
 		try {
 			// Comprueba si ya existe un usuario con el email que quiere registrar
-			Usuario usuarioDaoByEmail = repositorio.findFirstByEmailUsuario(userDto.getEmailUsuario());
+			Usuario usuarioDaoByEmail = repositorioUsuario.findFirstByEmailUsuario(userDto.getEmailUsuario());
 
 			if (usuarioDaoByEmail != null) {
 				return null; // Si no es null es que ya está registrado
 			}
 
 			// Ahora se comprueba si hay un usuario por el DNI que quiere registrar
-			boolean yaExisteElDNI = repositorio.existsByDniUsuario(userDto.getDniUsuario());
+			boolean yaExisteElDNI = repositorioUsuario.existsByDniUsuario(userDto.getDniUsuario());
 
 			if (yaExisteElDNI) {
 				// Si es que ya hay un usuario con ese dni se setea a null para controlar el
@@ -66,7 +71,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 			Usuario usuarioDao = toDao.usuarioToDao(userDto);
 			usuarioDao.setRol("ROLE_USER");
 			usuarioDao.setFchAltaUsuario(Calendar.getInstance());
-			repositorio.save(usuarioDao);
+			repositorioUsuario.save(usuarioDao);
 
 			return userDto;
 		} catch (IllegalArgumentException iae) {
@@ -82,7 +87,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 	 */
 	private void inicializarUsuarioAdmin() {
 		// Comprueba si ya existe un usuario admin
-		if (!repositorio.existsByNombreUsuario("admin")) {
+		if (!repositorioUsuario.existsByNombreUsuario("admin")) {
 			// Si no existe, crea un nuevo usuario con rol de administrador
 			Usuario admin = new Usuario();
 			admin.setNombreUsuario("admin");
@@ -91,7 +96,11 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 			admin.setEmailUsuario("admin@admin.com");
 			admin.setRol("ROLE_ADMIN");
 
-			repositorio.save(admin);
+			CuentaBancaria cuentaAdmin = new CuentaBancaria();
+			cuentaAdmin.setUsuarioCuenta(admin);
+			cuentaAdmin.setSaldoCuenta(120.50);
+			repositorioUsuario.save(admin);
+			repositorioCuenta.save(cuentaAdmin);
 		}
 	}
 
@@ -106,7 +115,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 	@Override
 	public boolean iniciarResetPassConEmail(String emailUsuario) {
 		try {
-			Usuario usuarioExistente = repositorio.findFirstByEmailUsuario(emailUsuario);
+			Usuario usuarioExistente = repositorioUsuario.findFirstByEmailUsuario(emailUsuario);
 
 			if (usuarioExistente != null) {
 				// Generar el token y establece la fecha de expiración
@@ -118,7 +127,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 				usuarioExistente.setExpiracionToken(fechaExpiracion);
 
 				// Actualizar el usuario en la base de datos
-				repositorio.save(usuarioExistente);
+				repositorioUsuario.save(usuarioExistente);
 
 				// Enviar el correo de recuperación
 				String nombreUsuario = usuarioExistente.getNombreUsuario() + " "
@@ -144,14 +153,14 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 	@Override
 	public boolean modificarContraseñaConToken(UsuarioDTO usuario) {
 
-		Usuario usuarioExistente = repositorio.findByToken(usuario.getToken());
+		Usuario usuarioExistente = repositorioUsuario.findByToken(usuario.getToken());
 
 		if (usuarioExistente != null) {
 			String nuevaContraseña = passwordEncoder.encode(usuario.getPassword());
 			usuarioExistente.setClaveUsuario(nuevaContraseña);
 			usuarioExistente.setToken(null); // Se setea a null para invalidar el token ya consumido al cambiar de
 												// password
-			repositorio.save(usuarioExistente);
+			repositorioUsuario.save(usuarioExistente);
 
 			return true;
 		}
@@ -161,7 +170,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 
 	@Override
 	public UsuarioDTO obtenerUsuarioPorToken(String token) {
-		Usuario usuarioExistente = repositorio.findByToken(token);
+		Usuario usuarioExistente = repositorioUsuario.findByToken(token);
 
 		if (usuarioExistente != null) {
 			UsuarioDTO usuario = toDto.usuarioToDto(usuarioExistente);
@@ -175,32 +184,37 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 
 	@Override
 	public Usuario buscarPorEmail(String email) {
-		return repositorio.findFirstByEmailUsuario(email);
+		return repositorioUsuario.findFirstByEmailUsuario(email);
 	}
 	
 	@Override
 	public Usuario eliminar(long id) {
-		Usuario usuario = repositorio.findById(id).orElse(null);
+		Usuario usuario = repositorioUsuario.findById(id).orElse(null);
 		if (usuario != null) {
-			repositorio.delete(usuario);
+			repositorioUsuario.delete(usuario);
 		} 
 		return usuario;
 		
 	}
+	
+	@Override
+	public Usuario obtenerUsuarioPorNombre(String nombreUsuario) {
+        return repositorioUsuario.findByNombreUsuario(nombreUsuario);
+    }
 
 	// ESTOS METODO NO SE USAN DE MOMENTO
 	@Override
 	public boolean buscarPorDni(String dni) {
-		return repositorio.existsByDniUsuario(dni);
+		return repositorioUsuario.existsByDniUsuario(dni);
 	}
 
 	@Override
 	public Usuario buscarPorId(long id) {
-		return repositorio.findById(id).orElse(null);
+		return repositorioUsuario.findById(id).orElse(null);
 	}
 
 	@Override
 	public List<UsuarioDTO> buscarTodos() {
-		return toDto.listaUsuarioToDto(repositorio.findAll());
+		return toDto.listaUsuarioToDto(repositorioUsuario.findAll());
 	}
 }

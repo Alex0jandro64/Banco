@@ -75,6 +75,7 @@ public interface IUsuarioServicio {
 	 */
 	public Usuario eliminar(long id);
 
+	public Usuario obtenerUsuarioPorNombre(String nombreUsuario);
 
 
 
