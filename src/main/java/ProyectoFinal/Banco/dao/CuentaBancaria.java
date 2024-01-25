@@ -1,11 +1,14 @@
 package ProyectoFinal.Banco.dao;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +29,12 @@ public class CuentaBancaria {
 	
 	@Column(name = "codigo_iban", nullable = true, length = 100)
 	private String codigoIban;
+	
+	@OneToMany(mappedBy = "usuarioTransaccionRemitente")
+	private List<Transaccion>trasaccionesRemitentes;
+	
+	@OneToMany(mappedBy = "usuarioTransaccionDestinatario")
+	private List<Transaccion>trasaccionesDestinatarios;
 
 	public CuentaBancaria(long idCuenta, Usuario usuarioCuenta, double saldoCuenta, String codigoIban) {
 		super();

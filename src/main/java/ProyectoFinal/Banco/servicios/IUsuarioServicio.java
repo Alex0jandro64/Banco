@@ -16,7 +16,7 @@ public interface IUsuarioServicio {
 	 * @param userDTO El usuario a registrar
 	 * @return El usuario registrado
 	 */
-	public UsuarioDTO registrar(UsuarioDTO userDTO);
+	public Usuario registrar(UsuarioDTO userDTO);
 	
 	/**
 	 * Busca a un usuario por su identificador asignado en la bbdd

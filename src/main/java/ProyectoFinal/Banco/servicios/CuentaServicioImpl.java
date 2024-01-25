@@ -1,17 +1,12 @@
 package ProyectoFinal.Banco.servicios;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Usuario;
-import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
-import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.repositorios.CuentaRepositorio;
 import ProyectoFinal.Banco.repositorios.UsuarioRepositorio;
 import jakarta.transaction.Transactional;

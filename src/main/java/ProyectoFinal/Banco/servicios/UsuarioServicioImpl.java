@@ -45,7 +45,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 	private IEmailServicio emailServicio;
 
 	@Override
-	public UsuarioDTO registrar(UsuarioDTO userDto) {
+	public Usuario registrar(UsuarioDTO userDto) {
 
 		try {
 			// Comprueba si ya existe un usuario con el email que quiere registrar
@@ -54,26 +54,26 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 			if (usuarioDaoByEmail != null) {
 				return null; // Si no es null es que ya está registrado
 			}
-
-			// Ahora se comprueba si hay un usuario por el DNI que quiere registrar
-			boolean yaExisteElDNI = repositorioUsuario.existsByDniUsuario(userDto.getDniUsuario());
+			userDto.setClaveUsuario(passwordEncoder.encode(userDto.getClaveUsuario()));
+			Usuario usuarioDao = toDao.usuarioToDao(userDto);			// Ahora se comprueba si hay un usuario por el DNI que quiere registrar
+			boolean yaExisteElDNI = repositorioUsuario.existsByDniUsuario(usuarioDao.getDniUsuario());
 
 			if (yaExisteElDNI) {
 				// Si es que ya hay un usuario con ese dni se setea a null para controlar el
 				// error en controlador
 				userDto.setDniUsuario(null);
-				return userDto;
+				return usuarioDao;
 			}
 
 			// Si llega a esta línea es que no existe el usuario con el email y el dni a
 			// registrar
-			userDto.setClaveUsuario(passwordEncoder.encode(userDto.getClaveUsuario()));
-			Usuario usuarioDao = toDao.usuarioToDao(userDto);
+			
+			
 			usuarioDao.setRol("ROLE_USER");
 			usuarioDao.setFchAltaUsuario(Calendar.getInstance());
 			repositorioUsuario.save(usuarioDao);
 
-			return userDto;
+			return usuarioDao;
 		} catch (IllegalArgumentException iae) {
 			System.out.println("[Error UsuarioServicioImpl - registrar() ]" + iae.getMessage());
 		} catch (Exception e) {
