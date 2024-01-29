@@ -3,6 +3,8 @@ package ProyectoFinal.Banco.servicios;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.repositorios.TransaccionRepository;
 import jakarta.transaction.Transactional;
@@ -16,9 +18,9 @@ public class TransaccionServicioImpl implements ITransaccionServicio{
     private TransaccionRepository transaccionRepository;
 	
 	@Override
-	public List<Transaccion> obtenerTransaccionesDeUsuario(Long usuarioId) {
+	public List<Transaccion> obtenerTransaccionesDeUsuario(CuentaBancaria usuarioId) {
         // Consultar todas las transacciones donde el usuario sea remitente o destinatario
-        return transaccionRepository.findByUsuarioTransaccionRemitenteIdOrUsuarioTransaccionDestinatarioId(usuarioId, usuarioId);
+        return transaccionRepository.findByUsuarioTransaccionRemitenteOrUsuarioTransaccionDestinatario(usuarioId, usuarioId);
     
     }
 	}

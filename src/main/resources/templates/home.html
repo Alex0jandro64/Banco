@@ -8,6 +8,7 @@
 		th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 	<link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 	<link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}">
+	<link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script th:src="@{/script/script.js}"></script>
@@ -38,32 +39,34 @@
 	<h2>Saldo de la cuenta: <span id="saldo" th:text="${cuentaBancaria.getSaldo()+ ' €'}"></span></h2>
 	
 	<h2>Historial de Transacciones</h2>
-	<table class="table table-striped table-bordered" th:if="${not #lists.isEmpty(usuarios)}">
-					<thead class="thead-inverse">
-						<tr>
-							<th class="table-dark">nombre</th>
-							<th class="table-dark">apellidos</th>
-							<th class="table-dark">email</th>
-							<th class="table-dark">DNI</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="transaccion : ${transacciones}">
-							<td th:text="${usuario.nombreUsuario}"></td>
-							<td th:text="${usuario.apellidosUsuario}"></td>
-							<td th:text="${usuario.emailUsuario}"></td>
-							<td th:text="${usuario.dniUsuario}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')">
-								<a class="btn btn-primary" th:href="@{/form/} + ${usuario.id}" th:text="'editar'"></a>
-							</td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')">
-    							<a class="btn btn-danger" th:attr="data-id=${usuario.id}" th:text="'eliminar'" onclick="confirmarEliminar(event)"></a>
-							</td>
-
-						</tr>
-					</tbody>
-				</table>
-	
+	<table border="1">
+        <thead>
+            <tr>
+                <th>ID de Transacción</th>
+                <th>Cantidad</th>
+                <th>Cuenta Destinataria</th>
+                <th>Cuenta Remitente</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="transaccion : ${transacciones}">
+                <td th:text="${transaccion.idTransaccion}"></td>
+                <td th:text="${transaccion.cantidadTransaccion + ' €'}"></td>
+                <td th:text="${transaccion.usuarioTransaccionDestinatario.codigoIban}"></td>
+                <td th:text="${transaccion.usuarioTransaccionRemitente.codigoIban}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div th:if="${hayPaginaAnterior}">
+        <a th:href="@{'/privada/home?pagina=' + ${paginaActual - 1}}">Ver Transacciones Anteriores</a>
+    </div>
+    
+	<div th:if="${haySiguientePagina}">
+        <a th:href="@{'/privada/home?pagina=' + ${paginaActual + 1}}">Ver Siguientes 3 Transacciones</a>
+    </div>
+    
+    <h2>Realizar transaccion</h2>
 	
 	<script th:if="${not #strings.isEmpty(noAdmin)}">
 	    mostrarNotificacion("¡Prohibido!", "No tiene permisos para acceder a este recurso", 'error');
