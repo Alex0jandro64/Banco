@@ -33,12 +33,6 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 	private CuentaRepositorio repositorioCuenta;
 
 	@Autowired
-	private IUsuarioToDao toDao;
-
-	@Autowired
-	private IUsuarioToDto toDto;
-
-	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
@@ -55,7 +49,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 				return null; // Si no es null es que ya está registrado
 			}
 			userDto.setClaveUsuario(passwordEncoder.encode(userDto.getClaveUsuario()));
-			Usuario usuarioDao = toDao.usuarioToDao(userDto);			// Ahora se comprueba si hay un usuario por el DNI que quiere registrar
+			Usuario usuarioDao = Util.usuarioToDao(userDto);			// Ahora se comprueba si hay un usuario por el DNI que quiere registrar
 			boolean yaExisteElDNI = repositorioUsuario.existsByDniUsuario(usuarioDao.getDniUsuario());
 
 			if (yaExisteElDNI) {
@@ -173,7 +167,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 		Usuario usuarioExistente = repositorioUsuario.findByToken(token);
 
 		if (usuarioExistente != null) {
-			UsuarioDTO usuario = toDto.usuarioToDto(usuarioExistente);
+			UsuarioDTO usuario = Util.usuarioToDto(usuarioExistente);
 			return usuario;
 		} else {
 			System.out.println("No existe el usuario con el token " + token);
@@ -215,6 +209,6 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 
 	@Override
 	public List<UsuarioDTO> buscarTodos() {
-		return toDto.listaUsuarioToDto(repositorioUsuario.findAll());
+		return Util.listaUsuarioToDto(repositorioUsuario.findAll());
 	}
 }

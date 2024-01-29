@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import ProyectoFinal.Banco.dao.CuentaBancaria;
+import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.servicios.ICuentaServicio;
+import ProyectoFinal.Banco.servicios.ITransaccionServicio;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
 import ProyectoFinal.Banco.servicios.Util;
 
@@ -24,6 +26,9 @@ public class bancoControlador {
 	
 	@Autowired
     private IUsuarioServicio usuarioServicio;
+	
+	@Autowired
+    private ITransaccionServicio transaccionServicio;
 
 	
 	/**
@@ -48,13 +53,21 @@ public class bancoControlador {
 		
 		List<CuentaBancaria> cuentasBancarias = cuentaServicio.obtenerCuentasDeUsuario(idUsuario);
 		List<CuentaBancariaDTO> cuentasBancariasDto = Util.cuentaBancariaToDto(cuentasBancarias);
-		
+		List<Transaccion> transacciones = transaccionServicio.obtenerTransaccionesDeUsuario(idUsuario);
 		CuentaBancariaDTO cuentaDTO = cuentasBancariasDto.get(0);
 		UsuarioDTO usuariodto = Util.usuarioToDto(usuario);
 		
 				
 		model.addAttribute("cuentaBancaria", cuentaDTO);
 		model.addAttribute("usuario", usuariodto);
+		model.addAttribute("transacciones", transacciones);
+		
+		for (Transaccion transaccion : transacciones) {
+			System.out.println(transaccion.getIdTransaccion());
+			System.out.println(transaccion.getCantidadTransaccion());
+			System.out.println(transaccion.getUsuarioTransaccionDestinatario());
+			System.out.println(transaccion.getUsuarioTransaccionRemitente());
+		}
 		System.out.println(authentication.getAuthorities());
 		}catch (Exception e) {
 			System.out.println("Error [bancoControlador-loginCorrecto]");// TODO: handle exception
