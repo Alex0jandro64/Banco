@@ -8,4 +8,6 @@ import ProyectoFinal.Banco.dao.Transaccion;
 public interface ITransaccionServicio {
 
 	public List<Transaccion> obtenerTransaccionesDeUsuario(CuentaBancaria usuarioId);
+	
+	public Transaccion registrarTransaccion(Transaccion transaccion);
 }

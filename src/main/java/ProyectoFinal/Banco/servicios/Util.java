@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ProyectoFinal.Banco.dao.CuentaBancaria;
+import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
+import ProyectoFinal.Banco.dto.TransaccionDTO;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 
 @Service
@@ -87,7 +89,7 @@ public class Util {
 		}
 		return null;
 	}
-	
+
 	static public Usuario usuarioToDao(UsuarioDTO usuarioDTO) {
 
 		Usuario usuarioDao = new Usuario();
@@ -99,7 +101,7 @@ public class Util {
 			usuarioDao.setClaveUsuario(usuarioDTO.getClaveUsuario());
 			usuarioDao.setTlfUsuario(usuarioDTO.getTlfUsuario());
 			usuarioDao.setDniUsuario(usuarioDTO.getDniUsuario());
-			
+
 			return usuarioDao;
 
 		} catch (Exception e) {
@@ -130,4 +132,23 @@ public class Util {
 		return null;
 	}
 
+	static public Transaccion transaccionToDao(TransaccionDTO transaccionDto) {
+
+		Transaccion transaccionDao = new Transaccion();
+
+		try {
+			transaccionDao.setCantidadTransaccion(transaccionDto.getCantidadTransaccion());
+			transaccionDao.setUsuarioTransaccionDestinatario(transaccionDto.getUsuarioTransaccionDestinatario());
+			transaccionDao.setUsuarioTransaccionRemitente(transaccionDto.getUsuarioTransaccionRemitente());
+
+			return transaccionDao;
+
+		} catch (Exception e) {
+			System.out.println(
+					"\n[ERROR Util - transaccionToDao()] - Al convertir transaccionDto a transaccionDao (return null): "
+							+ e);
+			return null;
+		}
+
+	}
 }

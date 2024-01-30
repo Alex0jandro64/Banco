@@ -49,6 +49,7 @@ public class LoginControlador {
 	 */
 	@GetMapping("/auth/registrar")
 	public String registrarGet(Model model) {
+		
 		model.addAttribute("usuarioDTO", new UsuarioDTO());
 		return "registro";
 	}

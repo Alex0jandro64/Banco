@@ -21,6 +21,23 @@ public class TransaccionServicioImpl implements ITransaccionServicio{
 	public List<Transaccion> obtenerTransaccionesDeUsuario(CuentaBancaria usuarioId) {
         // Consultar todas las transacciones donde el usuario sea remitente o destinatario
         return transaccionRepository.findByUsuarioTransaccionRemitenteOrUsuarioTransaccionDestinatario(usuarioId, usuarioId);
-    
     }
+	
+	@Override
+	public Transaccion registrarTransaccion(Transaccion transaccion) {
+
+		try {
+			transaccion.
+			transaccionRepository.save(transaccion);
+
+
+			return transaccion;
+		} catch (IllegalArgumentException iae) {
+			System.out.println("[Error TransaccionServicioImpl - registrar() ]" + iae.getMessage());
+		} catch (Exception e) {
+			System.out.println("[Error TransaccionServicioImpl - registrar() ]" + e.getMessage());
+		}
+		return null;
+	}
+	
 	}

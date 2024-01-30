@@ -23,7 +23,9 @@
 				<a href="/">AlceBank</a>
 			</div>
 			<ul class="nav-links">
+				<li class="mt-3 me-5"><a th:href="@{/privada/home}">Inicio</a></li>
 				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/privada/listado}">Listado Usuarios</a></li>
+				<li class="mt-3 me-5"><a th:href="@{/privada/nuevaTransaccion}">Realizar Transaccion</a></li>
 				<li>
 					<form th:action="@{/auth/logout}" method="post" id="logoutForm">
 						<button type="button" class="btn btn-dark mt-2"
@@ -42,31 +44,28 @@
 	<table border="1">
         <thead>
             <tr>
-                <th>ID de Transacción</th>
                 <th>Cantidad</th>
                 <th>Cuenta Destinataria</th>
                 <th>Cuenta Remitente</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="transaccion : ${transacciones}">
-                <td th:text="${transaccion.idTransaccion}"></td>
-                <td th:text="${transaccion.cantidadTransaccion + ' €'}"></td>
-                <td th:text="${transaccion.usuarioTransaccionDestinatario.codigoIban}"></td>
+            <tr th:each="transaccion : ${transacciones}"th:class="${transaccion.usuarioTransaccionDestinatario.codigoIban == cuentaBancaria.codigoIban ? 'ingreso' : 'pago'}">
+				<td th:text="${(transaccion.usuarioTransaccionDestinatario.codigoIban == cuentaBancaria.codigoIban ? '+' : (transaccion.usuarioTransaccionRemitente.codigoIban == cuentaBancaria.codigoIban ? '-' : '')) + transaccion.cantidadTransaccion + ' €'}"></td>
+				<td th:text="${transaccion.usuarioTransaccionDestinatario.codigoIban}"></td>
                 <td th:text="${transaccion.usuarioTransaccionRemitente.codigoIban}"></td>
             </tr>
         </tbody>
     </table>
     
-    <div th:if="${hayPaginaAnterior}">
-        <a th:href="@{'/privada/home?pagina=' + ${paginaActual - 1}}">Ver Transacciones Anteriores</a>
-    </div>
-    
-	<div th:if="${haySiguientePagina}">
-        <a th:href="@{'/privada/home?pagina=' + ${paginaActual + 1}}">Ver Siguientes 3 Transacciones</a>
-    </div>
-    
-    <h2>Realizar transaccion</h2>
+<div th:if="${hayPaginaAnterior}">
+    <button type="button" th:onclick="'location.href=\'/privada/home?pagina=' + (${paginaActual} - 1) + '\''">Ver Transacciones Anteriores</button>
+</div>
+
+<div th:if="${haySiguientePagina}" style="margin-top: 10px;">
+    <button type="button" th:onclick="'location.href=\'/privada/home?pagina=' + (${paginaActual} + 1) + '\''">Ver Siguientes Transacciones</button>
+</div>
+
 	
 	<script th:if="${not #strings.isEmpty(noAdmin)}">
 	    mostrarNotificacion("¡Prohibido!", "No tiene permisos para acceder a este recurso", 'error');
