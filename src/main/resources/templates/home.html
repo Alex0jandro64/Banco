@@ -17,6 +17,12 @@
 </head>
 
 <body>
+<script th:inline="javascript">
+        /* Obtener el valor del usuario desde el modelo y almacenarlo en sessionStorage */
+        var usuarioTransaccionRemitente = /*[[${usuarioTransaccionRemitente}]]*/ '';
+        sessionStorage.setItem('usuarioTransaccionRemitente', usuarioTransaccionRemitente);
+    </script>
+
 	<nav>
 		<div class="menu">
 			<div class="logo">
@@ -37,6 +43,19 @@
 	</nav>
 
 	<h3 class="text-dark text-center mt-5">Bienvenido <span th:text="${usuario.nombreUsuario} + ' ' + ${usuario.apellidosUsuario}">usuario</span></h3>
+	<h3 class="text-dark text-center mt-5">Cuenta Actual: <span th:text="${cuentaBancaria.getCodigoIban()}"></span></h3>
+	
+	<h2>Cambiar de Cuenta</h2>
+    <form action="/privada/home" method="GET">
+        <select name="cuentaIndex">
+            <option th:each="cuenta, index : ${cuentasBancarias}" 
+                    th:value="${index.index}" 
+                    th:selected="${index.index == cuentaIndex}">
+                <span th:text="${cuenta.codigoIban}"></span>
+            </option>
+        </select>
+        <input type="submit" value="Cambiar Cuenta">
+    </form>
 	
 	<h2>Saldo de la cuenta: <span id="saldo" th:text="${cuentaBancaria.getSaldo()+ ' €'}"></span></h2>
 	
@@ -66,6 +85,26 @@
     <button type="button" th:onclick="'location.href=\'/privada/home?pagina=' + (${paginaActual} + 1) + '\''">Ver Siguientes Transacciones</button>
 </div>
 
+	<script th:if="${not #strings.isEmpty(mensajeTransaccionExitosa)}">
+	    mostrarNotificacion("¡Transaccion exitosa!", "Su transaccion se a realizado correctamente", 'success');
+	</script>
+	
+	<script th:if="${not #strings.isEmpty(mensajeTransaccionError)}">
+	    mostrarNotificacion("¡Transaccion fallida!", "Intentelo de nuevo mas tarde", 'error');
+	</script>
+	
+	<script th:if="${not #strings.isEmpty(mensajeTransaccionErrorExisteCuenta)}">
+	    mostrarNotificacion("¡Transaccion fallida!", "No existe la Cuenta Destino", 'error');
+	</script>
+	
+	<script th:if="${not #strings.isEmpty(mensajeTransaccionErrorCuenta)}">
+	    mostrarNotificacion("¡Transaccion fallida!", "No puede hacer una transferencia a la misma cuenta", 'error');
+	</script>
+	
+	<script th:if="${not #strings.isEmpty(mensajeTransaccionErrorSaldo)}">
+	    mostrarNotificacion("¡Transaccion fallida!", "No tiene suficiente saldo", 'error');
+	</script>
+	
 	
 	<script th:if="${not #strings.isEmpty(noAdmin)}">
 	    mostrarNotificacion("¡Prohibido!", "No tiene permisos para acceder a este recurso", 'error');

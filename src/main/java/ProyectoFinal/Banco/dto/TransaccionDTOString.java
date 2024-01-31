@@ -1,25 +1,23 @@
 package ProyectoFinal.Banco.dto;
 
-import ProyectoFinal.Banco.dao.CuentaBancaria;
-
 /**
- * Clase que representa un objeto de transferencia de datos (DTO) para transacciones.
+ * Clase que representa un objeto de transferencia de datos (DTO) para transacciones con datos de tipo String.
  */
-public class TransaccionDTO {
+public class TransaccionDTOString {
 
     // ATRIBUTOS
     private long idTransaccion;
-    private CuentaBancaria usuarioTransaccionRemitente;
-    private CuentaBancaria usuarioTransaccionDestinatario;
+    private String usuarioTransaccionRemitente;
+    private String usuarioTransaccionDestinatario;
     private double cantidadTransaccion;
 
     // CONSTRUCTORES
-    public TransaccionDTO() {
+    public TransaccionDTOString() {
         super();
     }
 
-    public TransaccionDTO(long idTransaccion, CuentaBancaria usuarioTransaccionRemitente,
-            CuentaBancaria usuarioTransaccionDestinatario, double cantidadTransaccion) {
+    public TransaccionDTOString(long idTransaccion, String usuarioTransaccionRemitente,
+            String usuarioTransaccionDestinatario, double cantidadTransaccion) {
         super();
         this.idTransaccion = idTransaccion;
         this.usuarioTransaccionRemitente = usuarioTransaccionRemitente;
@@ -36,19 +34,19 @@ public class TransaccionDTO {
         this.idTransaccion = idTransaccion;
     }
 
-    public CuentaBancaria getUsuarioTransaccionRemitente() {
+    public String getUsuarioTransaccionRemitente() {
         return usuarioTransaccionRemitente;
     }
 
-    public void setUsuarioTransaccionRemitente(CuentaBancaria usuarioTransaccionRemitente) {
+    public void setUsuarioTransaccionRemitente(String usuarioTransaccionRemitente) {
         this.usuarioTransaccionRemitente = usuarioTransaccionRemitente;
     }
 
-    public CuentaBancaria getUsuarioTransaccionDestinatario() {
+    public String getUsuarioTransaccionDestinatario() {
         return usuarioTransaccionDestinatario;
     }
 
-    public void setUsuarioTransaccionDestinatario(CuentaBancaria usuarioTransaccionDestinatario) {
+    public void setUsuarioTransaccionDestinatario(String usuarioTransaccionDestinatario) {
         this.usuarioTransaccionDestinatario = usuarioTransaccionDestinatario;
     }
 

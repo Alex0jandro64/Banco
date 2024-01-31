@@ -1,5 +1,6 @@
 package ProyectoFinal.Banco.controladores;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,32 +9,69 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Transaccion;
-import ProyectoFinal.Banco.dto.TransaccionDTO;
+import ProyectoFinal.Banco.dao.Usuario;
+import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
+import ProyectoFinal.Banco.dto.TransaccionDTOString;
+import ProyectoFinal.Banco.servicios.ICuentaServicio;
 import ProyectoFinal.Banco.servicios.ITransaccionServicio;
+import ProyectoFinal.Banco.servicios.IUsuarioServicio;
 import ProyectoFinal.Banco.servicios.Util;
 
-
+/**
+ * Controlador para gestionar las transacciones bancarias.
+ */
 @Controller
 public class TransaccionControlador {
 
 	@Autowired
-	private ITransaccionServicio transaccionServicio;
+    private ICuentaServicio cuentaServicio;
 	
-	@GetMapping("/privada/nuevaTransaccion")
-	public String nuevaTrasaccion(Model model, Authentication authentication) {
-		return "nuevaTransaccion";
-	}
+	@Autowired
+    private IUsuarioServicio usuarioServicio;
 	
-	@PostMapping("/privada/nuevaTransaccion")
-	public String nuevaTransaccionPost(@ModelAttribute TransaccionDTO transaccionDTO, Model model) {
+    @Autowired
+    private ITransaccionServicio transaccionServicio;
 
-		
-		Transaccion transaccionDao=Util.transaccionToDao(transaccionDTO);
-		
-		Transaccion nuevaTransaccion = transaccionServicio.registrarTransaccion(transaccionDao);	
-		
-		return "nuevaTransaccion";
-	}
+    @GetMapping("/privada/nuevaTransaccion")
+    public String nuevaTrasaccion(Model model, Authentication authentication) {
+    	String mail = authentication.getName();
+        Usuario usuario = usuarioServicio.buscarPorEmail(mail);
+        Long idUsuario = usuario.getIdUsuario();
+        List<CuentaBancaria> cuentasBancarias = cuentaServicio.obtenerCuentasDeUsuario(idUsuario);
+        List<CuentaBancariaDTO> cuentasBancariasDto = Util.cuentaBancariaToDto(cuentasBancarias);
+        model.addAttribute("cuentasBancariasDto",cuentasBancariasDto);
+        return "nuevaTransaccion";
+    }
+
+	@PostMapping("/privada/nuevaTransaccion")
+    public String nuevaTransaccionPost(@ModelAttribute TransaccionDTOString transaccionDTOString,Authentication authentication ,RedirectAttributes redirectAttributes) {
+        try {
+        	
+            Transaccion nuevaTransaccion = transaccionServicio.registrarTransaccion(transaccionDTOString);
+            
+            if (nuevaTransaccion.getCantidadTransaccion() == 1) {
+                redirectAttributes.addFlashAttribute("mensajeTransaccionExitosa", "Registro del nuevo usuario OK");
+            } 
+            else if(nuevaTransaccion.getCantidadTransaccion()==-1) {
+            	redirectAttributes.addFlashAttribute("mensajeTransaccionErrorSaldo", "No tiene saldo Suficiente.");
+            }
+            else if(nuevaTransaccion.getCantidadTransaccion()==2) {
+            	redirectAttributes.addFlashAttribute("mensajeTransaccionErrorCuenta", "No puede hacer una tranferencia a su misma cuenta.");
+            }
+            else if(nuevaTransaccion.getCantidadTransaccion()==3) {
+            	redirectAttributes.addFlashAttribute("mensajeTransaccionErrorExisteCuenta", "No existe la cuenta bancaria.");
+            }
+            else {
+                redirectAttributes.addFlashAttribute("mensajeTransaccionError", "Error al registrar la transacción.");
+            }
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error al registrar la transacción: " + e.getMessage());
+        }
+        return "redirect:/privada/home";
+    }
+
 }

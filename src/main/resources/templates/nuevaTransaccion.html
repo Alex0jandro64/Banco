@@ -35,15 +35,26 @@
 			</ul>
 		</div>
 	</nav>
-<form class="form" th:action="@{/privada/nuevaTransaccion}" enctype="multipart/form-data" method="post" th:object="${TransaccionDTO}">
+<form class="form" th:action="@{/privada/nuevaTransaccion}" enctype="multipart/form-data" method="post" th:object="${TransaccionDTOString}">
     <h2>Formulario de Transferencia</h2>
+    <label for="cuenta">Selecciona una cuenta:</label>
+    <select id="usuarioTransaccionRemitente" name="usuarioTransaccionRemitente">
+        <option th:each="cuenta : ${cuentasBancariasDto}" th:value="${cuenta.getCodigoIban()}" th:text="${cuenta.getCodigoIban()}"></option>
+    </select>
+    
     <label for="cantidad">Cantidad:</label>
-    <input type="number" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad" required>
+    <input type="number" id="cantidadTransaccion" name="cantidadTransaccion" placeholder="Ingrese la cantidad" required min="0">
 
     <label for="codigoiban">Código IBAN:</label>
-    <input type="text" id="codigoiban" name="codigoiban" placeholder="Ingrese el código IBAN" required>
-
+    <input type="text" id="usuarioTransaccionDestinatario" name="usuarioTransaccionDestinatario" placeholder="Ingrese el código IBAN" required>
+	
+        
     <input type="submit" value="Realizar Transferencia">
 </form>
+<script>
+        // Recuperar el usuario de sessionStorage y establecerlo en el campo oculto
+        var usuarioTransaccionRemitente = sessionStorage.getItem('usuarioTransaccionRemitente');
+        document.getElementById('usuarioTransaccionRemitente').value = usuarioTransaccionRemitente;
+    </script>
 </body>
 </html>

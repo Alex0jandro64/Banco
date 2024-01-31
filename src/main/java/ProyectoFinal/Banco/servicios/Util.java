@@ -12,143 +12,146 @@ import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
 import ProyectoFinal.Banco.dto.TransaccionDTO;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 
+/**
+ * Clase utilitaria con métodos estáticos para realizar conversiones entre objetos DTO y DAO.
+ */
 @Service
 public class Util {
 
-	static public CuentaBancariaDTO cuentaToDTO(CuentaBancaria u) {
+    /**
+     * Convierte un objeto CuentaBancaria a un objeto CuentaBancariaDTO.
+     * @param cuentaBancaria El objeto CuentaBancaria a convertir.
+     * @return El objeto CuentaBancariaDTO resultante.
+     */
+    static public CuentaBancariaDTO cuentaToDTO(CuentaBancaria cuentaBancaria) {
+        try {
+            CuentaBancariaDTO dto = new CuentaBancariaDTO();
+            dto.setIdCuenta(cuentaBancaria.getIdCuenta());
+            dto.setUsuario(cuentaBancaria.getIdCuenta()); // ¿Esto es correcto?
+            dto.setSaldo(cuentaBancaria.getSaldoCuenta());
+            dto.setCodigoIban(cuentaBancaria.getCodigoIban());
+            return dto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en cuentaToDTO()] - Error al convertir CuentaBancaria a CuentaBancariaDTO: " + e.getMessage());
+            return null;
+        }
+    }
 
-		try {
-			CuentaBancariaDTO dto = new CuentaBancariaDTO();
-			dto.setIdCuenta(u.getIdCuenta());
-			dto.setUsuario(u.getIdCuenta());
-			dto.setSaldo(u.getSaldoCuenta());
-			dto.setCodigoIban(u.getCodigoIban());
+    /**
+     * Convierte una lista de CuentaBancaria a una lista de CuentaBancariaDTO.
+     * @param listaCuentas La lista de CuentaBancaria a convertir.
+     * @return La lista de CuentaBancariaDTO resultante.
+     */
+    static public List<CuentaBancariaDTO> cuentaBancariaToDto(List<CuentaBancaria> listaCuentas) {
+        try {
+            List<CuentaBancariaDTO> listaDto = new ArrayList<>();
+            for (CuentaBancaria cuentaBancaria : listaCuentas) {
+                listaDto.add(Util.cuentaToDTO(cuentaBancaria));
+            }
+            return listaDto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en cuentaBancariaToDto()] - Error al convertir lista de CuentaBancaria a lista de CuentaBancariaDTO: " + e.getMessage());
+            return null;
+        }
+    }
 
-			return dto;
-		} catch (Exception e) {
-			System.out.println(
-					"\n[ERROR CuentaToDtoImpl - CuentaToDto()] - Error al convertir usuario DAO a usuarioDTO (return null): "
-							+ e);
-			return null;
-		}
-	}
+    /**
+     * Convierte un objeto Usuario a un objeto UsuarioDTO.
+     * @param usuario El objeto Usuario a convertir.
+     * @return El objeto UsuarioDTO resultante.
+     */
+    static public UsuarioDTO usuarioToDto(Usuario usuario) {
+        try {
+            UsuarioDTO dto = new UsuarioDTO();
+            dto.setNombreUsuario(usuario.getNombreUsuario());
+            dto.setApellidosUsuario(usuario.getApellidosUsuario());
+            dto.setDniUsuario(usuario.getDniUsuario());
+            dto.setTlfUsuario(usuario.getTlfUsuario());
+            dto.setEmailUsuario(usuario.getEmailUsuario());
+            dto.setClaveUsuario(usuario.getClaveUsuario());
+            dto.setToken(usuario.getToken());
+            dto.setExpiracionToken(usuario.getExpiracionToken());
+            dto.setId(usuario.getIdUsuario());
+            return dto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en usuarioToDto()] - Error al convertir Usuario a UsuarioDTO: " + e.getMessage());
+            return null;
+        }
+    }
 
-	static public List<CuentaBancariaDTO> cuentaBancariaToDto(List<CuentaBancaria> listaCuentas) {
-		try {
+    /**
+     * Convierte una lista de Usuario a una lista de UsuarioDTO.
+     * @param listaUsuario La lista de Usuario a convertir.
+     * @return La lista de UsuarioDTO resultante.
+     */
+    static public List<UsuarioDTO> listaUsuarioToDto(List<Usuario> listaUsuario) {
+        try {
+            List<UsuarioDTO> listaDto = new ArrayList<>();
+            for (Usuario usuario : listaUsuario) {
+                listaDto.add(Util.usuarioToDto(usuario));
+            }
+            return listaDto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en listaUsuarioToDto()] - Error al convertir lista de Usuario a lista de UsuarioDTO: " + e.getMessage());
+            return null;
+        }
+    }
 
-			List<CuentaBancariaDTO> listaDto = new ArrayList<>();
-			for (CuentaBancaria u : listaCuentas) {
-				listaDto.add(Util.cuentaToDTO(u));
-			}
-			return listaDto;
+    /**
+     * Convierte un objeto UsuarioDTO a un objeto Usuario.
+     * @param usuarioDTO El objeto UsuarioDTO a convertir.
+     * @return El objeto Usuario resultante.
+     */
+    static public Usuario usuarioToDao(UsuarioDTO usuarioDTO) {
+        Usuario usuarioDao = new Usuario();
+        try {
+            usuarioDao.setNombreUsuario(usuarioDTO.getNombreUsuario());
+            usuarioDao.setApellidosUsuario(usuarioDTO.getApellidosUsuario());
+            usuarioDao.setEmailUsuario(usuarioDTO.getEmailUsuario());
+            usuarioDao.setClaveUsuario(usuarioDTO.getClaveUsuario());
+            usuarioDao.setTlfUsuario(usuarioDTO.getTlfUsuario());
+            usuarioDao.setDniUsuario(usuarioDTO.getDniUsuario());
+            return usuarioDao;
+        } catch (Exception e) {
+            System.out.println("[ERROR en usuarioToDao()] - Error al convertir UsuarioDTO a Usuario: " + e.getMessage());
+            return null;
+        }
+    }
 
-		} catch (Exception e) {
-			System.out.println(
-					"\n[ERROR CuentaBancariaToDtoImpl - listaCuentaToDto()] - Error al convertir lista de usuario DAO a lista de usuarioDTO (return null): "
-							+ e);
-		}
-		return null;
-	}
+    /**
+     * Convierte una lista de UsuarioDTO a una lista de Usuario.
+     * @param listaUsuarioDTO La lista de UsuarioDTO a convertir.
+     * @return La lista de Usuario resultante.
+     */
+    static public List<Usuario> listUsuarioToDao(List<UsuarioDTO> listaUsuarioDTO) {
+        List<Usuario> listaUsuarioDao = new ArrayList<>();
+        try {
+            for (UsuarioDTO usuarioDTO : listaUsuarioDTO) {
+                listaUsuarioDao.add(usuarioToDao(usuarioDTO));
+            }
+            return listaUsuarioDao;
+        } catch (Exception e) {
+            System.out.println("[ERROR en listUsuarioToDao()] - Error al convertir lista de UsuarioDTO a lista de Usuario: " + e.getMessage());
+            return null;
+        }
+    }
 
-	static public UsuarioDTO usuarioToDto(Usuario u) {
-
-		try {
-			UsuarioDTO dto = new UsuarioDTO();
-			dto.setNombreUsuario(u.getNombreUsuario());
-			dto.setApellidosUsuario(u.getApellidosUsuario());
-			dto.setDniUsuario(u.getDniUsuario());
-			dto.setTlfUsuario(u.getTlfUsuario());
-			dto.setEmailUsuario(u.getEmailUsuario());
-			dto.setClaveUsuario(u.getClaveUsuario());
-			dto.setToken(u.getToken());
-			dto.setExpiracionToken(u.getExpiracionToken());
-			dto.setId(u.getIdUsuario());
-
-			return dto;
-		} catch (Exception e) {
-			System.out.println(
-					"\n[ERROR UsuarioToDtoImpl - usuarioToDto()] - Error al convertir usuario DAO a usuarioDTO (return null): "
-							+ e);
-			return null;
-		}
-	}
-
-	static public List<UsuarioDTO> listaUsuarioToDto(List<Usuario> listaUsuario) {
-		try {
-
-			List<UsuarioDTO> listaDto = new ArrayList<>();
-			for (Usuario u : listaUsuario) {
-				listaDto.add(Util.usuarioToDto(u));
-			}
-			return listaDto;
-
-		} catch (Exception e) {
-			System.out.println(
-					"\n[ERROR UsuarioToDtoImpl - listauUsuarioToDto()] - Error al convertir lista de usuario DAO a lista de usuarioDTO (return null): "
-							+ e);
-		}
-		return null;
-	}
-
-	static public Usuario usuarioToDao(UsuarioDTO usuarioDTO) {
-
-		Usuario usuarioDao = new Usuario();
-
-		try {
-			usuarioDao.setNombreUsuario(usuarioDTO.getNombreUsuario());
-			usuarioDao.setApellidosUsuario(usuarioDTO.getApellidosUsuario());
-			usuarioDao.setEmailUsuario(usuarioDTO.getEmailUsuario());
-			usuarioDao.setClaveUsuario(usuarioDTO.getClaveUsuario());
-			usuarioDao.setTlfUsuario(usuarioDTO.getTlfUsuario());
-			usuarioDao.setDniUsuario(usuarioDTO.getDniUsuario());
-
-			return usuarioDao;
-
-		} catch (Exception e) {
-			System.out.println(
-					"\n[ERROR UsuarioToDaoImpl - toUsuarioDao()] - Al convertir usuarioDTO a usuarioDAO (return null): "
-							+ e);
-			return null;
-		}
-
-	}
-
-	static public List<Usuario> listUsuarioToDao(List<UsuarioDTO> listaUsuarioDTO) {
-
-		List<Usuario> listaUsuarioDao = new ArrayList<>();
-
-		try {
-			for (UsuarioDTO usuarioDTO : listaUsuarioDTO) {
-				listaUsuarioDao.add(usuarioToDao(usuarioDTO));
-			}
-
-			return listaUsuarioDao;
-
-		} catch (Exception e) {
-			System.out.println(
-					"\n[ERROR UsuarioToDaoImpl - toListUsuarioDao()] - Al convertir lista de usuarioDTO a lista de usuarioDAO (return null): "
-							+ e);
-		}
-		return null;
-	}
-
-	static public Transaccion transaccionToDao(TransaccionDTO transaccionDto) {
-
-		Transaccion transaccionDao = new Transaccion();
-
-		try {
-			transaccionDao.setCantidadTransaccion(transaccionDto.getCantidadTransaccion());
-			transaccionDao.setUsuarioTransaccionDestinatario(transaccionDto.getUsuarioTransaccionDestinatario());
-			transaccionDao.setUsuarioTransaccionRemitente(transaccionDto.getUsuarioTransaccionRemitente());
-
-			return transaccionDao;
-
-		} catch (Exception e) {
-			System.out.println(
-					"\n[ERROR Util - transaccionToDao()] - Al convertir transaccionDto a transaccionDao (return null): "
-							+ e);
-			return null;
-		}
-
-	}
+    /**
+     * Convierte un objeto TransaccionDTO a un objeto Transaccion.
+     * @param transaccionDto El objeto TransaccionDTO a convertir.
+     * @return El objeto Transaccion resultante.
+     */
+    static public Transaccion transaccionToDao(TransaccionDTO transaccionDto) {
+        Transaccion transaccionDao = new Transaccion();
+        try {
+            transaccionDao.setCantidadTransaccion(transaccionDto.getCantidadTransaccion());
+            transaccionDao.setUsuarioTransaccionDestinatario(transaccionDto.getUsuarioTransaccionDestinatario());
+            transaccionDao.setUsuarioTransaccionRemitente(transaccionDto.getUsuarioTransaccionRemitente());
+            return transaccionDao;
+        } catch (Exception e) {
+            System.out.println("[ERROR en transaccionToDao()] - Error al convertir TransaccionDTO a Transaccion: " + e.getMessage());
+            return null;
+        }
+    }
 }
+

@@ -11,61 +11,69 @@ import ProyectoFinal.Banco.repositorios.CuentaRepositorio;
 import ProyectoFinal.Banco.repositorios.UsuarioRepositorio;
 import jakarta.transaction.Transactional;
 
+/**
+ * Servicio que implementa los métodos de la interfaz {@link ICuentaServicio} 
+ * y en esta clase es donde se entra al detalle de la lógica de dichos métodos
+ * para la gestión de cuentas bancarias.
+ */
 @Service
 @Transactional
-public class CuentaServicioImpl implements ICuentaServicio{
+public class CuentaServicioImpl implements ICuentaServicio {
 
-	@Autowired
+    @Autowired
     private UsuarioRepositorio usuarioRepository;
-	
-	@Autowired
-    private CuentaRepositorio cuentaRepository;
-	
-	@Override
-	public List<CuentaBancaria> obtenerCuentasDeUsuario(Long usuarioId) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuarioId);
 
-        if (usuarioOptional.isPresent()) {
-            Usuario usuario = usuarioOptional.get();
-            return usuario.getCuentasBancarias();
-        } else {
-            // Manejar el caso en el que el usuario no existe
+    @Autowired
+    private CuentaRepositorio cuentaRepository;
+
+    @Override
+    public List<CuentaBancaria> obtenerCuentasDeUsuario(Long usuarioId) {
+        try {
+            Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuarioId);
+
+            if (usuarioOptional.isPresent()) {
+                Usuario usuario = usuarioOptional.get();
+                return usuario.getCuentasBancarias();
+            } else {
+                // Manejar el caso en el que el usuario no existe
+                return null;
+            }
+        } catch (IllegalArgumentException iae) {
+            System.out.println("[Error en CuentaServicioImpl - obtenerCuentasDeUsuario()]: " + iae.getMessage());
             return null;
         }
     }
-	
-	@Override
-	public CuentaBancaria registrarCuenta(CuentaBancaria cuenta) {
 
-		try {
-			String codigoIban = generarIBAN();
-			cuenta.setCodigoIban(codigoIban);
-			// Comprueba si ya existe una cuenta con el codigo Iban que quiere registrar
-			CuentaBancaria cuentaPorIban = cuentaRepository.findFirstBycodigoIban(cuenta.getCodigoIban());
-			
-			
-			if (cuentaPorIban != null) {
-				return null; // Si no es null es que ya está registrado
-			}
+    @Override
+    public CuentaBancaria registrarCuenta(CuentaBancaria cuenta) {
+        try {
+            String codigoIban = generarIBAN();
+            cuenta.setCodigoIban(codigoIban);
+            // Comprueba si ya existe una cuenta con el código IBAN que quiere registrar
+            CuentaBancaria cuentaPorIban = cuentaRepository.findFirstBycodigoIban(cuenta.getCodigoIban());
 
-			cuentaRepository.save(cuenta);
+            if (cuentaPorIban != null) {
+                return null; // Si no es null es que ya está registrado
+            }
 
-			return cuenta;
-		} catch (IllegalArgumentException iae) {
-			System.out.println("[Error CuentaServicioImpl - registrar() ]" + iae.getMessage());
-		} catch (Exception e) {
-			System.out.println("[Error CuentaServicioImpl - registrar() ]" + e.getMessage());
-		}
-		return null;
-	}
-	
-	public static String generarIBAN() {
+            cuentaRepository.save(cuenta);
+
+            return cuenta;
+        } catch (IllegalArgumentException iae) {
+            System.out.println("[Error en CuentaServicioImpl - registrarCuenta()]: " + iae.getMessage());
+            return null;
+        }
+    }
+
+    public static String generarIBAN() {
+        // Código del país
+        String codigoPais = "ES";
+
+        // Dígitos de control inicial
+        String digitosControl = "00";
+
         // Longitud total del IBAN
         int longitudIBAN = 22;
-
-        // Código del país y dígitos de control inicial
-        String codigoPais = "ES";
-        String digitosControl = "00";
 
         // Generar el resto del IBAN como números aleatorios
         String numerosAleatorios = generarNumerosAleatorios(longitudIBAN - codigoPais.length() - digitosControl.length());

@@ -10,111 +10,96 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.servicios.ICuentaServicio;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * Clase que ejerce de controlador de la vista de login/registro para gestionar las
- * solicitudes relacionadas con la autenticación y registro de usuarios.
+ * Clase controlador para gestionar la autenticación y registro de usuarios.
  */
 @Controller
 public class LoginControlador {
 
-	@Autowired
-	private IUsuarioServicio usuarioServicio;
-	
-	@Autowired
-	private ICuentaServicio cuentaServicio;
+    @Autowired
+    private IUsuarioServicio usuarioServicio;
 
-	/**
-	 * Gestiona la solicitud HTTP GET para /auth/login y muestra la página de inicio de sesión
-	 * @param model Modelo que se utiliza para enviar un usuarioDTO vacio a la vista.
-	 * @return La vista de inicio de sesión (login.html).
-	 */
-	@GetMapping("/auth/login")
-	public String login(Model model) {
-		// Se agrega un nuevo objeto UsuarioDTO al modelo para el formulario de login
-		model.addAttribute("usuarioDTO", new UsuarioDTO());
-		return "login";
-	}
+    @Autowired
+    private ICuentaServicio cuentaServicio;
 
-	/**
-	 * Gestiona la solicitud HTTP GET para mostrar la página de registro.
-	 * @param model Modelo que se utiliza para enviar un usuarioDTO vacio a la vista.
-	 * @return La vista de registro de usuario (registrar.html).
-	 */
-	@GetMapping("/auth/registrar")
-	public String registrarGet(Model model) {
-		
-		model.addAttribute("usuarioDTO", new UsuarioDTO());
-		return "registro";
-	}
+    @GetMapping("/auth/login")
+    public String login(Model model) {
+        model.addAttribute("usuarioDTO", new UsuarioDTO());
+        return "login";
+    }
 
-	/**
-	 * Procesa la solicitud HTTP POST para registro de un nuevo usuario.
-	 * @param  usuarioDTO El objeto UsuarioDTO que recibe en el modelo y contiene los
-	 *         datos del nuevo usuario.
-	 * @return La vista de inicio de sesión (login.html) si fue exitoso el registro; 
-	 * 		   de lo contrario, la vista de registro de usuario (registro.html).
-	 */
-	@PostMapping("/auth/registrar")
-	public String registrarPost(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
-		
-		Usuario nuevoUsuario = usuarioServicio.registrar(usuarioDTO);
-		
-		if (nuevoUsuario != null && nuevoUsuario.getDniUsuario() != null) {
-			// Si el usuario y el DNI no son null es que el registro se completo correctamente
-			model.addAttribute("mensajeRegistroExitoso", "Registro del nuevo usuario OK");
-			CuentaBancaria cuentaNueva = new CuentaBancaria();
-			cuentaNueva.setUsuarioCuenta(nuevoUsuario);
-			cuentaServicio.registrarCuenta(cuentaNueva);
-			return "login";
-		} else {
-			// Se verifica si el DNI ya existe para mostrar error personalizado en la vista
-			if (usuarioDTO.getDniUsuario() == null) {
-				model.addAttribute("mensajeErrorDni", "Ya existe un usuario con ese DNI");
-				return "registro";
-			} else {
-				model.addAttribute("mensajeErrorMail", "Ya existe un usuario con ese email");
-				return "registro";
-			}
-		}
-	}
+    @GetMapping("/auth/registrar")
+    public String registrarGet(Model model) {
+        model.addAttribute("usuarioDTO", new UsuarioDTO());
+        return "registro";
+    }
 
-	
-	
-	
-	
-	@GetMapping("/privada/listado")
-	public String listadoUsuarios(Model model, HttpServletRequest request,Authentication authentication) {
-		List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
-		System.out.println(usuarios);
-		model.addAttribute("usuarios", usuarios);
-		if(request.isUserInRole("ROLE_ADMIN")) {
-			return "listado";	
-		} 
-		model.addAttribute("noAdmin", "No eres admin");
-		model.addAttribute("nombreUsuario", authentication.getName());
-		return "home";
-	}
-	
-	@GetMapping("/privada/eliminar/{id}")
-	public String eliminarUsuario(@PathVariable Long id, Model model, HttpServletRequest request) {
-		Usuario usuario = usuarioServicio.buscarPorId(id);
-		List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
-		if(request.isUserInRole("ROLE_ADMIN") && usuario.getRol().equals("ROLE_ADMIN")) {
-			model.addAttribute("noSePuedeEliminar", "No se puede eliminar a un admin");
-			model.addAttribute("usuarios", usuarios);
-			return "listado";
-		}
-		usuarioServicio.eliminar(id);
-		return "redirect:/privada/listado";
-		
-	}
-	
+    @PostMapping("/auth/registrar")
+    public String registrarPost(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
+        try {
+            Usuario nuevoUsuario = usuarioServicio.registrar(usuarioDTO);
+            if (nuevoUsuario != null && nuevoUsuario.getDniUsuario() != null) {
+                model.addAttribute("mensajeTransaccionExitosa", "Registro del nuevo usuario OK");
+                CuentaBancaria cuentaNueva = new CuentaBancaria();
+                cuentaNueva.setUsuarioCuenta(nuevoUsuario);
+                cuentaServicio.registrarCuenta(cuentaNueva);
+                return "login";
+            } else {
+                if (usuarioDTO.getDniUsuario() == null) {
+                    model.addAttribute("mensajeErrorDni", "Ya existe un usuario con ese DNI");
+                    return "registro";
+                } else {
+                    model.addAttribute("mensajeErrorMail", "Ya existe un usuario con ese email");
+                    return "registro";
+                }
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Error al registrar el usuario: " + e.getMessage());
+            return "registro";
+        }
+    }
 
+    @GetMapping("/privada/listado")
+    public String listadoUsuarios(Model model, HttpServletRequest request, Authentication authentication) {
+        try {
+            List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
+            model.addAttribute("usuarios", usuarios);
+            if (request.isUserInRole("ROLE_ADMIN")) {
+                return "listado";
+            }
+            model.addAttribute("noAdmin", "No eres admin");
+            model.addAttribute("nombreUsuario", authentication.getName());
+            return "home";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Error al obtener el listado de usuarios: " + e.getMessage());
+            return "error";
+        }
+    }
+
+    @GetMapping("/privada/eliminar/{id}")
+    public String eliminarUsuario(@PathVariable Long id, Model model, HttpServletRequest request) {
+        try {
+            Usuario usuario = usuarioServicio.buscarPorId(id);
+            List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
+            if (request.isUserInRole("ROLE_ADMIN") && usuario.getRol().equals("ROLE_ADMIN")) {
+                model.addAttribute("noSePuedeEliminar", "No se puede eliminar a un admin");
+                model.addAttribute("usuarios", usuarios);
+                return "listado";
+            }
+            usuarioServicio.eliminar(id);
+            return "redirect:/privada/listado";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Error al eliminar el usuario: " + e.getMessage());
+            return "error";
+        }
+    }
 }

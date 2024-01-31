@@ -75,8 +75,10 @@ public interface IUsuarioServicio {
 	 */
 	public Usuario eliminar(long id);
 
+	/**
+	 * Obtiene un usuario por su nombre de usuario
+	 * @param nombreUsuario nombre de usuario del usuario a obtener
+	 * @return el usuario buscado
+	 */
 	public Usuario obtenerUsuarioPorNombre(String nombreUsuario);
-
-
-
 }

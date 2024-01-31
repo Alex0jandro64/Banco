@@ -20,212 +20,204 @@ import jakarta.persistence.Table;
 @Table(name = "usuarios", schema = "bf_operacional")
 public class Usuario {
 
-	// ATRIBUTOS
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario", nullable = false)
-	private long idUsuario;
+    // ATRIBUTOS
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario", nullable = false)
+    private long idUsuario;
 
-	@Column(name = "dni_usuario", nullable = false, unique = true, length = 9)
-	private String dniUsuario;
+    @Column(name = "dni_usuario", nullable = false, unique = true, length = 9)
+    private String dniUsuario;
 
-	@Column(name = "nombre_usuario", nullable = false, length = 70)
-	private String nombreUsuario;
+    @Column(name = "nombre_usuario", nullable = false, length = 70)
+    private String nombreUsuario;
 
-	@Column(name = "apellidos_usuario", nullable = true, length = 100)
-	private String apellidosUsuario;
+    @Column(name = "apellidos_usuario", nullable = true, length = 100)
+    private String apellidosUsuario;
 
-	@Column(name = "tlf_usuario", nullable = true, length = 9)
-	private String tlfUsuario;
+    @Column(name = "tlf_usuario", nullable = true, length = 9)
+    private String tlfUsuario;
 
-	@Column(name = "email_usuario", nullable = false, unique = true, length = 100)
-	private String emailUsuario;
+    @Column(name = "email_usuario", nullable = false, unique = true, length = 100)
+    private String emailUsuario;
 
-	@Column(name = "clave_usuario", nullable = false, length = 100)
-	private String claveUsuario;
+    @Column(name = "clave_usuario", nullable = false, length = 100)
+    private String claveUsuario;
 
-	@Column(name = "fch_alta_usuario", nullable = true, updatable = false)
-	private Calendar fchAltaUsuario ;
+    @Column(name = "fch_alta_usuario", nullable = true, updatable = false)
+    private Calendar fchAltaUsuario;
 
-	@Column(name = "fch_baja_usuario", nullable = true, updatable = false)
-	private Calendar fchBajaUsuario;
+    @Column(name = "fch_baja_usuario", nullable = true, updatable = false)
+    private Calendar fchBajaUsuario;
 
-	@Column(name = "tokenRecuperacion_usuario", nullable = true, length = 100)
-	private String token;
+    @Column(name = "tokenRecuperacion_usuario", nullable = true, length = 100)
+    private String token;
 
-	@Column(name = "expiracionToken_usuario", nullable = true, length = 100)
-	private Calendar expiracionToken;
-	
-	@Column(name = "rol", nullable = true, length = 20)
-	private String rol;
-	
-	@Column(name = "rutaImagen_usuario", nullable = true)
-	private String rutaImagenUsuario;
-	
-	@OneToMany(mappedBy = "usuarioCuenta")
-	private List<CuentaBancaria>cuentasBancarias;
+    @Column(name = "expiracionToken_usuario", nullable = true, length = 100)
+    private Calendar expiracionToken;
 
+    @Column(name = "rol", nullable = true, length = 20)
+    private String rol;
 
-	// CONSTRUCTORES
+    @Column(name = "rutaImagen_usuario", nullable = true)
+    private String rutaImagenUsuario;
 
-	public Usuario(String dni_usuario, String nombre_usuario, String apellidos_usuario, String tlf_usuario,
-			String email_usuario, String clave_usuario) {
-		super();
-		this.dniUsuario = dni_usuario;
-		this.nombreUsuario = nombre_usuario;
-		this.apellidosUsuario = apellidos_usuario;
-		this.tlfUsuario = tlf_usuario;
-		this.emailUsuario = email_usuario;
-		this.claveUsuario = clave_usuario;
-	}
-	
+    @OneToMany(mappedBy = "usuarioCuenta")
+    private List<CuentaBancaria> cuentasBancarias;
 
-	public Usuario() {
-		super();
-	}
+    // CONSTRUCTORES
 
-	// GETTERS Y SETTERS
-	public long getIdUsuario() {
-		return idUsuario;
-	}
+    public Usuario(String dni_usuario, String nombre_usuario, String apellidos_usuario, String tlf_usuario,
+                   String email_usuario, String clave_usuario) {
+        super();
+        this.dniUsuario = dni_usuario;
+        this.nombreUsuario = nombre_usuario;
+        this.apellidosUsuario = apellidos_usuario;
+        this.tlfUsuario = tlf_usuario;
+        this.emailUsuario = email_usuario;
+        this.claveUsuario = clave_usuario;
+    }
 
-	public String getDniUsuario() {
-		return dniUsuario;
-	}
+    public Usuario() {
+        super();
+    }
 
-	public void setDniUsuario(String dniUsuario) {
-		this.dniUsuario = dniUsuario;
-	}
+    // GETTERS Y SETTERS
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
+    public long getIdUsuario() {
+        return idUsuario;
+    }
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
+    public String getDniUsuario() {
+        return dniUsuario;
+    }
 
-	public String getApellidosUsuario() {
-		return apellidosUsuario;
-	}
+    public void setDniUsuario(String dniUsuario) {
+        this.dniUsuario = dniUsuario;
+    }
 
-	public void setApellidosUsuario(String apellidosUsuario) {
-		this.apellidosUsuario = apellidosUsuario;
-	}
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
 
-	public String getTlfUsuario() {
-		return tlfUsuario;
-	}
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
-	public void setTlfUsuario(String tlfUsuario) {
-		this.tlfUsuario = tlfUsuario;
-	}
+    public String getApellidosUsuario() {
+        return apellidosUsuario;
+    }
 
-	public String getEmailUsuario() {
-		return emailUsuario;
-	}
+    public void setApellidosUsuario(String apellidosUsuario) {
+        this.apellidosUsuario = apellidosUsuario;
+    }
 
-	public void setEmailUsuario(String emailUsuario) {
-		this.emailUsuario = emailUsuario;
-	}
+    public String getTlfUsuario() {
+        return tlfUsuario;
+    }
 
-	public String getClaveUsuario() {
-		return claveUsuario;
-	}
+    public void setTlfUsuario(String tlfUsuario) {
+        this.tlfUsuario = tlfUsuario;
+    }
 
-	public void setClaveUsuario(String claveUsuario) {
-		this.claveUsuario = claveUsuario;
-	}
+    public String getEmailUsuario() {
+        return emailUsuario;
+    }
 
-	public Calendar getFchAltaUsuario() {
-		return fchAltaUsuario;
-	}
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
+    }
 
-	public void setFchAltaUsuario(Calendar fchAltaUsuario) {
-		this.fchAltaUsuario = fchAltaUsuario;
-	}
+    public String getClaveUsuario() {
+        return claveUsuario;
+    }
 
-	public Calendar getFchBajaUsuario() {
-		return fchBajaUsuario;
-	}
+    public void setClaveUsuario(String claveUsuario) {
+        this.claveUsuario = claveUsuario;
+    }
 
-	public void setFchBajaUsuario(Calendar fchBajaUsuario) {
-		this.fchBajaUsuario = fchBajaUsuario;
-	}
+    public Calendar getFchAltaUsuario() {
+        return fchAltaUsuario;
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public void setFchAltaUsuario(Calendar fchAltaUsuario) {
+        this.fchAltaUsuario = fchAltaUsuario;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public Calendar getFchBajaUsuario() {
+        return fchBajaUsuario;
+    }
 
-	public Calendar getExpiracionToken() {
-		return expiracionToken;
-	}
+    public void setFchBajaUsuario(Calendar fchBajaUsuario) {
+        this.fchBajaUsuario = fchBajaUsuario;
+    }
 
-	public void setExpiracionToken(Calendar expiracionToken) {
-		this.expiracionToken = expiracionToken;
-	}
-	
-	public String getRol() {
-		return rol;
-	}
-	
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
-	
-	public List<CuentaBancaria> getCuentasBancarias() {
-		return cuentasBancarias;
-	}
+    public String getToken() {
+        return token;
+    }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-	public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
-		this.cuentasBancarias = cuentasBancarias;
-	}
-	
+    public Calendar getExpiracionToken() {
+        return expiracionToken;
+    }
 
-	// METODOS
+    public void setExpiracionToken(Calendar expiracionToken) {
+        this.expiracionToken = expiracionToken;
+    }
 
-	
+    public String getRol() {
+        return rol;
+    }
 
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(apellidosUsuario, claveUsuario, dniUsuario, emailUsuario, expiracionToken, fchAltaUsuario,
-				fchBajaUsuario, idUsuario, nombreUsuario, rol, tlfUsuario, token);
-	}
+    public List<CuentaBancaria> getCuentasBancarias() {
+        return cuentasBancarias;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(apellidosUsuario, other.apellidosUsuario)
-				&& Objects.equals(claveUsuario, other.claveUsuario) && Objects.equals(dniUsuario, other.dniUsuario)
-				&& Objects.equals(emailUsuario, other.emailUsuario)
-				&& Objects.equals(expiracionToken, other.expiracionToken)
-				&& Objects.equals(fchAltaUsuario, other.fchAltaUsuario)
-				&& Objects.equals(fchBajaUsuario, other.fchBajaUsuario) && idUsuario == other.idUsuario
-				&& Objects.equals(nombreUsuario, other.nombreUsuario) && Objects.equals(rol, other.rol)
-				&& Objects.equals(tlfUsuario, other.tlfUsuario) && Objects.equals(token, other.token);
-	}
-	
+    public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
+        this.cuentasBancarias = cuentasBancarias;
+    }
 
+    // METODOS
 
-	@Override
-	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", dniUsuario=" + dniUsuario + ", nombreUsuario=" + nombreUsuario
-				+ ", apellidosUsuario=" + apellidosUsuario + ", tlfUsuario=" + tlfUsuario + ", emailUsuario="
-				+ emailUsuario + ", claveUsuario=" + claveUsuario + ", fchAltaUsuario=" + fchAltaUsuario
-				+ ", fchBajaUsuario=" + fchBajaUsuario + ", token=" + token + ", expiracionToken=" + expiracionToken
-				+ ", codigoRolUsuario=" + rol + "]";
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(apellidosUsuario, claveUsuario, dniUsuario, emailUsuario, expiracionToken, fchAltaUsuario,
+                fchBajaUsuario, idUsuario, nombreUsuario, rol, tlfUsuario, token);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Usuario other = (Usuario) obj;
+        return Objects.equals(apellidosUsuario, other.apellidosUsuario)
+                && Objects.equals(claveUsuario, other.claveUsuario) && Objects.equals(dniUsuario, other.dniUsuario)
+                && Objects.equals(emailUsuario, other.emailUsuario)
+                && Objects.equals(expiracionToken, other.expiracionToken)
+                && Objects.equals(fchAltaUsuario, other.fchAltaUsuario)
+                && Objects.equals(fchBajaUsuario, other.fchBajaUsuario) && idUsuario == other.idUsuario
+                && Objects.equals(nombreUsuario, other.nombreUsuario) && Objects.equals(rol, other.rol)
+                && Objects.equals(tlfUsuario, other.tlfUsuario) && Objects.equals(token, other.token);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario [idUsuario=" + idUsuario + ", dniUsuario=" + dniUsuario + ", nombreUsuario=" + nombreUsuario
+                + ", apellidosUsuario=" + apellidosUsuario + ", tlfUsuario=" + tlfUsuario + ", emailUsuario="
+                + emailUsuario + ", claveUsuario=" + claveUsuario + ", fchAltaUsuario=" + fchAltaUsuario
+                + ", fchBajaUsuario=" + fchBajaUsuario + ", token=" + token + ", expiracionToken=" + expiracionToken
+                + ", codigoRolUsuario=" + rol + "]";
+    }
 
 }
