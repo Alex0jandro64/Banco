@@ -64,6 +64,9 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuarioCuenta")
     private List<CuentaBancaria> cuentasBancarias;
+    
+    @OneToMany(mappedBy = "usuarioCita")
+    private List<Cita> citasUsuario;
 
     // CONSTRUCTORES
 

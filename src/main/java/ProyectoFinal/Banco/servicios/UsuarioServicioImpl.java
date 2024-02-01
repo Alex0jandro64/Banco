@@ -84,6 +84,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
             CuentaBancaria cuentaAdmin = new CuentaBancaria();
             cuentaAdmin.setUsuarioCuenta(admin);
             cuentaAdmin.setSaldoCuenta(120.50);
+            cuentaAdmin.setCodigoIban("1234");
             repositorioUsuario.save(admin);
             repositorioCuenta.save(cuentaAdmin);
         }

@@ -32,6 +32,8 @@ public class datosUsuarioControlador {
             
             UsuarioDTO usuariodto = Util.usuarioToDto(usuario);
             
+            
+            
             model.addAttribute("cuentasBancarias", cuentasBancariasDto);
             model.addAttribute("cuentasBancariasDto"  , cuentasBancariasDto);
             model.addAttribute("usuario", usuariodto);

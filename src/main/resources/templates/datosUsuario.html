@@ -15,6 +15,49 @@
 	
 </head>
 <body>
-
+<nav>
+		<div class="menu">
+			<div class="logo">
+				<a href="/">AlceBank</a>
+			</div>
+			<ul class="nav-links">
+				<li class="mt-3 me-5"><a th:href="@{/privada/home}">Inicio</a></li>
+				<li class="mt-3 me-5"><a th:href="@{/privada/datosUsuario}">Datos Usuario</a></li>
+				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/privada/listado}">Listado Usuarios</a></li>
+				<li class="mt-3 me-5"><a th:href="@{/privada/nuevaTransaccion}">Realizar Transaccion</a></li>
+				<li>
+					<form th:action="@{/auth/logout}" method="post" id="logoutForm">
+						<button type="button" class="btn btn-dark mt-2"
+							onclick="confirmarLogout()">Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+<h1 class="text-dark text-center mt-5">Datos Usuario</h1>
+<div class="text-dark text-center mt-5">
+        <label><b>Nombre:</b></label>
+        <span th:text="${usuario.nombreUsuario}"></span>
+    </div>
+    <div class="text-dark text-center mt-5">
+        <label><b>Apellidos:</b></label>
+        <span th:text="${usuario.apellidosUsuario}"></span>
+    </div>
+    <div class="text-dark text-center mt-5">
+        <label><b>DNI:</b></label>
+        <span th:text="${usuario.dniUsuario}"></span>
+    </div>
+    <div class="text-dark text-center mt-5">
+        <label><b>Teléfono:</b></label>
+        <span th:text="${usuario.tlfUsuario}"></span>
+    </div>
+    <div class="text-dark text-center mt-5">
+        <label><b>Email:</b></label>
+        <span th:text="${usuario.emailUsuario}"></span>
+    </div>
+    <div class="text-dark text-center mt-5">
+        <label><b>Fecha de Alta:</b></label>
+        <span th:text="${#dates.format(usuario.fchAltaUsuario, 'dd-MM-yyyy HH:mm:ss')}"></span>
+    </div>
 </body>
 </html>

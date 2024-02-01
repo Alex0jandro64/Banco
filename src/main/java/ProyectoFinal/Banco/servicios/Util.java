@@ -71,6 +71,7 @@ public class Util {
             dto.setClaveUsuario(usuario.getClaveUsuario());
             dto.setToken(usuario.getToken());
             dto.setExpiracionToken(usuario.getExpiracionToken());
+            dto.setFchAltaUsuario(usuario.getFchAltaUsuario());
             dto.setId(usuario.getIdUsuario());
             return dto;
         } catch (Exception e) {

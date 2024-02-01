@@ -18,6 +18,7 @@ public class UsuarioDTO {
 	private String emailUsuario;
 	private String claveUsuario;
 	private String token;
+	private Calendar fchAltaUsuario;
 	private String password;
 	private String password2;
 	private Calendar expiracionToken;
@@ -129,6 +130,14 @@ public class UsuarioDTO {
 
 	public void setRutaImagenUsuario(String rutaImagenUsuario) {
 		this.rutaImagenUsuario = rutaImagenUsuario;
+	}
+
+	public Calendar getFchAltaUsuario() {
+		return fchAltaUsuario;
+	}
+
+	public void setFchAltaUsuario(Calendar fchAltaUsuario) {
+		this.fchAltaUsuario = fchAltaUsuario;
 	}
 
 	//METODOS
