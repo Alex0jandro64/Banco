@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
-import ProyectoFinal.Banco.dto.TransaccionDTOString;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.servicios.ICuentaServicio;
 import ProyectoFinal.Banco.servicios.ITransaccionServicio;
