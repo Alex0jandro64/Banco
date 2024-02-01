@@ -26,5 +26,5 @@ public interface ITransaccionServicio {
 	 * @param transaccionDTOString El objeto de transferencia de datos de la transacción.
 	 * @return La transacción registrada.
 	 */
-	public Transaccion registrarTransaccion(TransaccionDTOString transaccionDTOString);
+	public int registrarTransaccion(TransaccionDTOString transaccionDTOString);
 }

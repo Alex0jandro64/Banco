@@ -37,7 +37,7 @@ public class TransaccionServicioImpl implements ITransaccionServicio {
     }
 
     @Override
-    public Transaccion registrarTransaccion(TransaccionDTOString transaccionDTOString) {
+    public int registrarTransaccion(TransaccionDTOString transaccionDTOString) {
         try {
             CuentaBancaria cuentaDestino = cuentaRepository.findFirstBycodigoIban(transaccionDTOString.getUsuarioTransaccionDestinatario());
             CuentaBancaria cuentaRemitente = cuentaRepository.findFirstBycodigoIban(transaccionDTOString.getUsuarioTransaccionRemitente());
@@ -52,13 +52,13 @@ public class TransaccionServicioImpl implements ITransaccionServicio {
             	//transaccion.setCantidadTransaccion(-1);
             	error =-1;              
             }else if(cuentaDestino == null){
-            	
+            	error =3;
             	//transaccion.setCantidadTransaccion(3);
             	
             }else if(cuentaRemitente.getCodigoIban().equals(cuentaDestino.getCodigoIban())){
             	//Si la cuenta destino y la cuenta remitente es la misma le pongo 2 para posteriormente controlarlo y mostrar mensaje de error
             	//transaccion.setCantidadTransaccion(2);
-            	
+            	error =2;
             }
             else {
             	cuentaRemitente.setSaldoCuenta(cuentaRemitente.getSaldoCuenta()-transaccion.getCantidadTransaccion());
@@ -67,14 +67,14 @@ public class TransaccionServicioImpl implements ITransaccionServicio {
                 cuentaRepository.save(cuentaRemitente);
                 transaccionRepository.save(transaccion);
                 //transaccion.setCantidadTransaccion(1);
-
+                error =1;
             }
             
 
-            return transaccion;
+            return error;
         } catch (Exception e) {
             System.out.println("[Error en TransaccionServicioImpl - registrarTransaccion()]: " + e.getMessage());
-            return null;
+            return -1;
         }
     }
 }

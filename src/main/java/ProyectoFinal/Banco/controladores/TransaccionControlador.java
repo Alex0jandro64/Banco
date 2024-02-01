@@ -51,18 +51,18 @@ public class TransaccionControlador {
     public String nuevaTransaccionPost(@ModelAttribute TransaccionDTOString transaccionDTOString,Authentication authentication ,RedirectAttributes redirectAttributes) {
         try {
         	
-            Transaccion nuevaTransaccion = transaccionServicio.registrarTransaccion(transaccionDTOString);
+            int error = transaccionServicio.registrarTransaccion(transaccionDTOString);
             
-            if (nuevaTransaccion.getCantidadTransaccion() == 1) {
+            if (error == 1) {
                 redirectAttributes.addFlashAttribute("mensajeTransaccionExitosa", "Registro del nuevo usuario OK");
             } 
-            else if(nuevaTransaccion.getCantidadTransaccion()==-1) {
+            else if(error==-1) {
             	redirectAttributes.addFlashAttribute("mensajeTransaccionErrorSaldo", "No tiene saldo Suficiente.");
             }
-            else if(nuevaTransaccion.getCantidadTransaccion()==2) {
+            else if(error==2) {
             	redirectAttributes.addFlashAttribute("mensajeTransaccionErrorCuenta", "No puede hacer una tranferencia a su misma cuenta.");
             }
-            else if(nuevaTransaccion.getCantidadTransaccion()==3) {
+            else if(error==3) {
             	redirectAttributes.addFlashAttribute("mensajeTransaccionErrorExisteCuenta", "No existe la cuenta bancaria.");
             }
             else {

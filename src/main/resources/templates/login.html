@@ -38,7 +38,7 @@
     		<button type="submit" class="form-btn negro">Recuperar contraseña</button>
 		</form>
 	</div>
-	<script th:if="${not #strings.isEmpty(mensajeRegistroExitoso)}">
+	<script th:if="${not #strings.isEmpty(mensajeTransaccionExitosa)}">
 	    mostrarNotificacion("¡Registro exitoso!", "Ahora puede iniciar sesión", 'success');
 	</script>
 	<script th:if="${not #strings.isEmpty(mensajeExitoMail)}">
