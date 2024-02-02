@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ProyectoFinal.Banco.dao.CuentaBancaria;
+import ProyectoFinal.Banco.dao.Oficina;
 import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
+import ProyectoFinal.Banco.dto.OficinaDTO;
 import ProyectoFinal.Banco.dto.TransaccionDTO;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 
@@ -151,6 +153,34 @@ public class Util {
             return transaccionDao;
         } catch (Exception e) {
             System.out.println("[ERROR en transaccionToDao()] - Error al convertir TransaccionDTO a Transaccion: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    static public OficinaDTO oficinaToDto(Oficina oficina) {
+        try {
+        	OficinaDTO dto = new OficinaDTO();
+            
+            dto.setIdOficina(oficina.getIdOficina());
+            dto.setDireccionOficina(oficina.getDireccionOficina());
+            dto.setCitasOficina(oficina.getCitasOficina());
+            
+            return dto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en oficinaToDto()] - Error al convertir Oficina a OficinaDTO: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    static public List<OficinaDTO> listaOficinasToDto(List<Oficina> listaOficina) {
+        try {
+            List<OficinaDTO> listaDto = new ArrayList<>();
+            for (Oficina oficina : listaOficina) {
+                listaDto.add(Util.oficinaToDto(oficina));
+            }
+            return listaDto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en cuentaBancariaToDto()] - Error al convertir lista de CuentaBancaria a lista de CuentaBancariaDTO: " + e.getMessage());
             return null;
         }
     }

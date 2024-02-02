@@ -49,7 +49,6 @@
 							<th class="table-dark">apellidos</th>
 							<th class="table-dark">email</th>
 							<th class="table-dark">DNI</th>
-							<th class="table-dark" sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
 							<th class="table-dark"sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
 						</tr>
 					</thead>
@@ -61,9 +60,6 @@
 							<td th:text="${usuario.apellidosUsuario}"></td>
 							<td th:text="${usuario.emailUsuario}"></td>
 							<td th:text="${usuario.dniUsuario}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')">
-								<a class="btn btn-primary" th:href="@{/form/} + ${usuario.id}" th:text="'editar'"></a>
-							</td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')">
     							<a class="btn btn-danger" th:attr="data-id=${usuario.id}" th:text="'eliminar'" onclick="confirmarEliminar(event)"></a>
 							</td>

@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
  * mapea con esta 1:1 y ejerce como modelo virtual de la tabla en la aplicación.
  */
 @Entity
-@Table(name = "usuarios", schema = "bf_operacional")
+@Table(name = "usuarios", schema = "bf_operacional_usu")
 public class Usuario {
 
     // ATRIBUTOS

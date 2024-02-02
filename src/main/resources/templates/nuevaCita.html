@@ -35,21 +35,16 @@
 			</ul>
 		</div>
 	</nav>
-<form class="form" th:action="@{/privada/nuevaTransaccion}" enctype="multipart/form-data" method="post" th:object="${TransaccionDTOString}">
-    <h2>Formulario de Transferencia</h2>
-    <label for="cuenta">Selecciona una cuenta:</label>
-    <select id="usuarioTransaccionRemitente" name="usuarioTransaccionRemitente">
-        <option th:each="cuenta : ${cuentasBancariasDto}" th:value="${cuenta.getCodigoIban()}" th:text="${cuenta.getCodigoIban()}"></option>
+<form class="form" th:action="@{/privada/nuevaCita}" enctype="multipart/form-data" method="post" th:object="${CitaDTOLong}">
+    <h2>Formulario de Citas</h2>
+    <label for="oficina">Selecciona una oficina:</label>
+    <select id="idOficina" name="idOficina">
+        <option th:each="oficina : ${listaOficinas}" th:value="${oficina.getIdOficina()}" th:text="${oficina.getDireccionOficina()}"></option>
     </select>
-    
-    <label for="cantidad">Cantidad:</label>
-    <input type="number" id="cantidadTransaccion" name="cantidadTransaccion" placeholder="Ingrese la cantidad" required min="0">
+    <label for="fechaHora">Fecha y Hora:</label>
+        <input type="datetime-local" id="fechaHora" th:field="*{fechaCita}" required>
 
-    <label for="codigoiban">Código IBAN:</label>
-    <input type="text" id="usuarioTransaccionDestinatario" name="usuarioTransaccionDestinatario" placeholder="Ingrese el código IBAN" required>
-	
-        
-    <input type="submit" value="Realizar Transferencia">
+    <input type="submit" value="Realizar Cita">
 </form>
 </body>
 </html>

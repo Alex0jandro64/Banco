@@ -1,5 +1,7 @@
 package ProyectoFinal.Banco.dao;
 
+import java.util.Calendar;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,9 @@ public class Cita {
 	@ManyToOne
     private Oficina oficinaCita;
 
+	@Column(name = "fecha_cita", nullable = false)
+	private Calendar fechaCita;
+	
 	//CONSTRUCTORES
 	public Cita(long idCita, Usuario usuarioCita, Oficina oficinaCita) {
 		super();
@@ -60,6 +65,14 @@ public class Cita {
 
 	public void setOficinaCita(Oficina oficinaCita) {
 		this.oficinaCita = oficinaCita;
+	}
+
+	public Calendar getFechaCita() {
+		return fechaCita;
+	}
+
+	public void setFechaCita(Calendar fechaCita) {
+		this.fechaCita = fechaCita;
 	}
 	
 	
