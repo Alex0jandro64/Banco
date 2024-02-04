@@ -43,6 +43,9 @@
     </select>
     <label for="fechaHora">Fecha y Hora:</label>
         <input type="datetime-local" id="fechaHora" th:field="*{fechaCita}" required>
+        
+        <label for="motivoCita">Motivo de la cita</label>
+        <input type="text" id="motivoCita" th:field="*{motivoCita}" required>
 
     <input type="submit" value="Realizar Cita">
 </form>

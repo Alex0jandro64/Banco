@@ -10,6 +10,7 @@ public class CitaDTOLong {
 	    private Usuario usuarioCita;
 	    private Long oficinaCita;
 	    private LocalDateTime fechaCita;
+	    private String motivoCita;
 	    
 	  //CONSTRUCTOR
 		public CitaDTOLong(long idCita, Usuario usuarioCita, Long oficinaCita, LocalDateTime fechaCita) {
@@ -27,6 +28,16 @@ public class CitaDTOLong {
 		//GETTERS Y SETTERS
 		public long getIdCita() {
 			return idCita;
+		}
+		
+		
+
+		public String getMotivoCita() {
+			return motivoCita;
+		}
+
+		public void setMotivoCita(String motivoCita) {
+			this.motivoCita = motivoCita;
 		}
 
 		public void setIdCita(long idCita) {

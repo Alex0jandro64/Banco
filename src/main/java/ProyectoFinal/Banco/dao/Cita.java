@@ -30,6 +30,9 @@ public class Cita {
 	@Column(name = "fecha_cita", nullable = false)
 	private Calendar fechaCita;
 	
+	@Column(name = "motivo_cita", nullable = false)
+	private String motivoCita;
+	
 	//CONSTRUCTORES
 	public Cita(long idCita, Usuario usuarioCita, Oficina oficinaCita) {
 		super();
@@ -45,6 +48,14 @@ public class Cita {
 	//GETTERS Y SETTERS
 	public long getIdCita() {
 		return idCita;
+	}
+
+	public String getMotivoCita() {
+		return motivoCita;
+	}
+
+	public void setMotivoCita(String motivoCita) {
+		this.motivoCita = motivoCita;
 	}
 
 	public void setIdCita(long idCita) {

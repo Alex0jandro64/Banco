@@ -1,8 +1,6 @@
 package ProyectoFinal.Banco.dto;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
-
 import ProyectoFinal.Banco.dao.Oficina;
 import ProyectoFinal.Banco.dao.Usuario;
 
@@ -13,6 +11,7 @@ public class CitaDTO {
 	    private Usuario usuarioCita;
 	    private Oficina oficinaCita;
 	    private LocalDateTime fechaCita;
+	    private String motivoCita;
 	    
 	  //CONSTRUCTOR
 		public CitaDTO(long idCita, Usuario usuarioCita, Oficina oficinaCita, LocalDateTime fechaCita) {
@@ -30,6 +29,15 @@ public class CitaDTO {
 		//GETTERS Y SETTERS
 		public long getIdCita() {
 			return idCita;
+		}
+		
+
+		public String getMotivoCita() {
+			return motivoCita;
+		}
+
+		public void setMotivoCita(String motivoCita) {
+			this.motivoCita = motivoCita;
 		}
 
 		public void setIdCita(long idCita) {

@@ -3,20 +3,13 @@ package ProyectoFinal.Banco.servicios;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ProyectoFinal.Banco.dao.Cita;
-import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Oficina;
-import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dto.CitaDTOLong;
-import ProyectoFinal.Banco.dto.TransaccionDTOString;
 import ProyectoFinal.Banco.repositorios.CitaRepositorio;
 import ProyectoFinal.Banco.repositorios.OficinaRepositorio;
-import ProyectoFinal.Banco.repositorios.UsuarioRepositorio;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -38,6 +31,7 @@ public class CitasServicioImpl implements ICitasServicio{
         	citaDao.setOficinaCita(oficina);
         	citaDao.setUsuarioCita(citaDTOLong.getUsuarioCita());
         	citaDao.setFechaCita(convertToCalendar(citaDTOLong.getFechaCita()));
+        	citaDao.setMotivoCita(citaDTOLong.getMotivoCita());
         	
             int error=0;
             	citaRepository.save(citaDao);
