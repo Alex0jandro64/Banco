@@ -183,7 +183,23 @@ public class Usuario {
         return cuentasBancarias;
     }
 
-    public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
+    public String getRutaImagenUsuario() {
+		return rutaImagenUsuario;
+	}
+
+	public void setRutaImagenUsuario(String rutaImagenUsuario) {
+		this.rutaImagenUsuario = rutaImagenUsuario;
+	}
+
+	public List<Cita> getCitasUsuario() {
+		return citasUsuario;
+	}
+
+	public void setCitasUsuario(List<Cita> citasUsuario) {
+		this.citasUsuario = citasUsuario;
+	}
+
+	public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
         this.cuentasBancarias = cuentasBancarias;
     }
 

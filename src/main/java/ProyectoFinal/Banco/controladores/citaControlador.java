@@ -8,18 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import ProyectoFinal.Banco.dao.Oficina;
 import ProyectoFinal.Banco.dao.Usuario;
+import ProyectoFinal.Banco.dto.CitaDTO;
 import ProyectoFinal.Banco.dto.CitaDTOLong;
 import ProyectoFinal.Banco.dto.OficinaDTO;
 import ProyectoFinal.Banco.servicios.ICitasServicio;
 import ProyectoFinal.Banco.servicios.IOficinaServicio;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
 import ProyectoFinal.Banco.servicios.Util;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class citaControlador {
@@ -48,6 +50,19 @@ public class citaControlador {
         return "nuevaCita";
     }
 	
+	@GetMapping("/privada/verCitas")
+    public String listarCitas(Model model, Authentication authentication) {
+		
+    	String mail = authentication.getName();
+        Usuario usuario = usuarioServicio.buscarPorEmail(mail);
+        List<CitaDTO> citas = Util.listaCitasToDto(usuario.getCitasUsuario());
+        
+        model.addAttribute("citas", citas);
+        model.addAttribute("usuario",usuario);
+        return "listadoCitas";
+    }
+
+	
 	@PostMapping("/privada/nuevaCita")
     public String nuevaCitaPost(@RequestParam("idOficina") Long idOficina,@ModelAttribute CitaDTOLong citaDTOLong,Authentication authentication ,RedirectAttributes redirectAttributes) {
         try {
@@ -64,5 +79,16 @@ public class citaControlador {
             redirectAttributes.addFlashAttribute("errorMessage", "Error al registrar la transacción: " + e.getMessage());
         }
         return "redirect:/privada/home";
+    }
+	
+	@GetMapping("/privada/eliminarCita/{id}")
+    public String eliminarCita(@PathVariable Long id, Model model, HttpServletRequest request) {
+        try {
+            citaServicio.eliminar(id);
+            return "redirect:/privada/verCitas";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Error al eliminar el usuario: " + e.getMessage());
+            return "error";
+        }
     }
 }

@@ -25,4 +25,5 @@ public interface ICuentaServicio {
      * @return La cuenta bancaria registrada.
      */
     public CuentaBancaria registrarCuenta(CuentaBancaria cuenta);
+    
 }

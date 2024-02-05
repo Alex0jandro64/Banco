@@ -43,6 +43,7 @@ public class CitasServicioImpl implements ICitasServicio{
         }
 }
 	
+	
 	public static Calendar convertToCalendar(LocalDateTime localDateTime) {
         // Obtener la zona horaria predeterminada del sistema
         ZoneId zoneId = ZoneId.systemDefault();
@@ -55,6 +56,15 @@ public class CitasServicioImpl implements ICitasServicio{
         calendar.setTimeInMillis(millis);
 
         return calendar;
+    }
+	
+	@Override
+    public Cita eliminar(long id) {
+        Cita cita = citaRepository.findById(id).orElse(null);
+        if (cita != null) {
+            citaRepository.delete(cita);
+        } 
+        return cita;
     }
 
 }

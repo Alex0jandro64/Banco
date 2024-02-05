@@ -66,6 +66,15 @@ function confirmarEliminar(event) {
     });
 }
 
+function confirmarEliminar(event) {
+    const idCita = event.currentTarget.getAttribute("data-id");
+    confirmar().then(function (confirmado) {
+        if (confirmado) {
+            window.location.href = 'http://localhost:8080/privada/eliminarCita/' + idCita;
+        }
+    });
+}
+
 
 
 

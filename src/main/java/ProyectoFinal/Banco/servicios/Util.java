@@ -1,14 +1,18 @@
 package ProyectoFinal.Banco.servicios;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ProyectoFinal.Banco.dao.Cita;
 import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Oficina;
 import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dao.Usuario;
+import ProyectoFinal.Banco.dto.CitaDTO;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
 import ProyectoFinal.Banco.dto.OficinaDTO;
 import ProyectoFinal.Banco.dto.TransaccionDTO;
@@ -181,6 +185,37 @@ public class Util {
             return listaDto;
         } catch (Exception e) {
             System.out.println("[ERROR en cuentaBancariaToDto()] - Error al convertir lista de CuentaBancaria a lista de CuentaBancariaDTO: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    static public List<CitaDTO> listaCitasToDto(List<Cita> listaCita) {
+        try {
+            List<CitaDTO> listaDto = new ArrayList<>();
+            for (Cita cita : listaCita) {
+                listaDto.add(Util.citaToDto(cita));
+            }
+            return listaDto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en cuentaBancariaToDto()] - Error al convertir lista de CuentaBancaria a lista de CuentaBancariaDTO: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    static public CitaDTO citaToDto(Cita cita) {
+        try {
+        	CitaDTO dto = new CitaDTO();
+            
+            dto.setIdCita(cita.getIdCita());
+            dto.setMotivoCita(cita.getMotivoCita());
+            dto.setOficinaCita(cita.getOficinaCita());
+            dto.setUsuarioCita(cita.getUsuarioCita());
+            LocalDateTime localDateTime = LocalDateTime.ofInstant(cita.getFechaCita().toInstant(), ZoneId.systemDefault());
+            dto.setFechaCita(localDateTime);
+            
+            return dto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en oficinaToDto()] - Error al convertir Oficina a OficinaDTO: " + e.getMessage());
             return null;
         }
     }
