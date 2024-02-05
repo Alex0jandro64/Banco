@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Inicio Recuperacion</title>
@@ -23,10 +24,24 @@
 	<nav>
 		<div class="menu">
 			<div class="logo">
-				<a>AlceBank</a>
+				<a href="/">AlceBank</a>
 			</div>
 			<ul class="nav-links">
-				<li><a th:href="@{/auth/login}">Volver</a></li>
+				<li class="mt-3 me-3"><a th:href="@{/privada/home}">Inicio</a></li>
+				<li class="mt-3 me-3"><a th:href="@{/privada/cita}">Pedir Cita</a></li>
+				<li class="mt-3 me-3"><a th:href="@{/privada/verCitas}">Ver Citas</a></li>
+				<li class="mt-3 me-3"><a th:href="@{/privada/datosUsuario}">Datos
+						Usuario</a></li>
+				<li class="mt-3 me-3" sec:authorize="hasRole('ROLE_ADMIN')"><a
+					th:href="@{/privada/listado}">Listado Usuarios</a></li>
+				<li class="mt-3 me-3"><a th:href="@{/privada/nuevaTransaccion}">Realizar
+						Transaccion</a></li>
+				<li>
+					<form th:action="@{/auth/logout}" method="post" id="logoutForm">
+						<button type="button" class="btn btn-dark mt-2"
+							onclick="confirmarLogout()">Logout</button>
+					</form>
+				</li>
 			</ul>
 		</div>
 	</nav>

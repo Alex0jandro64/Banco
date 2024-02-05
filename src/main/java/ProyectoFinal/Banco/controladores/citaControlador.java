@@ -55,9 +55,23 @@ public class citaControlador {
 		
     	String mail = authentication.getName();
         Usuario usuario = usuarioServicio.buscarPorEmail(mail);
-        List<CitaDTO> citas = Util.listaCitasToDto(usuario.getCitasUsuario());
         
-        model.addAttribute("citas", citas);
+        
+        
+     // Verificar si el usuario tiene el rol de administrador
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+        
+     // Si el usuario es administrador, pasar la lista completa de citas
+        if (isAdmin) {
+        	List<CitaDTO> citasAdmin = citaServicio.buscarTodos();
+            model.addAttribute("citas", citasAdmin);
+        } else {
+            // Si no es administrador, pasar solo las citas del usuario actual
+        	List<CitaDTO> citas = Util.listaCitasToDto(usuario.getCitasUsuario());
+            model.addAttribute("citas", citas);
+        }
+        
         model.addAttribute("usuario",usuario);
         return "listadoCitas";
     }
