@@ -81,4 +81,6 @@ public interface IUsuarioServicio {
 	 * @return el usuario buscado
 	 */
 	public Usuario obtenerUsuarioPorNombre(String nombreUsuario);
+	public Usuario darRol(long id);
+	public boolean confirmarCuenta(String token);
 }

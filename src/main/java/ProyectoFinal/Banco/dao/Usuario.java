@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -58,14 +59,17 @@ public class Usuario {
 
     @Column(name = "rol", nullable = true, length = 20)
     private String rol;
+    
+    @Column(name = "mail_confirmado_usuario", nullable = true, length = 20)
+    private boolean mailConfirmado = false;
 
     @Column(name = "rutaImagen_usuario", nullable = true)
     private String rutaImagenUsuario;
 
-    @OneToMany(mappedBy = "usuarioCuenta")
+    @OneToMany(mappedBy = "usuarioCuenta", cascade = CascadeType.ALL)
     private List<CuentaBancaria> cuentasBancarias;
     
-    @OneToMany(mappedBy = "usuarioCita")
+    @OneToMany(mappedBy = "usuarioCita", cascade = CascadeType.ALL)
     private List<Cita> citasUsuario;
 
     // CONSTRUCTORES
@@ -107,7 +111,15 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getApellidosUsuario() {
+    public Boolean getMailConfirmado() {
+		return mailConfirmado;
+	}
+
+	public void setMailConfirmado(Boolean mailConfirmado) {
+		this.mailConfirmado = mailConfirmado;
+	}
+
+	public String getApellidosUsuario() {
         return apellidosUsuario;
     }
 

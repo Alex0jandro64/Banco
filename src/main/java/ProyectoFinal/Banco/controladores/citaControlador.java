@@ -60,7 +60,7 @@ public class citaControlador {
         
      // Verificar si el usuario tiene el rol de administrador
         boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN") || role.getAuthority().equals("ROLE_TRABAJADOR"));
         
      // Si el usuario es administrador, pasar la lista completa de citas
         if (isAdmin) {

@@ -71,6 +71,7 @@ public class Util {
             UsuarioDTO dto = new UsuarioDTO();
             dto.setNombreUsuario(usuario.getNombreUsuario());
             dto.setApellidosUsuario(usuario.getApellidosUsuario());
+            dto.setRolUsuario(usuario.getRol());
             dto.setDniUsuario(usuario.getDniUsuario());
             dto.setTlfUsuario(usuario.getTlfUsuario());
             dto.setEmailUsuario(usuario.getEmailUsuario());

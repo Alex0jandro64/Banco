@@ -111,4 +111,13 @@ public class CuentaServicioImpl implements ICuentaServicio {
 
         return String.format("%02d", mod);
     }
+    
+    @Override
+    public CuentaBancaria eliminarCuenta(long id) {
+    	CuentaBancaria cuenta = cuentaRepository.findById(id).orElse(null);
+        if (cuenta != null) {
+            cuentaRepository.delete(cuenta);
+        } 
+        return cuenta;
+    }
 }

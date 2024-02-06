@@ -17,7 +17,9 @@ public class UsuarioDTO {
 	private String tlfUsuario;
 	private String emailUsuario;
 	private String claveUsuario;
+	private String rolUsuario;
 	private String token;
+	private boolean mailConfirmado =false;
 	private Calendar fchAltaUsuario;
 	private String password;
 	private String password2;
@@ -46,6 +48,22 @@ public class UsuarioDTO {
 	}
 	public String getDniUsuario() {
 		return dniUsuario;
+	}
+
+	public Boolean getMailConfirmado() {
+		return mailConfirmado;
+	}
+
+	public void setMailConfirmado(Boolean mailConfirmado) {
+		this.mailConfirmado = mailConfirmado;
+	}
+
+	public String getRolUsuario() {
+		return rolUsuario;
+	}
+
+	public void setRolUsuario(String rolUsuario) {
+		this.rolUsuario = rolUsuario;
 	}
 
 	public void setDniUsuario(String dniUsuario) {
@@ -138,6 +156,10 @@ public class UsuarioDTO {
 
 	public void setFchAltaUsuario(Calendar fchAltaUsuario) {
 		this.fchAltaUsuario = fchAltaUsuario;
+	}
+	
+	public Boolean isMailConfirmado() {
+		return this.mailConfirmado;
 	}
 
 	//METODOS

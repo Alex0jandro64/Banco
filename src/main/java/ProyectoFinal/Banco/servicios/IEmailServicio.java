@@ -12,6 +12,6 @@ public interface IEmailServicio {
 	 * @param token Token asociado a la recuperación.
 	 */
 	public void enviarEmailRecuperacion(String emailDestino, String nombreUsuario, String token);
-
+	public void enviarEmailConfirmacion(String emailDestino, String nombreUsuario, String token);
 
 }

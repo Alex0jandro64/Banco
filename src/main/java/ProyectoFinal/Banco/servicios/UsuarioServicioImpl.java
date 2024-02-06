@@ -15,6 +15,7 @@ import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.repositorios.CuentaRepositorio;
 import ProyectoFinal.Banco.repositorios.UsuarioRepositorio;
+import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
 
 /**
@@ -44,8 +45,10 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
             Usuario usuarioDaoByEmail = repositorioUsuario.findFirstByEmailUsuario(userDto.getEmailUsuario());
 
             if (usuarioDaoByEmail != null) {
-                return null; // El usuario ya está registrado
+                // El usuario ya está registrado y confirmado
+                return null;
             }
+            
             userDto.setClaveUsuario(passwordEncoder.encode(userDto.getClaveUsuario()));
             Usuario usuarioDao = Util.usuarioToDao(userDto);
 
@@ -58,8 +61,25 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 
             usuarioDao.setRol("ROLE_USER");
             usuarioDao.setFchAltaUsuario(Calendar.getInstance());
-            repositorioUsuario.save(usuarioDao);
+            
+            if (userDto.isMailConfirmado()) {
+				usuarioDao.setMailConfirmado(true);
+				repositorioUsuario.save(usuarioDao);
+			} else {
+				usuarioDao.setMailConfirmado(false);
+				// Generar token de confirmación
+				String token = passwordEncoder.encode(RandomStringUtils.random(30));
+				usuarioDao.setToken(token);
+				
+				// Guardar el usuario en la base de datos
+				repositorioUsuario.save(usuarioDao);
+				
+				// Enviar el correo de confirmación
+				String nombreUsuario = usuarioDao.getNombreUsuario()+" "+ usuarioDao.getApellidosUsuario();
+				emailServicio.enviarEmailConfirmacion(userDto.getEmailUsuario(), nombreUsuario, token);
 
+			}
+            
             return usuarioDao;
         } catch (IllegalArgumentException iae) {
             System.out.println("[Error en UsuarioServicioImpl - registrar()]: " + iae.getMessage());
@@ -176,6 +196,43 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
     public Usuario obtenerUsuarioPorNombre(String nombreUsuario) {
         return repositorioUsuario.findByNombreUsuario(nombreUsuario);
     }
+    
+    @Override
+    public Usuario darRol(long id) {
+        Usuario usuario = repositorioUsuario.findById(id).orElse(null);
+        if (usuario != null) {
+        	usuario.setRol("ROLE_TRABAJADOR");
+            repositorioUsuario.save(usuario);
+        } 
+        return usuario;
+    }
+    
+    @Override
+	public boolean confirmarCuenta(String token) {
+		try {
+			Usuario usuarioExistente = repositorioUsuario.findByToken(token);
+
+			if (usuarioExistente != null && !usuarioExistente.getMailConfirmado()) {
+				// Entra en esta condición si el usuario existe y su cuenta no se ha confirmado
+				usuarioExistente.setMailConfirmado(true);
+				usuarioExistente.setToken(null);
+				repositorioUsuario.save(usuarioExistente);
+
+				return true;
+			} else {
+				System.out.println("La cuenta no existe o ya está confirmada");
+				return false;
+			}
+		} catch (IllegalArgumentException iae) {
+			System.out.println("[Error UsuarioServicioImpl - confirmarCuenta()] Error al confirmar la cuenta " + iae.getMessage());
+			return false;
+		} catch (PersistenceException e) {
+			System.out.println("[Error UsuarioServicioImpl - confirmarCuenta()] Error de persistencia al confirmar la cuenta" + e.getMessage());
+			return false;
+		}
+	}
+
+
 
     // ESTOS MÉTODOS NO SE USAN DE MOMENTO
 

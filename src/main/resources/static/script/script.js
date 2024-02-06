@@ -1,19 +1,31 @@
 function revisarContraseña() {
-	var contraseña = document.getElementById('claveUsuario').value;
-    var confContraseña = document.getElementById('confirmarClaveUsuario').value;
-    var mensajeContraseña = document.getElementById('mensajeContrasenya');
+    const contraseña = document.getElementById('password').value;
+    const confContraseña = document.getElementById('confirmarPassword').value;
+    const mensajeContraseña = document.getElementById('mensajeContrasenya');
+    const contraseñaRegex = /^(?=.*\d).{8,}$/;
 
-	if (contraseña === "" && confContraseña === "") {
-		mensajeContraseña.textContent = 'No puede dejar campos vacíos';
-		document.getElementById("btnRegistro").disabled = true;//deshabilita el boton		
-	} else if (contraseña === confContraseña) {
-        mensajeContraseña.textContent = 'Las contraseñas coinciden';
-        mensajeContraseña.style.color = 'green';
-        document.getElementById("btnRegistro").disabled = false;//habilita el boton
-    } else {
-        mensajeContraseña.textContent = 'Las contraseñas no coinciden';
+    if (contraseña === "" && confContraseña === "") {
+        mensajeContraseña.innerHTML = '<span class="badge bg-danger">No puede dejar los campos contraseñas vacíos</span>';
         mensajeContraseña.style.color = 'red';
-        document.getElementById("btnRegistro").disabled = true;//deshabilita el boton
+        document.getElementById("btnRegistro").disabled = true;
+        btnRegistro.style.backgroundColor = "#959595"; 
+    } else if (contraseña === confContraseña) {
+        if (contraseñaRegex.test(contraseña)) {
+            mensajeContraseña.innerHTML = '<span class="badge bg-success">Contraseña válida</span>';
+            mensajeContraseña.style.color = 'green';
+            document.getElementById("btnRegistro").disabled = false;
+            btnRegistro.style.backgroundColor = "#5993d3"; 
+        } else {
+            mensajeContraseña.innerHTML = '<span class="badge bg-danger">La contraseña debe tener al menos 8 caracteres con 1 número</span>';
+            mensajeContraseña.style.color = 'red';
+            document.getElementById("btnRegistro").disabled = true;
+            btnRegistro.style.backgroundColor = "#959595"; 
+        }
+    } else {
+        mensajeContraseña.innerHTML = '<span class="badge bg-danger">Las contraseñas introducidas no son iguales</span>';
+        mensajeContraseña.style.color = 'red';
+        document.getElementById("btnRegistro").disabled = true;
+        btnRegistro.style.backgroundColor = "#959595"; 
     }
 }
 
@@ -57,7 +69,7 @@ function confirmar() {
     });
 }
 
-function confirmarEliminar(event) {
+function confirmarEliminarUsu(event) {
     const idUsuario = event.currentTarget.getAttribute("data-id");
     confirmar().then(function (confirmado) {
         if (confirmado) {
@@ -71,6 +83,15 @@ function confirmarEliminar(event) {
     confirmar().then(function (confirmado) {
         if (confirmado) {
             window.location.href = 'http://localhost:8080/privada/eliminarCita/' + idCita;
+        }
+    });
+}
+
+function confirmarRol(event) {
+    const idUsuario = event.currentTarget.getAttribute("data-id");
+    confirmar().then(function (confirmado) {
+        if (confirmado) {
+            window.location.href = 'http://localhost:8080/privada/darRol/' + idUsuario;
         }
     });
 }

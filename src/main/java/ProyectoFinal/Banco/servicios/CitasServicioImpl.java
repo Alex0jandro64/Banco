@@ -11,7 +11,6 @@ import ProyectoFinal.Banco.dao.Cita;
 import ProyectoFinal.Banco.dao.Oficina;
 import ProyectoFinal.Banco.dto.CitaDTO;
 import ProyectoFinal.Banco.dto.CitaDTOLong;
-import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.repositorios.CitaRepositorio;
 import ProyectoFinal.Banco.repositorios.OficinaRepositorio;
 import jakarta.transaction.Transactional;
