@@ -1,5 +1,6 @@
 package ProyectoFinal.Banco.servicios;
 
+import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,7 @@ public class TransaccionServicioImpl implements ITransaccionServicio {
             else {
             	cuentaRemitente.setSaldoCuenta(cuentaRemitente.getSaldoCuenta()-transaccion.getCantidadTransaccion());
                 cuentaDestino.setSaldoCuenta(cuentaDestino.getSaldoCuenta()+transaccion.getCantidadTransaccion());
+                transaccion.setFechaTransaccion(Calendar.getInstance());
             	cuentaRepository.save(cuentaDestino);
                 cuentaRepository.save(cuentaRemitente);
                 transaccionRepository.save(transaccion);

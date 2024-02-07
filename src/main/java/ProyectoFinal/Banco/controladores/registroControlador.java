@@ -34,7 +34,7 @@ public class registroControlador {
         	
             Usuario nuevoUsuario = usuarioServicio.registrar(usuarioDTO);
             
-            if (nuevoUsuario != null && nuevoUsuario.getDniUsuario() != null ) {
+            if (nuevoUsuario.getDniUsuario() != null && nuevoUsuario != null ) {
             	model.addAttribute("mensajeExitoMail", "Registro del nuevo usuario OK");
                 CuentaBancaria cuentaNueva = new CuentaBancaria();
                 cuentaNueva.setUsuarioCuenta(nuevoUsuario);
@@ -42,7 +42,7 @@ public class registroControlador {
                 return "login";
             }
             else {
-                if (usuarioDTO.getDniUsuario() == null) {
+                if (nuevoUsuario.getDniUsuario() == null) {
                     model.addAttribute("mensajeErrorDni", "Ya existe un usuario con ese DNI");
                     return "registro";
                 } else {

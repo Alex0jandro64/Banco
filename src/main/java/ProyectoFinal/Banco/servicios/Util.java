@@ -190,6 +190,37 @@ public class Util {
         }
     }
     
+    static public TransaccionDTO transaccionToDto(Transaccion transaccion) {
+        try {
+        	TransaccionDTO dto = new TransaccionDTO();
+            
+            dto.setCantidadTransaccion(transaccion.getCantidadTransaccion());
+            dto.setUsuarioTransaccionDestinatario(transaccion.getUsuarioTransaccionDestinatario());
+            dto.setUsuarioTransaccionRemitente(transaccion.getUsuarioTransaccionRemitente());
+            LocalDateTime localDateTime = LocalDateTime.ofInstant(transaccion.getFechaTransaccion().toInstant(), ZoneId.systemDefault());
+            dto.setFechaTransaccion(localDateTime);
+            
+            return dto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en transaccionToDto()] - Error al convertir Transaccion a transaccionToDto: " + e.getMessage());
+            return null;
+        }
+    }
+
+    
+    static public List<TransaccionDTO> listaTransaccionesToDto(List<Transaccion> listaTransacciones) {
+        try {
+            List<TransaccionDTO> listaDto = new ArrayList<>();
+            for (Transaccion transaccion : listaTransacciones) {
+                listaDto.add(Util.transaccionToDto(transaccion));
+            }
+            return listaDto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en listaTransaccionesToDto()] - Error al convertir lista de Transacciones a lista de TransaccionesDto: " + e.getMessage());
+            return null;
+        }
+    }
+    
     static public List<CitaDTO> listaCitasToDto(List<Cita> listaCita) {
         try {
             List<CitaDTO> listaDto = new ArrayList<>();

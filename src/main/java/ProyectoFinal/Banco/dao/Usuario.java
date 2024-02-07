@@ -4,12 +4,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -57,14 +60,15 @@ public class Usuario {
     @Column(name = "expiracionToken_usuario", nullable = true, length = 100)
     private Calendar expiracionToken;
 
-    @Column(name = "rol", nullable = true, length = 20)
+    @Column(name = "rol_usuario", nullable = true, length = 20)
     private String rol;
     
     @Column(name = "mail_confirmado_usuario", nullable = true, length = 20)
     private boolean mailConfirmado = false;
 
-    @Column(name = "rutaImagen_usuario", nullable = true)
-    private String rutaImagenUsuario;
+ // Agregar un campo para la imagen de perfil
+    @Column(name = "foto_perfil_usuario", nullable = true)
+    private byte[] fotoPerfil;
 
     @OneToMany(mappedBy = "usuarioCuenta", cascade = CascadeType.ALL)
     private List<CuentaBancaria> cuentasBancarias;
@@ -195,12 +199,13 @@ public class Usuario {
         return cuentasBancarias;
     }
 
-    public String getRutaImagenUsuario() {
-		return rutaImagenUsuario;
+
+	public byte[] getFotoPerfil() {
+		return fotoPerfil;
 	}
 
-	public void setRutaImagenUsuario(String rutaImagenUsuario) {
-		this.rutaImagenUsuario = rutaImagenUsuario;
+	public void setFotoPerfil(byte[] fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
 	}
 
 	public List<Cita> getCitasUsuario() {

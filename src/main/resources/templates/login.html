@@ -54,13 +54,13 @@
 	    mostrarNotificacion("¡Confirmar Correo!", "Tiene que confirmar el correo para poder usar la cuenta", 'info');
 	</script>
 	<script th:if="${not #strings.isEmpty(mensajeExitoMail)}">
-	    mostrarNotificacion("¡Email enviado!", "Se ha enviado a su direccion un correo de recuperación", 'info');
+	    mostrarNotificacion("¡Cuenta Creada!", "Se ha enviado a su direccion un correo de confirmacion", 'info');
 	</script>
 	<script th:if="${not #strings.isEmpty(cuentaVerificada)}">
 	    mostrarNotificacion("¡Cuenta Creada!", "Se ha Activado su cuenta correctamente", 'success');
 	</script>
 	<script th:if="${not #strings.isEmpty(contraseñaModificadaExito)}">
-	    mostrarNotificacion("¡Exito!", "Se ha modificado con correctamente la contraseña", 'success');
+	    mostrarNotificacion("¡Exito!", "Se ha modificado correctamente la contraseña", 'success');
 	</script>
 	<script th:if="${param.error}">
 	    mostrarNotificacion("¡Error!","Las credenciales introducidas no son correctas", 'error');

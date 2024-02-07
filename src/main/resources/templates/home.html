@@ -86,6 +86,7 @@
 				<th>Cantidad</th>
 				<th>Cuenta Destinataria</th>
 				<th>Cuenta Remitente</th>
+				<th>Fecha</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -96,6 +97,7 @@
 				<td
 					th:text="${transaccion.usuarioTransaccionDestinatario.codigoIban}"></td>
 				<td th:text="${transaccion.usuarioTransaccionRemitente.codigoIban}"></td>
+				<td th:text="${#temporals.format(transaccion.fechaTransaccion, 'dd-MM-yyyy HH:mm')}"></td>
 			</tr>
 		</tbody>
 	</table>

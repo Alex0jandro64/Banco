@@ -69,6 +69,21 @@ function confirmar() {
     });
 }
 
+function confirmarRol() {
+    return Swal.fire({
+        title: '¿Estás seguro de asignar el rol?',
+        text: '',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, modificar.'
+    }).then((result) => {
+        return result.isConfirmed;
+    });
+}
+
+
 function confirmarEliminarUsu(event) {
     const idUsuario = event.currentTarget.getAttribute("data-id");
     confirmar().then(function (confirmado) {
@@ -89,7 +104,7 @@ function confirmarEliminar(event) {
 
 function confirmarRol(event) {
     const idUsuario = event.currentTarget.getAttribute("data-id");
-    confirmar().then(function (confirmado) {
+    confirmarRol().then(function (confirmado) {
         if (confirmado) {
             window.location.href = 'http://localhost:8080/privada/darRol/' + idUsuario;
         }

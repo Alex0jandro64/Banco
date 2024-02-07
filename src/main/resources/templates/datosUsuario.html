@@ -41,6 +41,9 @@
 	</nav>
 <h1 class="text-dark text-center mt-5">Datos Usuario</h1>
 <div class="text-dark text-center mt-5">
+<img th:src="@{'/privada/perfil/foto/' + ${usuario.id}}" alt="Foto de perfil">
+</div>
+<div class="text-dark text-center mt-5">
         <label><b>Nombre:</b></label>
         <span th:text="${usuario.nombreUsuario}"></span>
     </div>
@@ -64,5 +67,12 @@
         <label><b>Fecha de Alta:</b></label>
         <span th:text="${#dates.format(usuario.fchAltaUsuario, 'dd-MM-yyyy HH:mm:ss')}"></span>
     </div>
+    <div class="text-dark text-center mt-5">
+    <form th:action="@{/privada/guardarFotoPerfil}"  method="post" enctype="multipart/form-data">
+    <input type="file" name="fotoPerfil" accept="image/*">
+    <button type="submit">Guardar Foto de Perfil</button>
+    </form>
+    </div>
+
 </body>
 </html>

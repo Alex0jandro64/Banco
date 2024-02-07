@@ -1,5 +1,7 @@
 package ProyectoFinal.Banco.dao;
 
+import java.util.Calendar;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,13 +35,24 @@ public class Transaccion {
 
     @Column(name = "cantidad_transaccion", nullable = true)
     private double cantidadTransaccion;
+    
+    @Column(name = "fecha_transaccion", nullable = true)
+    private Calendar fechaTransaccion;
 
     // GETTERS Y SETTERS
     public long getIdTransaccion() {
         return idTransaccion;
     }
 
-    public void setIdTransaccion(long idTransaccion) {
+    public Calendar getFechaTransaccion() {
+		return fechaTransaccion;
+	}
+
+	public void setFechaTransaccion(Calendar fechaTransaccion) {
+		this.fechaTransaccion = fechaTransaccion;
+	}
+
+	public void setIdTransaccion(long idTransaccion) {
         this.idTransaccion = idTransaccion;
     }
 

@@ -13,6 +13,7 @@ import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
+import ProyectoFinal.Banco.dto.TransaccionDTO;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.servicios.ITransaccionServicio;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
@@ -32,8 +33,6 @@ public class bancoControlador {
         try {
             String mail = authentication.getName();
             Usuario usuario = usuarioServicio.buscarPorEmail(mail);
-            Long idUsuario = usuario.getIdUsuario();
-            model.addAttribute("idUsuario", idUsuario);
             
             List<CuentaBancaria> cuentasBancarias1 = usuario.getCuentasBancarias();
             
@@ -47,10 +46,12 @@ public class bancoControlador {
             
             UsuarioDTO usuariodto = Util.usuarioToDto(usuario);
             List<Transaccion> listaCompletaTransacciones = transaccionServicio.obtenerTransaccionesDeUsuario(cuentaActual);
+            listaCompletaTransacciones.sort((a, b) -> -1);
             CuentaBancariaDTO cuentaBancariaDto = Util.cuentaToDTO(cuentaActual);
             int indiceInicial = pagina * 3;
             int indiceFinal = Math.min(indiceInicial + 3, listaCompletaTransacciones.size());
-            List<Transaccion> transaccionesPaginaActual = listaCompletaTransacciones.subList(indiceInicial, indiceFinal);
+            List<Transaccion> transaccionesPaginaActual1 = listaCompletaTransacciones.subList(indiceInicial, indiceFinal);
+            List<TransaccionDTO> transaccionesPaginaActual = Util.listaTransaccionesToDto(transaccionesPaginaActual1);
             model.addAttribute("haySiguientePagina", indiceFinal < listaCompletaTransacciones.size());
             model.addAttribute("hayPaginaAnterior", pagina > 0);
             model.addAttribute("paginaActual", pagina);

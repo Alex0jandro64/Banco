@@ -1,22 +1,25 @@
 package ProyectoFinal.Banco.servicios;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.List;
-
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import ProyectoFinal.Banco.dao.CuentaBancaria;
+import ProyectoFinal.Banco.dao.Oficina;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.repositorios.CuentaRepositorio;
+import ProyectoFinal.Banco.repositorios.OficinaRepositorio;
 import ProyectoFinal.Banco.repositorios.UsuarioRepositorio;
 import jakarta.persistence.PersistenceException;
-import jakarta.transaction.Transactional;
 
 /**
  * Servicio que implementa los métodos de la interfaz {@link IUsuarioServicio}
@@ -24,11 +27,13 @@ import jakarta.transaction.Transactional;
  * para la gestión de usuarios.
  */
 @Service
-@Transactional
 public class UsuarioServicioImpl implements IUsuarioServicio {
 
     @Autowired
     private UsuarioRepositorio repositorioUsuario;
+    
+    @Autowired
+    private OficinaRepositorio repositorioOficina;
 
     @Autowired
     private CuentaRepositorio repositorioCuenta;
@@ -55,7 +60,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
             boolean yaExisteElDNI = repositorioUsuario.existsByDniUsuario(usuarioDao.getDniUsuario());
 
             if (yaExisteElDNI) {
-                userDto.setDniUsuario(null); // Controlar el error en el controlador
+                usuarioDao.setDniUsuario(null); // Controlar el error en el controlador
                 return usuarioDao;
             }
 
@@ -72,6 +77,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 				usuarioDao.setToken(token);
 				
 				// Guardar el usuario en la base de datos
+				usuarioDao.setFotoPerfil(obtenerFotoPorDefecto());
 				repositorioUsuario.save(usuarioDao);
 				
 				// Enviar el correo de confirmación
@@ -105,6 +111,11 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
             cuentaAdmin.setUsuarioCuenta(admin);
             cuentaAdmin.setSaldoCuenta(120.50);
             cuentaAdmin.setCodigoIban("1234");
+            
+            Oficina oficina = new Oficina();
+            oficina.setDireccionOficina("Calle Pepe Nº2");
+            
+            repositorioOficina.save(oficina);
             repositorioUsuario.save(admin);
             repositorioCuenta.save(cuentaAdmin);
         }
@@ -231,8 +242,15 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
 			return false;
 		}
 	}
-
-
+    
+    public byte[] obtenerFotoPorDefecto() throws IOException {
+        // Ruta de la imagen por defecto
+        String defaultImagePath = "static/img/user_icon_149851.jpeg";
+        
+        // Lee la imagen por defecto como un array de bytes
+        InputStream inputStream = new ClassPathResource(defaultImagePath).getInputStream();
+        return IOUtils.toByteArray(inputStream);
+    }
 
     // ESTOS MÉTODOS NO SE USAN DE MOMENTO
 

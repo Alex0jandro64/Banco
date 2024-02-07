@@ -31,7 +31,7 @@ public class CuentaBancaria {
     @Column(name = "saldo_cuenta", nullable = true)
     private double saldoCuenta;
 
-    @Column(name = "codigo_iban", nullable = true, length = 100)
+    @Column(name = "codigo_iban_cuenta", nullable = true, length = 100)
     private String codigoIban;
 
     @OneToMany(mappedBy = "usuarioTransaccionRemitente")

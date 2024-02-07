@@ -1,5 +1,8 @@
 package ProyectoFinal.Banco.dto;
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
+
 import ProyectoFinal.Banco.dao.CuentaBancaria;
 
 /**
@@ -12,6 +15,7 @@ public class TransaccionDTO {
     private CuentaBancaria usuarioTransaccionRemitente;
     private CuentaBancaria usuarioTransaccionDestinatario;
     private double cantidadTransaccion;
+    private LocalDateTime fechaTransaccion;
 
     // CONSTRUCTORES
     public TransaccionDTO() {
@@ -32,7 +36,15 @@ public class TransaccionDTO {
         return idTransaccion;
     }
 
-    public void setIdTransaccion(long idTransaccion) {
+    public LocalDateTime getFechaTransaccion() {
+		return fechaTransaccion;
+	}
+
+	public void setFechaTransaccion(LocalDateTime fechaTransaccion) {
+		this.fechaTransaccion = fechaTransaccion;
+	}
+
+	public void setIdTransaccion(long idTransaccion) {
         this.idTransaccion = idTransaccion;
     }
 

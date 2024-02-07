@@ -30,7 +30,7 @@ public class LoginControlador {
     @PostMapping("/auth/login-post")
     public String registrarPost(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
         try {
-        	
+        	System.out.println("hgola");
             //Usuario nuevoUsuario = usuarioServicio.registrar(usuarioDTO);
             
             return "home";

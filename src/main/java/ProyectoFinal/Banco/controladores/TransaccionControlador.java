@@ -38,8 +38,7 @@ public class TransaccionControlador {
     public String nuevaTrasaccion(Model model, Authentication authentication) {
     	String mail = authentication.getName();
         Usuario usuario = usuarioServicio.buscarPorEmail(mail);
-        Long idUsuario = usuario.getIdUsuario();
-        List<CuentaBancaria> cuentasBancarias = cuentaServicio.obtenerCuentasDeUsuario(idUsuario);
+        List<CuentaBancaria> cuentasBancarias = usuario.getCuentasBancarias();
         List<CuentaBancariaDTO> cuentasBancariasDto = Util.cuentaBancariaToDto(cuentasBancarias);
         model.addAttribute("cuentasBancariasDto",cuentasBancariasDto);
         return "nuevaTransaccion";
