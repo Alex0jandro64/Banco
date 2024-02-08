@@ -14,7 +14,6 @@ import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
 import ProyectoFinal.Banco.dto.TransaccionDTOString;
-import ProyectoFinal.Banco.servicios.ICuentaServicio;
 import ProyectoFinal.Banco.servicios.ITransaccionServicio;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
 import ProyectoFinal.Banco.servicios.Util;
@@ -25,9 +24,6 @@ import ProyectoFinal.Banco.servicios.Util;
 @Controller
 public class TransaccionControlador {
 
-	@Autowired
-    private ICuentaServicio cuentaServicio;
-	
 	@Autowired
     private IUsuarioServicio usuarioServicio;
 	
