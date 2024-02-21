@@ -3,7 +3,10 @@ package ProyectoFinal.Banco.dto;
 import java.time.LocalDateTime;
 import ProyectoFinal.Banco.dao.Oficina;
 import ProyectoFinal.Banco.dao.Usuario;
-
+/**
+ * Clase DTO (Data Transfer Object) para la gestión de citas,
+ * utilizada para transferir datos relacionados con las citas entre capas.
+ */
 public class CitaDTO {
 	
 		//ATRIBUTOS

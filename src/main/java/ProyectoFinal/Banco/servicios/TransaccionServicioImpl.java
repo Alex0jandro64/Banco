@@ -2,6 +2,7 @@ package ProyectoFinal.Banco.servicios;
 
 import java.util.Calendar;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,12 @@ public class TransaccionServicioImpl implements ITransaccionServicio {
     @Autowired
     private CuentaRepositorio cuentaRepository;
 
+    /**
+     * Obtiene todas las transacciones de un usuario.
+     * 
+     * @param usuarioId La cuenta bancaria del usuario.
+     * @return Una lista de transacciones del usuario.
+     */
     @Override
     public List<Transaccion> obtenerTransaccionesDeUsuario(CuentaBancaria usuarioId) {
         try {
@@ -33,50 +40,56 @@ public class TransaccionServicioImpl implements ITransaccionServicio {
             return transaccionRepository.findByUsuarioTransaccionRemitenteOrUsuarioTransaccionDestinatario(usuarioId, usuarioId);
         } catch (Exception e) {
             System.out.println("[Error en TransaccionServicioImpl - obtenerTransaccionesDeUsuario()]: " + e.getMessage());
-            return null;
+            return null; // Devuelve null en caso de error
         }
     }
 
+    /**
+     * Registra una nueva transacción.
+     * 
+     * @param transaccionDTOString El DTO de la transacción.
+     * @return Un código de error que indica el resultado de la operación:
+     *         1 si la transacción se realizó correctamente,
+     *         -1 si ocurrió un error durante la operación.
+     */
     @Override
     public int registrarTransaccion(TransaccionDTOString transaccionDTOString) {
         try {
             CuentaBancaria cuentaDestino = cuentaRepository.findFirstBycodigoIban(transaccionDTOString.getUsuarioTransaccionDestinatario());
             CuentaBancaria cuentaRemitente = cuentaRepository.findFirstBycodigoIban(transaccionDTOString.getUsuarioTransaccionRemitente());
+            
+            // Verificar si la cuenta destino existe
+            if (cuentaDestino == null) {
+                return 3; // Código de error para cuenta destino no encontrada
+            }
+            
+            // Verificar si la cuenta remitente y destino son la misma
+            if (cuentaRemitente.getCodigoIban().equals(cuentaDestino.getCodigoIban())) {
+                return 2; // Código de error para cuenta remitente y destino iguales
+            }
+            
             Transaccion transaccion = new Transaccion();
             transaccion.setCantidadTransaccion(transaccionDTOString.getCantidadTransaccion());
             transaccion.setUsuarioTransaccionDestinatario(cuentaDestino);
             transaccion.setUsuarioTransaccionRemitente(cuentaRemitente);
             
-            int error=0;
-            if(cuentaRemitente.getSaldoCuenta()-transaccion.getCantidadTransaccion()<0){
-            	//Si no tiene saldo suficiente le pongo -1 para posteriormente controlarlo y mostrar mensaje de error
-            	//transaccion.setCantidadTransaccion(-1);
-            	error =-1;              
-            }else if(cuentaDestino == null){
-            	error =3;
-            	//transaccion.setCantidadTransaccion(3);
-            	
-            }else if(cuentaRemitente.getCodigoIban().equals(cuentaDestino.getCodigoIban())){
-            	//Si la cuenta destino y la cuenta remitente es la misma le pongo 2 para posteriormente controlarlo y mostrar mensaje de error
-            	//transaccion.setCantidadTransaccion(2);
-            	error =2;
-            }
-            else {
-            	cuentaRemitente.setSaldoCuenta(cuentaRemitente.getSaldoCuenta()-transaccion.getCantidadTransaccion());
-                cuentaDestino.setSaldoCuenta(cuentaDestino.getSaldoCuenta()+transaccion.getCantidadTransaccion());
-                transaccion.setFechaTransaccion(Calendar.getInstance());
-            	cuentaRepository.save(cuentaDestino);
-                cuentaRepository.save(cuentaRemitente);
-                transaccionRepository.save(transaccion);
-                //transaccion.setCantidadTransaccion(1);
-                error =1;
+            // Verificar si el remitente tiene saldo suficiente
+            if (cuentaRemitente.getSaldoCuenta() - transaccion.getCantidadTransaccion() < 0) {
+                return -1; // Código de error para saldo insuficiente
             }
             
-
-            return error;
+            // Actualizar los saldos y guardar la transacción
+            cuentaRemitente.setSaldoCuenta(cuentaRemitente.getSaldoCuenta() - transaccion.getCantidadTransaccion());
+            cuentaDestino.setSaldoCuenta(cuentaDestino.getSaldoCuenta() + transaccion.getCantidadTransaccion());
+            transaccion.setFechaTransaccion(Calendar.getInstance());
+            cuentaRepository.save(cuentaDestino);
+            cuentaRepository.save(cuentaRemitente);
+            transaccionRepository.save(transaccion);
+            
+            return 1; // Transacción exitosa
         } catch (Exception e) {
             System.out.println("[Error en TransaccionServicioImpl - registrarTransaccion()]: " + e.getMessage());
-            return -1;
+            return -1; // Código de error para error general
         }
     }
 }

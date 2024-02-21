@@ -69,15 +69,15 @@ function confirmar() {
     });
 }
 
-function confirmarRol() {
+function confirmarRolMensaje() {
     return Swal.fire({
-        title: '¿Estás seguro de asignar el rol?',
-        text: '',
+        title: '¿Estás seguro de que deseas dar rol?',
+        text: 'El usuario tendra Rol Trabajador.',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, modificar.'
+        confirmButtonText: 'Sí, dar Rol.'
     }).then((result) => {
         return result.isConfirmed;
     });
@@ -104,7 +104,7 @@ function confirmarEliminar(event) {
 
 function confirmarRol(event) {
     const idUsuario = event.currentTarget.getAttribute("data-id");
-    confirmarRol().then(function (confirmado) {
+    confirmarRolMensaje().then(function (confirmado) {
         if (confirmado) {
             window.location.href = 'http://localhost:8080/privada/darRol/' + idUsuario;
         }

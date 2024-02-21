@@ -3,7 +3,10 @@ package ProyectoFinal.Banco.dto;
 import java.util.List;
 
 import ProyectoFinal.Banco.dao.Cita;
-
+/**
+ * Clase DTO (Data Transfer Object) para representar una Oficina y sus citas asociadas,
+ * utilizada para transferir datos relacionados con las oficinas entre capas.
+ */
 public class OficinaDTO {
 
 	//ATRIBUTOS

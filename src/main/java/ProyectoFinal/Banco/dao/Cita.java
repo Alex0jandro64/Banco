@@ -9,7 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+/**
+ * Clase DAO (Data Access Object) que representa la tabla de citas en la base de datos,
+ * mapea con esta 1:1 y ejerce como modelo virtual de la tabla en la aplicación.
+ */
 @Entity
 @Table(name = "citas", schema = "bf_operacional")
 public class Cita {

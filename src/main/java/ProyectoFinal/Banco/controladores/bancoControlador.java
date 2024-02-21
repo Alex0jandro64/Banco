@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dao.Usuario;
@@ -19,6 +20,9 @@ import ProyectoFinal.Banco.servicios.ITransaccionServicio;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
 import ProyectoFinal.Banco.servicios.Util;
 
+/**
+ * Controlador para manejar las operaciones bancarias.
+ */
 @Controller
 public class bancoControlador {
 
@@ -28,8 +32,20 @@ public class bancoControlador {
     @Autowired
     private ITransaccionServicio transaccionServicio;
 
+    /**
+     * Método para mostrar la página principal después del inicio de sesión.
+     */
     @GetMapping("/privada/home")
-    public String loginCorrecto(Model model, Authentication authentication,@RequestParam(defaultValue = "0") int cuentaIndex, @RequestParam(defaultValue = "0") int pagina,@ModelAttribute("mensajeTransaccionExitosa") String mensajeTransaccionExitosa, @ModelAttribute("mensajeTransaccionError") String mensajeTransaccionError,@ModelAttribute("mensajeTransaccionErrorSaldo") String mensajeTransaccionErrorSaldo,@ModelAttribute("mensajeTransaccionErrorExisteCuenta") String mensajeTransaccionErrorExisteCuenta ,@ModelAttribute("mensajeTransaccionErrorCuenta") String mensajeTransaccionErrorCuenta,@ModelAttribute("mensajeCuentaLimite") String mensajeCuentaLimite,@ModelAttribute("mensajeCuentaCreada") String mensajeCuentaCreada  ) {
+    public String loginCorrecto(Model model, Authentication authentication,
+                                @RequestParam(defaultValue = "0") int cuentaIndex,
+                                @RequestParam(defaultValue = "0") int pagina,
+                                @ModelAttribute("mensajeTransaccionExitosa") String mensajeTransaccionExitosa,
+                                @ModelAttribute("mensajeTransaccionError") String mensajeTransaccionError,
+                                @ModelAttribute("mensajeTransaccionErrorSaldo") String mensajeTransaccionErrorSaldo,
+                                @ModelAttribute("mensajeTransaccionErrorExisteCuenta") String mensajeTransaccionErrorExisteCuenta,
+                                @ModelAttribute("mensajeTransaccionErrorCuenta") String mensajeTransaccionErrorCuenta,
+                                @ModelAttribute("mensajeCuentaLimite") String mensajeCuentaLimite,
+                                @ModelAttribute("mensajeCuentaCreada") String mensajeCuentaCreada) {
         try {
             String mail = authentication.getName();
             Usuario usuario = usuarioServicio.buscarPorEmail(mail);
@@ -69,10 +85,9 @@ public class bancoControlador {
             model.addAttribute("mensajeCuentaCreada", mensajeCuentaCreada);
             model.addAttribute("mensajeCuentaLimite", mensajeCuentaLimite);
         } catch (Exception e) {
+            // Manejo de excepción
             System.out.println("Error [bancoControlador-loginCorrecto]");
         }
         return "home";
     }
-    
-    
-    }
+}

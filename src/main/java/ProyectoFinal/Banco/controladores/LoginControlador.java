@@ -11,28 +11,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
 
-
 /**
  * Clase controlador para gestionar la autenticación y registro de usuarios.
  */
 @Controller
 public class LoginControlador {
 
-	@Autowired
+    @Autowired
     private IUsuarioServicio usuarioServicio;
-	
+    
+    /**
+     * Método para mostrar el formulario de inicio de sesión.
+     */
     @GetMapping("/auth/login")
     public String login(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
-        
         return "login";
     }
+    
+    /** 
+     * Método para procesar el formulario de registro de usuarios.
+     */
     @PostMapping("/auth/login-post")
     public String registrarPost(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
         try {
-        	System.out.println("hgola");
             //Usuario nuevoUsuario = usuarioServicio.registrar(usuarioDTO);
-            
             return "home";
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error al registrar el usuario: " + e.getMessage());
@@ -41,6 +44,9 @@ public class LoginControlador {
     }
     
 
+    /**
+     * Método para confirmar la cuenta de usuario a través de un token.
+     */
     @GetMapping("/auth/confirmar-cuenta")
     public String confirmarCuenta(Model model, @RequestParam("token") String token) {
         try {

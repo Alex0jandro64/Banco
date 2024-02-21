@@ -80,7 +80,27 @@ public interface IUsuarioServicio {
 	 * @param nombreUsuario nombre de usuario del usuario a obtener
 	 * @return el usuario buscado
 	 */
+	/**
+	 * Obtiene un usuario por su nombre de usuario.
+	 * 
+	 * @param nombreUsuario El nombre de usuario del usuario que se desea obtener.
+	 * @return El objeto Usuario asociado al nombre de usuario proporcionado, null si no se encuentra ningún usuario.
+	 */
 	public Usuario obtenerUsuarioPorNombre(String nombreUsuario);
+
+	/**
+	 * Otorga un rol específico a un usuario.
+	 * 
+	 * @param id El identificador del usuario al que se desea otorgar el rol.
+	 * @return El objeto Usuario al que se le ha otorgado el rol, null si no se encuentra ningún usuario con el identificador proporcionado.
+	 */
 	public Usuario darRol(long id);
+
+	/**
+	 * Confirma la cuenta de un usuario utilizando un token de confirmación.
+	 * 
+	 * @param token El token de confirmación del usuario.
+	 * @return true si la cuenta se confirmó correctamente, false si la cuenta ya está confirmada o si ocurre un error durante el proceso.
+	 */
 	public boolean confirmarCuenta(String token);
 }

@@ -5,6 +5,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -29,18 +30,25 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class usuarioControlador {
 
-	@Autowired
+    @Autowired
     private IUsuarioServicio usuarioServicio;
-	
-	@Autowired
+    
+    @Autowired
     private UsuarioRepositorio usuarioRepository;
-	
-	@GetMapping("/privada/listado")
-    public String listadoUsuarios(Model model, HttpServletRequest request, Authentication authentication,RedirectAttributes redirectAttributes) {
+    
+    /**
+     * Método para mostrar el listado de usuarios.
+     * @param model El modelo utilizado para agregar los datos necesarios a la vista.
+     * @param request La solicitud HTTP.
+     * @param authentication La autenticación del usuario.
+     * @param redirectAttributes Los atributos utilizados para enviar mensajes flash a la redirección.
+     * @return La vista "listado".
+     */
+    @GetMapping("/privada/listado")
+    public String listadoUsuarios(Model model, HttpServletRequest request, Authentication authentication, RedirectAttributes redirectAttributes) {
         try {
-            
             if (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_TRABAJADOR")) {
-            	List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
+                List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
                 model.addAttribute("usuarios", usuarios);
                 return "listado";
             }
@@ -52,12 +60,19 @@ public class usuarioControlador {
         }
     }
 
+    /**
+     * Método para eliminar un usuario.
+     * @param id El ID del usuario a eliminar.
+     * @param model El modelo utilizado para agregar los datos necesarios a la vista.
+     * @param request La solicitud HTTP.
+     * @return La redirección al listado de usuarios.
+     */
     @GetMapping("/privada/eliminar/{id}")
     public String eliminarUsuario(@PathVariable Long id, Model model, HttpServletRequest request) {
         try {
             Usuario usuario = usuarioServicio.buscarPorId(id);
             List<UsuarioDTO> usuarios = usuarioServicio.buscarTodos();
-            if (request.isUserInRole("ROLE_ADMIN") && usuario.getRol().equals("ROLE_ADMIN") || usuario.getRol().equals("ROLE_TRABAJADOR")) {
+            if (request.isUserInRole("ROLE_ADMIN") && usuario.getRol().equals("ROLE_ADMIN")) {
                 model.addAttribute("noSePuedeEliminar", "No se puede eliminar a un admin");
                 model.addAttribute("usuarios", usuarios);
                 return "listado";
@@ -70,6 +85,13 @@ public class usuarioControlador {
         }
     }
     
+    /**
+     * Método para dar un rol a un usuario.
+     * @param id El ID del usuario al que se le dará el rol.
+     * @param model El modelo utilizado para agregar los datos necesarios a la vista.
+     * @param request La solicitud HTTP.
+     * @return La redirección al listado de usuarios.
+     */
     @GetMapping("/privada/darRol/{id}")
     public String darRolUsuario(@PathVariable Long id, Model model, HttpServletRequest request) {
         try {
@@ -88,6 +110,12 @@ public class usuarioControlador {
         }
     }
     
+    /**
+     * Método para mostrar los datos del usuario actual.
+     * @param model El modelo utilizado para agregar los datos necesarios a la vista.
+     * @param authentication La autenticación del usuario.
+     * @return La vista "datosUsuario".
+     */
     @GetMapping("/privada/datosUsuario")
     public String loginCorrecto(Model model, Authentication authentication ) {
         try {
@@ -101,37 +129,58 @@ public class usuarioControlador {
             
             UsuarioDTO usuariodto = Util.usuarioToDto(usuario);
             
-            
-            
             model.addAttribute("cuentasBancarias", cuentasBancariasDto);
             model.addAttribute("cuentasBancariasDto"  , cuentasBancariasDto);
             model.addAttribute("usuario", usuariodto);
         } catch (Exception e) {
-            System.out.println("Error [bancoControlador-loginCorrecto]");
+            model.addAttribute("errorMessage", "Error al obtener los datos del usuario: " + e.getMessage());
+            return "error";
         }
         return "datosUsuario";
     }
     
+    /**
+     * Método para guardar la foto de perfil del usuario.
+     * @param file El archivo de la foto de perfil.
+     * @param principal El principal del usuario.
+     * @return La redirección a la página de datos del usuario.
+     * @throws IOException Si hay un error de E/S.
+     */
     @PostMapping("/privada/guardarFotoPerfil")
     public String guardarFotoPerfil(@RequestParam("fotoPerfil") MultipartFile file, Principal principal) throws IOException {
-        Usuario usuario = usuarioServicio.buscarPorEmail(principal.getName());
-        
-        if (file != null && !file.isEmpty()) {
-            usuario.setFotoPerfil(file.getBytes());
-            usuarioRepository.save(usuario);
+        try {
+            Usuario usuario = usuarioServicio.buscarPorEmail(principal.getName());
+            
+            if (file != null && !file.isEmpty()) {
+                usuario.setFotoPerfil(file.getBytes());
+                usuarioRepository.save(usuario);
+            }
+        } catch (Exception e) {
+            // Manejo de excepciones no controladas
+            throw new IOException("Error al guardar la foto de perfil: " + e.getMessage());
         }
         
         return "redirect:/privada/datosUsuario";
     }
     
+    /**
+     * Método para obtener la foto de perfil de un usuario.
+     * @param id El ID del usuario.
+     * @return La respuesta con la foto de perfil.
+     */
     @GetMapping("/privada/perfil/foto/{id}")
     public ResponseEntity<byte[]> obtenerFotoPerfil(@PathVariable Long id) {
-        Usuario usuario = usuarioRepository.findById(id).orElse(null);
-        
-        if (usuario != null && usuario.getFotoPerfil() != null) {
-            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(usuario.getFotoPerfil());
-        } else {
-            return ResponseEntity.notFound().build();
+        try {
+            Usuario usuario = usuarioRepository.findById(id).orElse(null);
+            
+            if (usuario != null && usuario.getFotoPerfil() != null) {
+                return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(usuario.getFotoPerfil());
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            // Manejo de excepciones no controladas
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }

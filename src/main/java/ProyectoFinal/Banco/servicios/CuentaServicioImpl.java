@@ -3,17 +3,19 @@ package ProyectoFinal.Banco.servicios;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.repositorios.CuentaRepositorio;
 import ProyectoFinal.Banco.repositorios.UsuarioRepositorio;
+
 import jakarta.transaction.Transactional;
 
 /**
  * Servicio que implementa los métodos de la interfaz {@link ICuentaServicio} 
- * y en esta clase es donde se entra al detalle de la lógica de dichos métodos
  * para la gestión de cuentas bancarias.
  */
 @Service
@@ -26,6 +28,12 @@ public class CuentaServicioImpl implements ICuentaServicio {
     @Autowired
     private CuentaRepositorio cuentaRepository;
 
+    /**
+     * Obtiene todas las cuentas bancarias asociadas a un usuario.
+     *
+     * @param usuarioId El identificador del usuario.
+     * @return Una lista de cuentas bancarias asociadas al usuario, o null si el usuario no existe.
+     */
     @Override
     public List<CuentaBancaria> obtenerCuentasDeUsuario(Long usuarioId) {
         try {
@@ -40,15 +48,23 @@ public class CuentaServicioImpl implements ICuentaServicio {
             }
         } catch (IllegalArgumentException iae) {
             System.out.println("[Error en CuentaServicioImpl - obtenerCuentasDeUsuario()]: " + iae.getMessage());
-            return null;
+            throw new RuntimeException("Error al obtener las cuentas del usuario", iae);
         }
     }
 
+    /**
+     * Registra una nueva cuenta bancaria.
+     *
+     * @param cuenta La cuenta bancaria a registrar.
+     * @return La cuenta bancaria registrada, o null si ya existe una cuenta con el mismo código IBAN.
+     */
     @Override
     public CuentaBancaria registrarCuenta(CuentaBancaria cuenta) {
         try {
+            // Generar código IBAN único
             String codigoIban = generarIBAN();
             cuenta.setCodigoIban(codigoIban);
+            
             // Comprueba si ya existe una cuenta con el código IBAN que quiere registrar
             CuentaBancaria cuentaPorIban = cuentaRepository.findFirstBycodigoIban(cuenta.getCodigoIban());
 
@@ -61,11 +77,38 @@ public class CuentaServicioImpl implements ICuentaServicio {
             return cuenta;
         } catch (IllegalArgumentException iae) {
             System.out.println("[Error en CuentaServicioImpl - registrarCuenta()]: " + iae.getMessage());
-            return null;
+            throw new RuntimeException("Error al registrar la cuenta bancaria", iae);
+        }
+    }
+    
+    /**
+     * Elimina una cuenta bancaria por su ID.
+     *
+     * @param id El ID de la cuenta bancaria a eliminar.
+     * @return La cuenta bancaria eliminada, o null si no se encontró ninguna cuenta con el ID especificado.
+     */
+    @Override
+    public CuentaBancaria eliminarCuenta(long id) {
+        try {
+            CuentaBancaria cuenta = cuentaRepository.findById(id).orElse(null);
+            if (cuenta != null) {
+                cuentaRepository.delete(cuenta);
+            } 
+            return cuenta;
+        } catch (Exception e) {
+            System.out.println("[Error en CuentaServicioImpl - eliminarCuenta()]: " + e.getMessage());
+            throw new RuntimeException("Error al eliminar la cuenta bancaria", e);
         }
     }
 
-    public static String generarIBAN() {
+    // Métodos privados auxiliares
+
+    /**
+     * Genera un código IBAN aleatorio único.
+     *
+     * @return El código IBAN generado.
+     */
+    private static String generarIBAN() {
         // Código del país
         String codigoPais = "ES";
 
@@ -90,6 +133,12 @@ public class CuentaServicioImpl implements ICuentaServicio {
         return ibanCompleto;
     }
 
+    /**
+     * Genera una cadena de dígitos aleatorios.
+     *
+     * @param longitud La longitud de la cadena de dígitos.
+     * @return La cadena de dígitos aleatorios generada.
+     */
     private static String generarNumerosAleatorios(int longitud) {
         Random random = new Random();
         StringBuilder numerosAleatorios = new StringBuilder();
@@ -101,6 +150,12 @@ public class CuentaServicioImpl implements ICuentaServicio {
         return numerosAleatorios.toString();
     }
 
+    /**
+     * Calcula los dígitos de control de un IBAN.
+     *
+     * @param ibanParcial El IBAN parcial al que se le calcularán los dígitos de control.
+     * @return Los dígitos de control calculados.
+     */
     private static String calcularDigitosControl(String ibanParcial) {
         // Tomar solo los dígitos numéricos del IBAN parcial
         String numeros = ibanParcial.replaceAll("[^0-9]", "");
@@ -110,14 +165,5 @@ public class CuentaServicioImpl implements ICuentaServicio {
         int mod = (int) (98 - (numero % 97));
 
         return String.format("%02d", mod);
-    }
-    
-    @Override
-    public CuentaBancaria eliminarCuenta(long id) {
-    	CuentaBancaria cuenta = cuentaRepository.findById(id).orElse(null);
-        if (cuenta != null) {
-            cuentaRepository.delete(cuenta);
-        } 
-        return cuenta;
     }
 }

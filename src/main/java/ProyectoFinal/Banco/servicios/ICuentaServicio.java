@@ -25,5 +25,12 @@ public interface ICuentaServicio {
      * @return La cuenta bancaria registrada.
      */
     public CuentaBancaria registrarCuenta(CuentaBancaria cuenta);
+    
+    /**
+     * Elimina una cuenta bancaria.
+     * 
+     * @param id El identificador de la cuenta bancaria a eliminar.
+     * @return La cuenta bancaria eliminada, o null si no se encuentra ninguna cuenta con el identificador proporcionado.
+     */
     public CuentaBancaria eliminarCuenta(long id);
 }

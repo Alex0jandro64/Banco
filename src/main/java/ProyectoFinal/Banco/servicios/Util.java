@@ -162,9 +162,15 @@ public class Util {
         }
     }
     
+    /**
+     * Convierte un objeto de tipo Oficina a un objeto de tipo OficinaDTO.
+     * 
+     * @param oficina El objeto de tipo Oficina que se desea convertir.
+     * @return Un objeto de tipo OficinaDTO.
+     */
     static public OficinaDTO oficinaToDto(Oficina oficina) {
         try {
-        	OficinaDTO dto = new OficinaDTO();
+            OficinaDTO dto = new OficinaDTO();
             
             dto.setIdOficina(oficina.getIdOficina());
             dto.setDireccionOficina(oficina.getDireccionOficina());
@@ -176,7 +182,13 @@ public class Util {
             return null;
         }
     }
-    
+
+    /**
+     * Convierte una lista de objetos de tipo Oficina a una lista de objetos de tipo OficinaDTO.
+     * 
+     * @param listaOficina La lista de oficinas que se desea convertir.
+     * @return Una lista de objetos de tipo OficinaDTO.
+     */
     static public List<OficinaDTO> listaOficinasToDto(List<Oficina> listaOficina) {
         try {
             List<OficinaDTO> listaDto = new ArrayList<>();
@@ -185,14 +197,20 @@ public class Util {
             }
             return listaDto;
         } catch (Exception e) {
-            System.out.println("[ERROR en cuentaBancariaToDto()] - Error al convertir lista de CuentaBancaria a lista de CuentaBancariaDTO: " + e.getMessage());
+            System.out.println("[ERROR en listaOficinasToDto()] - Error al convertir lista de Oficinas a lista de OficinasDTO: " + e.getMessage());
             return null;
         }
     }
     
+    /**
+     * Convierte un objeto de tipo Transaccion a un objeto de tipo TransaccionDTO.
+     * 
+     * @param transaccion El objeto de tipo Transaccion que se desea convertir.
+     * @return Un objeto de tipo TransaccionDTO.
+     */
     static public TransaccionDTO transaccionToDto(Transaccion transaccion) {
         try {
-        	TransaccionDTO dto = new TransaccionDTO();
+            TransaccionDTO dto = new TransaccionDTO();
             
             dto.setCantidadTransaccion(transaccion.getCantidadTransaccion());
             dto.setUsuarioTransaccionDestinatario(transaccion.getUsuarioTransaccionDestinatario());
@@ -202,12 +220,17 @@ public class Util {
             
             return dto;
         } catch (Exception e) {
-            System.out.println("[ERROR en transaccionToDto()] - Error al convertir Transaccion a transaccionToDto: " + e.getMessage());
+            System.out.println("[ERROR en transaccionToDto()] - Error al convertir Transaccion a TransaccionDTO: " + e.getMessage());
             return null;
         }
     }
 
-    
+    /**
+     * Convierte una lista de objetos de tipo Transaccion a una lista de objetos de tipo TransaccionDTO.
+     * 
+     * @param listaTransacciones La lista de transacciones que se desea convertir.
+     * @return Una lista de objetos de tipo TransaccionDTO.
+     */
     static public List<TransaccionDTO> listaTransaccionesToDto(List<Transaccion> listaTransacciones) {
         try {
             List<TransaccionDTO> listaDto = new ArrayList<>();
@@ -216,11 +239,17 @@ public class Util {
             }
             return listaDto;
         } catch (Exception e) {
-            System.out.println("[ERROR en listaTransaccionesToDto()] - Error al convertir lista de Transacciones a lista de TransaccionesDto: " + e.getMessage());
+            System.out.println("[ERROR en listaTransaccionesToDto()] - Error al convertir lista de Transacciones a lista de TransaccionesDTO: " + e.getMessage());
             return null;
         }
     }
     
+    /**
+     * Convierte una lista de objetos de tipo Cita a una lista de objetos de tipo CitaDTO.
+     * 
+     * @param listaCita La lista de citas que se desea convertir.
+     * @return Una lista de objetos de tipo CitaDTO.
+     */
     static public List<CitaDTO> listaCitasToDto(List<Cita> listaCita) {
         try {
             List<CitaDTO> listaDto = new ArrayList<>();
@@ -228,26 +257,32 @@ public class Util {
                 listaDto.add(Util.citaToDto(cita));
             }
             return listaDto;
-        } catch (Exception e) {
-            System.out.println("[ERROR en cuentaBancariaToDto()] - Error al convertir lista de CuentaBancaria a lista de CuentaBancariaDTO: " + e.getMessage());
+        } catch (Exception e) { // Captura todas las excepciones no manejadas
+            System.out.println("[ERROR en listaCitasToDto()] - Error al convertir lista de Cita a lista de CitaDTO: " + e.getMessage());
             return null;
         }
     }
-    
+
+    /**
+     * Convierte un objeto de tipo Cita a un objeto de tipo CitaDTO.
+     * 
+     * @param cita El objeto de tipo Cita que se desea convertir.
+     * @return Un objeto de tipo CitaDTO.
+     */
     static public CitaDTO citaToDto(Cita cita) {
         try {
-        	CitaDTO dto = new CitaDTO();
-            
+            CitaDTO dto = new CitaDTO();
+
             dto.setIdCita(cita.getIdCita());
             dto.setMotivoCita(cita.getMotivoCita());
             dto.setOficinaCita(cita.getOficinaCita());
             dto.setUsuarioCita(cita.getUsuarioCita());
             LocalDateTime localDateTime = LocalDateTime.ofInstant(cita.getFechaCita().toInstant(), ZoneId.systemDefault());
             dto.setFechaCita(localDateTime);
-            
+
             return dto;
-        } catch (Exception e) {
-            System.out.println("[ERROR en oficinaToDto()] - Error al convertir Oficina a OficinaDTO: " + e.getMessage());
+        } catch (Exception e) { // Captura todas las excepciones no manejadas
+            System.out.println("[ERROR en citaToDto()] - Error al convertir Cita a CitaDTO: " + e.getMessage());
             return null;
         }
     }
