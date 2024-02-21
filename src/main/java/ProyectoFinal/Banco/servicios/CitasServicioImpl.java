@@ -38,7 +38,7 @@ public class CitasServicioImpl implements ICitasServicio{
         	
             int error=0;
             	citaRepository.save(citaDao);
-
+System.out.println("Cita registrada");
             return error;
         } catch (Exception e) {
             System.out.println("[Error en TransaccionServicioImpl - registrarTransaccion()]: " + e.getMessage());
