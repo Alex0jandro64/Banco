@@ -52,7 +52,7 @@ public class RecuperarPasswordControlador {
 		boolean envioConExito = usuarioServicio.iniciarResetPassConEmail(usuarioDTO.getEmailUsuario());
 		
 		if(envioConExito) {
-	        model.addAttribute("mensajeExitoMail", "Proceso de recuperacion OK");
+	        model.addAttribute("mensajeExitoMailRecuperar", "Proceso de recuperacion OK");
 	        return "login";
 		} else {
 	        model.addAttribute("mensajeErrorMail", "Error en el proceso de recuperacion.");
