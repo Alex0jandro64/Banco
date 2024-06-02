@@ -23,6 +23,7 @@ public class UsuarioDTO {
 	private Calendar fchAltaUsuario;
 	private String password;
 	private String password2;
+	private String mensajeError;
 	private Calendar expiracionToken;
 	private String rutaImagenUsuario;
 	//CONSTRUCTORES
@@ -46,6 +47,19 @@ public class UsuarioDTO {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	public String getMensajeError() {
+		return mensajeError;
+	}
+
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+
+	public void setMailConfirmado(boolean mailConfirmado) {
+		this.mailConfirmado = mailConfirmado;
+	}
+
 	public String getDniUsuario() {
 		return dniUsuario;
 	}

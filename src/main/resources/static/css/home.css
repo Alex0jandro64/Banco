@@ -1,0 +1,283 @@
+body {
+    background-color: #f8f9fa; /* Color de fondo */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #343a40;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.cuadro {
+    background-color: #fff;
+    box-shadow: rgba(40, 88, 69, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    word-wrap: break-word; /* Asegura que las palabras largas se ajusten al ancho del cuadro */
+    overflow-wrap: break-word; /* Otra propiedad para asegurar que las palabras largas se ajusten */
+    overflow: hidden; /* Evita que el contenido se salga del cuadro */
+}
+
+.cuadro h2, .cuadro h3 {
+    margin-top: 0;
+}
+
+/* Estilos del contenedor principal */
+.contenedor {
+    background-color: #fff;
+    box-shadow: rgba(40, 88, 69, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    margin: auto;
+    margin-top: 50px; /* Espacio superior */
+}
+
+/* Estilos del panel de administrador */
+.panelAdmin {
+    background-color: #192255;
+    border-radius: 10px;
+    padding: 20px 30px;
+}
+
+.burbuja {
+    background-color: #fff;
+    color: #285845;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Estilos de los formularios */
+.form-login, .form-restablecer, .form-registro, .form-olvidado {
+    width: 350px;
+}
+
+.form-login { height: 435px; }
+.form-restablecer { width: 450px; height: 320px; }
+.form-registro { height: 660px; }
+.form-olvidado { height: 365px; }
+
+.titulo {
+    text-align: left;
+    margin: 10px 0 30px 0;
+    font-size: 28px;
+    font-weight: 800;
+    color: #192255;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 15px;
+}
+
+.input {
+    border-radius: 20px;
+    border: 1px solid #192255;
+    outline: 0 !important;
+    box-sizing: border-box;
+    padding: 12px 15px;
+}
+
+.form-btn {
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 20px;
+    border: 0 !important;
+    outline: 0 !important;
+    background: #285845;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 3px 8px rgba(40, 88, 69, 0.24);
+}
+
+.form-btn:active {
+    box-shadow: none;
+}
+
+.negro {
+    background: black;
+}
+
+/* Estilos del recuadro */
+.mi-recuadro {
+    width: 300px;
+    height: 75px;
+    border: 2px solid #ff9900;
+    padding: 20px;
+    margin: 3px auto;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 25px;
+}
+
+.mi-recuadro div {
+    font-size: 14px;
+    font-weight: 700;
+    color: #192255;
+}
+
+/* Estilos para los enlaces */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Mensaje de contraseña */
+.mensajeContrasenya, #mensajeContrasenya {
+    text-align: center;
+    margin-top: -8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #192255;
+}
+
+/* Estilos del menú de navegación */
+nav {
+    background-color: white;
+    box-shadow: rgba(40, 88, 69, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo a {
+    color: #192255;
+    text-decoration: none;
+    font-size: 2em;
+    border-radius: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-weight: 800;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 15px;
+}
+
+.nav-links a {
+    color: #192255;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-weight: 800;
+}
+
+.nav-links a:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilos de las tablas */
+table {
+    border-collapse: collapse;
+    width: 55%;
+    margin: 40px auto;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #285845;
+    color: white;
+    text-align: center;
+}
+
+.ingreso {
+    background-color: #90EE90;
+}
+
+.pago {
+    background-color: #ec5252;
+}
+
+/* Estilos de botones centrados */
+.center-table1 {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.center-button {
+    margin-right: 10px;
+}
+
+/* Estilos de los encabezados */
+h2, h3 {
+    margin-top: 30px;
+    text-align: center;
+    color: #192255;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-5 {
+    margin-top: 30px;
+}
+
+/* Estilos de los formularios */
+form {
+    text-align: center;
+    
+}
+
+
+/* Estilos de las notificaciones (simulados) */
+.notification {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: none; /* Por defecto están ocultas */
+}
+
+.notification.success {
+    background-color: #28a745;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}

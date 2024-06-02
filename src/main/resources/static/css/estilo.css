@@ -12,13 +12,57 @@ body {
     margin-top: 50px; /* Espacio superior */
     
 }
+.perfil-foto-contenedor {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
 
+.perfil-foto {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.datos-usuario {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.datos-usuario label {
+    font-weight: bold;
+}
+
+.btn-guardar-foto {
+    margin-top: 20px;
+}
 .panelAdmin {
     background-color: #192255;
     border-radius: 10px;
     padding: 20px 30px;
 }
+ .perfil-foto-contenedor {
+    width: 150px;  /* Ancho fijo */
+    height: 150px; /* Alto fijo */
+    overflow: hidden; /* Oculta cualquier contenido que desborde el contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    border-radius: 50%; /* Hace el contenedor circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.perfil-foto {
+    width: 100%; /* La imagen ocupa el 100% del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 50%; /* Hace la imagen circular */
+} 
 .burbuja {
     background-color: #fff;
     color: #285845;

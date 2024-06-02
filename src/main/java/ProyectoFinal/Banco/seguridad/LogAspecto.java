@@ -7,6 +7,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,21 +23,33 @@ public class LogAspecto {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	private String getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            return authentication.getName();
+        } else {
+            return "SinSesion";
+        }
+    }
 	
-	// Registrar en el fichero log despues de lanzar cualquier excepción	
-	// En estos caso el pointcut es cualquier metodo o clase de la app
-	@AfterThrowing(pointcut = "execution(* ProyectoFinal.Banco..*.*(..))", throwing = "ex")
-	public void logException(JoinPoint joinPoint, Throwable ex) {
-		logger.error("Error en el método {}() de la clase {}: {}", 
-				joinPoint.getSignature().getName(),
-				joinPoint.getTarget().getClass().getName(),
-				ex.getMessage() + "\n" + ex.getStackTrace());
-	}
-	
-	// Registrar en el fichero log la entrada a métodos
+	// Registrar en el fichero log después de lanzar cualquier excepción
+    // En estos casos el pointcut es cualquier método o clase de la app
+    @AfterThrowing(pointcut = "execution(* ProyectoFinal.Banco..*.*(..))", throwing = "ex")
+    public void logException(JoinPoint joinPoint, Throwable ex) {
+        String user = getCurrentUser();
+        logger.error("Usuario: {} - Error en el método {}() de la clase {}: {}", 
+                user,
+                joinPoint.getSignature().getName(),
+                joinPoint.getTarget().getClass().getName(),
+                ex.getMessage(), ex);
+    }
+
+    // Registrar en el fichero log la entrada a métodos
     @Before("execution(* ProyectoFinal.Banco..*.*(..))")
     public void logMetodoEntrada(JoinPoint joinPoint) {
-        logger.info("Entrando en el método {}() de la clase {}", 
+        String user = getCurrentUser();
+        logger.info("Usuario: {} - Entrando en el método {}() de la clase {}", 
+                     user,
                      joinPoint.getSignature().getName(),
                      joinPoint.getTarget().getClass().getName());
     }
@@ -43,9 +57,10 @@ public class LogAspecto {
     // Registrar en el fichero log la salida de métodos (después de la ejecución exitosa)
     @AfterReturning("execution(* ProyectoFinal.Banco..*.*(..))")
     public void logMethodoSalida(JoinPoint joinPoint) {
-        logger.info("Saliendo del método {}() de la clase {}", 
+        String user = getCurrentUser();
+        logger.info("Usuario: {} - Saliendo del método {}() de la clase {}", 
+                     user,
                      joinPoint.getSignature().getName(),
                      joinPoint.getTarget().getClass().getName());
     }
-
 }

@@ -86,8 +86,29 @@ function confirmarRolMensaje() {
 
 function confirmarEliminarUsu(event) {
     const idUsuario = event.currentTarget.getAttribute("data-id");
-    confirmar().then(function (confirmado) {
-        if (confirmado) {
+    const DNI = $(event.currentTarget).closest("tr").find("td:eq(3)").text(); // Obtiene el correo electrónico de la fila correspondiente
+
+    Swal.fire({
+        title: 'Confirmación de eliminación',
+        text: `Estás a punto de eliminar al usuario con el DNI: ${DNI}. Esta acción eliminará todas las transferencias, citas y préstamos asociados a este usuario. Si desea continuar escribe el DNI del usuario (${DNI}) para confirmar:`,
+        input: 'text',
+        inputPlaceholder: 'DNI',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+        preConfirm: (inputValue) => {
+            return new Promise((resolve) => {
+                if (inputValue === DNI) {
+                    resolve();
+                } else {
+                    Swal.showValidationMessage('El DNI no coincide');
+                }
+            });
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
             window.location.href = 'http://localhost:8080/privada/eliminar/' + idUsuario;
         }
     });
@@ -110,7 +131,22 @@ function confirmarRol(event) {
         }
     });
 }
-
+function validateForm() {
+    var selectElement = document.getElementById("usuarioTransaccionRemitente");
+    if (selectElement.value === "") {
+        mostrarNotificacion('Error', 'Por favor, elija una cuenta bancaria.', 'error');
+        return false; // Evita el envío del formulario
+    }
+    return true; // Permite el envío del formulario
+}
+function validateFormOfi() {
+        var selectElement = document.getElementById("idOficina");
+        if (selectElement.value === "") {
+            mostrarNotificacion('Error', 'Por favor, elija una oficina.', 'error');
+            return false; // Evita el envío del formulario
+        }
+        return true; // Permite el envío del formulario
+    }
 
 
 

@@ -1,6 +1,7 @@
 package ProyectoFinal.Banco.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,10 +37,14 @@ public class LoginControlador {
     public String registrarPost(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
         try {
             //Usuario nuevoUsuario = usuarioServicio.registrar(usuarioDTO);
+        	
             return "home";
+        } catch (DisabledException e) {
+            model.addAttribute("errorMessageConfirmacion", "Su correo electrónico no ha sido confirmado.");
+            return "login";
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "Error al registrar el usuario: " + e.getMessage());
-            return "registro";
+            model.addAttribute("errorMessage", "Error al iniciar sesión: " + e.getMessage());
+            return "login";
         }
     }
     

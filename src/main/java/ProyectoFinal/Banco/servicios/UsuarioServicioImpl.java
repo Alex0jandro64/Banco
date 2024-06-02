@@ -56,10 +56,16 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
             // Verificar si ya existe un usuario con el mismo correo electrónico
             Usuario usuarioDaoByEmail = repositorioUsuario.findFirstByEmailUsuario(userDto.getEmailUsuario());
 
-            if (usuarioDaoByEmail != null) {
+            if (usuarioDaoByEmail != null && usuarioDaoByEmail.isCuentaConfirmada() == true) {
                 // El usuario ya está registrado y confirmado
                 return null;
             }
+            
+            if (usuarioDaoByEmail!= null) {
+                // El usuario ya está registrado pero no confirmado
+                return null;
+            }
+            
             
             // Codificar la contraseña antes de almacenarla en la base de datos
             userDto.setClaveUsuario(passwordEncoder.encode(userDto.getClaveUsuario()));
@@ -77,7 +83,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
             usuarioDao.setRol("ROLE_USER");
             usuarioDao.setFchAltaUsuario(Calendar.getInstance());
             
-            // Si el correo electrónico está confirmado, guardar el usuario
+            // Si el correo electrónico está confirmado, confirmar y guardar el usuario
             if (userDto.isMailConfirmado()) {
                 usuarioDao.setMailConfirmado(true);
                 repositorioUsuario.save(usuarioDao);
@@ -102,6 +108,9 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
         }
         return null; // Retorno null en caso de error
     }
+    
+    
+    
     /**
      * Método que ejecuta la creación de un usuario administrador con su rol de administrador.
      */

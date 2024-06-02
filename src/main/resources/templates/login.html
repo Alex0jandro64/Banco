@@ -50,9 +50,6 @@
     		<button type="submit" class="form-btn negro">Recuperar contraseña</button>
 		</form>
 	</div>
-	<script th:if="${not #strings.isEmpty(mensajeTransaccionExitosa)}">
-	    mostrarNotificacion("¡Confirmar Correo!", "Tiene que confirmar el correo para poder usar la cuenta", 'info');
-	</script>
 	<script th:if="${not #strings.isEmpty(mensajeExitoMail)}">
 	    mostrarNotificacion("¡Cuenta Creada!", "Se ha enviado a su direccion un correo de confirmacion", 'info');
 	</script>
@@ -66,7 +63,7 @@
 	    mostrarNotificacion("¡Exito!", "Se ha modificado correctamente la contraseña", 'success');
 	</script>
 	<script th:if="${param.error}">
-	    mostrarNotificacion("¡Error!","Las credenciales introducidas no son correctas", 'error');
+	    mostrarNotificacion("¡Error!","Las credenciales introducidas no son correctas o no a confirmado la cuenta por email", 'error');
 	</script>
 	
 </body>

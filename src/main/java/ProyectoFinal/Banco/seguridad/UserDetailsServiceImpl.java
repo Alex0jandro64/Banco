@@ -1,6 +1,7 @@
 package ProyectoFinal.Banco.seguridad;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,26 +31,30 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.printf("\nIntento de inicio de sesión para el usuario: %s\n", username);
 
-	    System.out.printf("\nIntento de inicio de sesión para el usuario: %s\n", username);
+        // El nombre de usuario en la aplicación es el email
+        Usuario user = usuarioRepository.findFirstByEmailUsuario(username);
 
-		//El nombre de usuario en la aplicación es el email
-		Usuario user = usuarioRepository.findFirstByEmailUsuario(username);
-		
-		//Construir la instancia de UserDetails con los datos del usuario
-		UserBuilder builder = null;
-		if (user != null) {
-	    	System.out.printf("\nUsuario encontrado en la base de datos: %s\n", user.getEmailUsuario());
+        // Construir la instancia de UserDetails con los datos del usuario
+        UserBuilder builder = null;
+        if (user != null) {
+            System.out.printf("\nUsuario encontrado en la base de datos: %s\n", user.getEmailUsuario());
 
-			builder = User.withUsername(username);
-			builder.disabled(false);
-			builder.password(user.getClaveUsuario());
-			builder.authorities(user.getRol());
-		} else {
-	    	System.out.println("Usuario no encontrado en la base de datos");
-			throw new UsernameNotFoundException("Usuario no encontrado");
-		}
-		return builder.build();
-	}
+            if (!user.isCuentaConfirmada()) {
+                throw new DisabledException("Correo no confirmado");
+                
+            }
+
+            builder = User.withUsername(username);
+            builder.disabled(false);
+            builder.password(user.getClaveUsuario());
+            builder.authorities(user.getRol());
+        } else {
+            System.out.println("Usuario no encontrado en la base de datos");
+            throw new UsernameNotFoundException("Usuario no encontrado");
+        }
+        return builder.build();
+    }
 
 }

@@ -3,18 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Datos Usuario</title>
+    <title>Nuevo Prestamo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css"
         th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/css/nuevaTran.css" th:href="@{/css/nuevaTran.css}">
     <link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}">
-    <link rel="stylesheet" href="../static/css/datosUsu.css" th:href="@{/css/datosUsu.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/script/script.js}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"
         th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-   
+
 </head>
 
 <body>
@@ -39,41 +39,30 @@
             </ul>
         </div>
     </nav>
-        <div class="container datos-usuario">
-        <h1 class="text-center">Datos Usuario</h1>
-        <div class="perfil-foto-contenedor">
-            <img th:src="@{'/privada/perfil/foto/' + ${usuario.id}}" alt="Foto de perfil" class="perfil-foto">
-        </div>
-        <div class="text-center">
-            <label>Nombre:</label>
-            <span th:text="${usuario.nombreUsuario}"></span>
-        </div>
-        <div class="text-center">
-            <label>Apellidos:</label>
-            <span th:text="${usuario.apellidosUsuario}"></span>
-        </div>
-        <div class="text-center">
-            <label>DNI:</label>
-            <span th:text="${usuario.dniUsuario}"></span>
-        </div>
-        <div class="text-center">
-            <label>Teléfono:</label>
-            <span th:text="${usuario.tlfUsuario}"></span>
-        </div>
-        <div class="text-center">
-            <label>Email:</label>
-            <span th:text="${usuario.emailUsuario}"></span>
-        </div>
-        <div class="text-center">
-            <label>Fecha de Alta:</label>
-            <span th:text="${#dates.format(usuario.fchAltaUsuario, 'dd-MM-yyyy HH:mm:ss')}"></span>
-        </div>
-        <div class="text-center">
-            <form th:action="@{/privada/guardarFotoPerfil}" method="post" enctype="multipart/form-data">
-                <input type="file" name="fotoPerfil" accept="image/*" class="form-control-file">
-                <button type="submit" class="btn btn-guardar-foto">Guardar Foto de Perfil</button>
-            </form>
-        </div>
+    <div class="container form-container">
+        <form class="form" th:action="@{/privada/nuevoPrestamo}" enctype="multipart/form-data" method="post"
+            th:object="${PrestamoDTO}" onsubmit="return validateForm()">
+            <h2>Formulario de Prestamo</h2>
+            <div>
+                <label for="cuenta">Selecciona una cuenta:</label>
+                <select id="cuentaPrestamo" name="cuentaPrestamo" required>
+                    <option value="" selected>Elija cuenta bancaria</option>
+                    <option th:each="cuenta : ${cuentasBancariasDto}" th:value="${cuenta.getCodigoIban()}"
+                        th:text="${cuenta.getCodigoIban()}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidadPrestamo" name="cantidadPrestamo" placeholder="Ingrese la cantidad" required min="0" max="1000">
+            </div>
+            <div>
+                <label for="codigoiban">Motivo del prestamo:</label>
+                <input type="text" id="motivoPrestamo" name="motivoPrestamo" placeholder="Ingrese el motivo del prestamo" required>
+            </div>
+            <div>
+<input type="submit" value="Realizar Transferencia" style="background-color: #285845; color: #fff; border: none; padding: 10px 20px; font-size: 1em; border-radius: 5px; transition: background-color 0.3s; cursor: pointer;">
+            </div>
+        </form>
     </div>
 </body>
 

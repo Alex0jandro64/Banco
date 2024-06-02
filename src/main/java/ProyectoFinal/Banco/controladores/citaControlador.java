@@ -101,8 +101,9 @@ public class citaControlador {
             citaDTOLong.setUsuarioCita(usuario);
             citaDTOLong.setOficinaCita(idOficina);
             citaServicio.registrarCita(citaDTOLong);
+            redirectAttributes.addFlashAttribute("mensajeCitaBien", "Cita registrada correctamente: ");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error al registrar la cita: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("mensajeCitaError", "Error al registrar la cita: " + e.getMessage());
         }
         return "redirect:/privada/home";
     }
@@ -116,7 +117,7 @@ public class citaControlador {
             citaServicio.eliminar(id);
             return "redirect:/privada/verCitas";
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error al eliminar la cita: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("mensajeCitaError", "Error al eliminar la cita: " + e.getMessage());
             return "redirect:/privada/verCitas";
         }
     }

@@ -44,6 +44,7 @@ public interface IUsuarioServicio {
 	 * @return la lista de todos los usuariosDTO
 	 */
 	public List<UsuarioDTO> buscarTodos();
+
 	
 
 	/**

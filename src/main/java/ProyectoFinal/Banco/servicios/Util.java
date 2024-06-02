@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import ProyectoFinal.Banco.dao.Cita;
 import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Oficina;
+import ProyectoFinal.Banco.dao.Prestamo;
 import ProyectoFinal.Banco.dao.Transaccion;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.CitaDTO;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
 import ProyectoFinal.Banco.dto.OficinaDTO;
+import ProyectoFinal.Banco.dto.PrestamoDTO;
 import ProyectoFinal.Banco.dto.TransaccionDTO;
 import ProyectoFinal.Banco.dto.UsuarioDTO;
 
@@ -244,6 +246,35 @@ public class Util {
         }
     }
     
+    static public PrestamoDTO prestamoToDto(Prestamo prestamo) {
+        try {
+            PrestamoDTO dto = new PrestamoDTO();
+            
+            dto.setCantidadPrestamo(prestamo.getCantidadPrestamo());
+            dto.setCuentaPrestamo(prestamo.getCuentaBancariaPrestamo().getCodigoIban());
+            dto.setMotivoPrestamo(prestamo.getMotivoPrestamo());
+            LocalDateTime localDateTime = LocalDateTime.ofInstant(prestamo.getFechaPrestamo().toInstant(), ZoneId.systemDefault());
+            dto.setFechaTransaccion(localDateTime);
+            
+            return dto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en transaccionToDto()] - Error al convertir Prestamo a PrestamoDTo: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    static public List<PrestamoDTO> listaPrestamosToDto(List<Prestamo> listaPrestamos) {
+        try {
+            List<PrestamoDTO> listaDto = new ArrayList<>();
+            for (Prestamo prestamo : listaPrestamos) {
+                listaDto.add(Util.prestamoToDto(prestamo));
+            }
+            return listaDto;
+        } catch (Exception e) {
+            System.out.println("[ERROR en listaPrestamosToDto()] - Error al convertir lista de Prestamos a lista de PrestamosDTO: " + e.getMessage());
+            return null;
+        }
+    }
     /**
      * Convierte una lista de objetos de tipo Cita a una lista de objetos de tipo CitaDTO.
      * 

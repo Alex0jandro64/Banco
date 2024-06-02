@@ -39,6 +39,9 @@ public class CuentaBancaria {
 
     @OneToMany(mappedBy = "usuarioTransaccionDestinatario")
     private List<Transaccion> trasaccionesDestinatarios;
+    
+    @OneToMany(mappedBy = "cuentaBancariaPrestamo")
+    private List<Prestamo> prestamosCuenta;
 
     // CONSTRUCTORES
     public CuentaBancaria(long idCuenta, Usuario usuarioCuenta, double saldoCuenta, String codigoIban) {
@@ -57,8 +60,18 @@ public class CuentaBancaria {
     public Usuario getUsuarioCuenta() {
         return usuarioCuenta;
     }
+    
+    
 
-    public void setUsuarioCuenta(Usuario usuarioCuenta) {
+    public List<Prestamo> getPrestamosCuenta() {
+		return prestamosCuenta;
+	}
+
+	public void setPrestamosCuenta(List<Prestamo> prestamosCuenta) {
+		this.prestamosCuenta = prestamosCuenta;
+	}
+
+	public void setUsuarioCuenta(Usuario usuarioCuenta) {
         this.usuarioCuenta = usuarioCuenta;
     }
 
