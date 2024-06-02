@@ -14,9 +14,7 @@ import ProyectoFinal.Banco.dao.CuentaBancaria;
 import ProyectoFinal.Banco.dao.Usuario;
 import ProyectoFinal.Banco.dto.CuentaBancariaDTO;
 import ProyectoFinal.Banco.dto.PrestamoDTO;
-import ProyectoFinal.Banco.dto.TransaccionDTOString;
 import ProyectoFinal.Banco.servicios.IPrestamoServicio;
-import ProyectoFinal.Banco.servicios.ITransaccionServicio;
 import ProyectoFinal.Banco.servicios.IUsuarioServicio;
 import ProyectoFinal.Banco.servicios.Util;
 

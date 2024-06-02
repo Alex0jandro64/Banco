@@ -5203,3 +5203,573 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:258) ~[postgresql-42.6.0.jar:42.6.0]
 	... 54 common frames omitted
 
+2024-06-02T12:04:58.704+02:00  INFO 8700 --- [main] ProyectoFinal.Banco.BancoApplication     : Starting BancoApplication using Java 21 with PID 8700 (C:\Users\Alex\Desktop\Banco\target\classes started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:04:58.708+02:00  INFO 8700 --- [main] ProyectoFinal.Banco.BancoApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:04:59.497+02:00  INFO 8700 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:04:59.594+02:00  INFO 8700 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 84 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:05:00.605+02:00  INFO 8700 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-06-02T12:05:00.616+02:00  INFO 8700 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-02T12:05:00.617+02:00  INFO 8700 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-06-02T12:05:00.696+02:00  INFO 8700 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-06-02T12:05:00.696+02:00  INFO 8700 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1948 ms
+2024-06-02T12:05:00.962+02:00  INFO 8700 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:05:01.041+02:00  INFO 8700 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:05:01.084+02:00  INFO 8700 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:05:01.356+02:00  INFO 8700 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:05:01.385+02:00  INFO 8700 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:05:02.554+02:00 ERROR 8700 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+org.postgresql.util.PSQLException: FATAL: no existe la base de datos �bancofinal�
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2825) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:175) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.Driver.makeConnection(Driver.java:443) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.Driver.connect(Driver.java:297) ~[postgresql-42.6.0.jar:42.6.0]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:424) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:273) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:105) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:66) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:129) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:169) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331) ~[spring-boot-3.2.0.jar:3.2.0]
+	at ProyectoFinal.Banco.BancoApplication.main(BancoApplication.java:10) ~[classes/:na]
+
+2024-06-02T12:05:02.561+02:00  WARN 8700 --- [main] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata
+
+java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)" because the return value of "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()" is null
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:273) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:105) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:66) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:129) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:169) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331) ~[spring-boot-3.2.0.jar:3.2.0]
+	at ProyectoFinal.Banco.BancoApplication.main(BancoApplication.java:10) ~[classes/:na]
+
+2024-06-02T12:05:02.588+02:00  WARN 8700 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:05:03.400+02:00  INFO 8700 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:05:03.418+02:00  INFO 8700 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:05:04.453+02:00 ERROR 8700 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+org.postgresql.util.PSQLException: FATAL: no existe la base de datos �bancofinal�
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2825) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:175) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.Driver.makeConnection(Driver.java:443) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.Driver.connect(Driver.java:297) ~[postgresql-42.6.0.jar:42.6.0]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:424) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:43) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.extractMetadata(SequenceInformationExtractorLegacyImpl.java:39) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.initializeSequences(DatabaseInformationImpl.java:66) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.<init>(DatabaseInformationImpl.java:60) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:185) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:98) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:295) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331) ~[spring-boot-3.2.0.jar:3.2.0]
+	at ProyectoFinal.Banco.BancoApplication.main(BancoApplication.java:10) ~[classes/:na]
+
+2024-06-02T12:05:04.458+02:00  WARN 8700 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 3D000
+2024-06-02T12:05:04.458+02:00 ERROR 8700 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : FATAL: no existe la base de datos �bancofinal�
+2024-06-02T12:05:04.466+02:00 ERROR 8700 --- [main] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: no existe la base de datos �bancofinal�] [n/a]
+2024-06-02T12:05:04.468+02:00  WARN 8700 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: no existe la base de datos �bancofinal�] [n/a]
+2024-06-02T12:05:04.471+02:00  INFO 8700 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-06-02T12:05:04.486+02:00  INFO 8700 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-06-02T12:05:04.507+02:00 ERROR 8700 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: no existe la base de datos �bancofinal�] [n/a]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331) ~[spring-boot-3.2.0.jar:3.2.0]
+	at ProyectoFinal.Banco.BancoApplication.main(BancoApplication.java:10) ~[classes/:na]
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: no existe la base de datos �bancofinal�] [n/a]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771) ~[spring-beans-6.1.1.jar:6.1.1]
+	... 16 common frames omitted
+Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: no existe la base de datos �bancofinal�] [n/a]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:63) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:74) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:43) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.extractMetadata(SequenceInformationExtractorLegacyImpl.java:39) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.initializeSequences(DatabaseInformationImpl.java:66) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.<init>(DatabaseInformationImpl.java:60) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:185) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:98) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:295) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.1.jar:6.1.1]
+	... 20 common frames omitted
+Caused by: org.postgresql.util.PSQLException: FATAL: no existe la base de datos �bancofinal�
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2713) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2825) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:175) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.Driver.makeConnection(Driver.java:443) ~[postgresql-42.6.0.jar:42.6.0]
+	at org.postgresql.Driver.connect(Driver.java:297) ~[postgresql-42.6.0.jar:42.6.0]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:424) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	... 40 common frames omitted
+
+2024-06-02T12:05:48.746+02:00  INFO 17964 --- [main] ProyectoFinal.Banco.BancoApplication     : Starting BancoApplication using Java 21 with PID 17964 (C:\Users\Alex\Desktop\Banco\target\classes started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:05:48.748+02:00  INFO 17964 --- [main] ProyectoFinal.Banco.BancoApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:05:49.394+02:00  INFO 17964 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:05:49.482+02:00  INFO 17964 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 76 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:05:50.361+02:00  INFO 17964 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-06-02T12:05:50.374+02:00  INFO 17964 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-02T12:05:50.374+02:00  INFO 17964 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-06-02T12:05:50.441+02:00  INFO 17964 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-06-02T12:05:50.441+02:00  INFO 17964 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1646 ms
+2024-06-02T12:05:50.687+02:00  INFO 17964 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:05:50.737+02:00  INFO 17964 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:05:50.771+02:00  INFO 17964 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:05:51.000+02:00  INFO 17964 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:05:51.027+02:00  INFO 17964 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:05:51.218+02:00  INFO 17964 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@586728e8
+2024-06-02T12:05:51.220+02:00  INFO 17964 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:05:51.250+02:00  WARN 17964 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:05:52.138+02:00  INFO 17964 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:05:52.219+02:00  WARN 17964 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2024-06-02T12:05:52.219+02:00  WARN 17964 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : no existe la restricción «uk_515rwvllv7awi67r64e863mqa» en la relación «usuarios», omitiendo
+2024-06-02T12:05:52.222+02:00  WARN 17964 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2024-06-02T12:05:52.222+02:00  WARN 17964 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : no existe la restricción «uk_bdp41y8e8un0nsxowhgsl783s» en la relación «usuarios», omitiendo
+2024-06-02T12:05:52.241+02:00  INFO 17964 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:05:52.914+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:05:52.915+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:05:53.127+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:05:53.142+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:05:53.163+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:05:53.194+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:05:53.220+02:00  WARN 17964 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:05:53.346+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:05:53.393+02:00  INFO 17964 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:05:54.114+02:00  INFO 17964 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5bdef8ee, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@345d4ecb, org.springframework.security.web.context.SecurityContextHolderFilter@a6d4547, org.springframework.security.web.header.HeaderWriterFilter@32f243f, org.springframework.web.filter.CorsFilter@66e44f9f, org.springframework.security.web.csrf.CsrfFilter@20e25bf7, org.springframework.security.web.authentication.logout.LogoutFilter@36618b3b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@25cef4b3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@23263586, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e2ad1f2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@79f82fc4, org.springframework.security.web.access.ExceptionTranslationFilter@60c33609, org.springframework.security.web.access.intercept.AuthorizationFilter@4ea4290f]
+2024-06-02T12:05:54.115+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:05:54.658+02:00  INFO 17964 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-06-02T12:05:54.674+02:00  INFO 17964 --- [main] ProyectoFinal.Banco.BancoApplication     : Started BancoApplication in 6.299 seconds (process running for 6.633)
+2024-06-02T12:05:54.679+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:05:54.680+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy120
+2024-06-02T12:05:54.842+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy120
+2024-06-02T12:05:54.942+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método save() de la clase jdk.proxy2.$Proxy121
+2024-06-02T12:05:54.992+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método save() de la clase jdk.proxy2.$Proxy121
+2024-06-02T12:05:54.993+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método save() de la clase jdk.proxy2.$Proxy120
+2024-06-02T12:05:54.998+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método save() de la clase jdk.proxy2.$Proxy120
+2024-06-02T12:05:54.999+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método save() de la clase jdk.proxy2.$Proxy122
+2024-06-02T12:05:55.008+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método save() de la clase jdk.proxy2.$Proxy122
+2024-06-02T12:05:55.008+02:00  INFO 17964 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:06:49.397+02:00  INFO 2376 --- [main] P.Banco.BancoApplicationTests            : Starting BancoApplicationTests using Java 21 with PID 2376 (started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:06:49.399+02:00  INFO 2376 --- [main] P.Banco.BancoApplicationTests            : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:06:50.089+02:00  INFO 2376 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:06:50.157+02:00  INFO 2376 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:06:50.904+02:00  INFO 2376 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:06:50.968+02:00  INFO 2376 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:06:51.006+02:00  INFO 2376 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:06:51.277+02:00  INFO 2376 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:06:51.308+02:00  INFO 2376 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:06:51.518+02:00  INFO 2376 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3e2d8623
+2024-06-02T12:06:51.520+02:00  INFO 2376 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:06:51.553+02:00  WARN 2376 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:06:52.520+02:00  INFO 2376 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:06:52.644+02:00  INFO 2376 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:06:53.407+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:06:53.408+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:06:53.627+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:06:53.640+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:06:53.671+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:06:53.706+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:06:53.739+02:00  WARN 2376 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:06:53.843+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:06:53.879+02:00  INFO 2376 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:06:54.679+02:00  INFO 2376 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2b27d5d3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@12115c28, org.springframework.security.web.context.SecurityContextHolderFilter@4f5ad6b7, org.springframework.security.web.header.HeaderWriterFilter@5e38329d, org.springframework.web.filter.CorsFilter@cc3fc5c, org.springframework.security.web.csrf.CsrfFilter@3c89fdd8, org.springframework.security.web.authentication.logout.LogoutFilter@7fe40b9f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4bbabec8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@443d94ae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@322399e6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2aac60b, org.springframework.security.web.access.ExceptionTranslationFilter@7c08461b, org.springframework.security.web.access.intercept.AuthorizationFilter@2693e39c]
+2024-06-02T12:06:54.679+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:06:55.365+02:00  INFO 2376 --- [main] P.Banco.BancoApplicationTests            : Started BancoApplicationTests in 6.24 seconds (process running for 7.127)
+2024-06-02T12:06:55.371+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:06:55.372+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:06:55.521+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:06:55.522+02:00  INFO 2376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:06:56.075+02:00  INFO 2376 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:06:56.078+02:00  INFO 2376 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-02T12:06:56.084+02:00  INFO 2376 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-02T12:08:10.474+02:00  INFO 8208 --- [main] P.Banco.BancoApplicationTests            : Starting BancoApplicationTests using Java 21 with PID 8208 (started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:08:10.475+02:00  INFO 8208 --- [main] P.Banco.BancoApplicationTests            : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:08:11.160+02:00  INFO 8208 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:08:11.232+02:00  INFO 8208 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:08:11.995+02:00  INFO 8208 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:08:12.058+02:00  INFO 8208 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:08:12.098+02:00  INFO 8208 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:08:12.370+02:00  INFO 8208 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:08:12.398+02:00  INFO 8208 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:08:12.707+02:00  INFO 8208 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5f0d8937
+2024-06-02T12:08:12.709+02:00  INFO 8208 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:08:12.744+02:00  WARN 8208 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:08:13.709+02:00  INFO 8208 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:08:13.825+02:00  INFO 8208 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:08:14.513+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:08:14.514+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:08:14.737+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:08:14.748+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:08:14.770+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:08:14.793+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:08:14.828+02:00  WARN 8208 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:08:14.945+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:08:14.985+02:00  INFO 8208 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:08:15.742+02:00  INFO 8208 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@42c9f2cd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@797c67c, org.springframework.security.web.context.SecurityContextHolderFilter@48064a5a, org.springframework.security.web.header.HeaderWriterFilter@5d1d05ff, org.springframework.web.filter.CorsFilter@31ce271c, org.springframework.security.web.csrf.CsrfFilter@74fd5fb0, org.springframework.security.web.authentication.logout.LogoutFilter@443d94ae, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4d1f6e1c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6a2b6031, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2e4262d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b1d7b09, org.springframework.security.web.access.ExceptionTranslationFilter@665c79a2, org.springframework.security.web.access.intercept.AuthorizationFilter@6fe55fcf]
+2024-06-02T12:08:15.742+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:08:16.413+02:00  INFO 8208 --- [main] P.Banco.BancoApplicationTests            : Started BancoApplicationTests in 6.203 seconds (process running for 7.136)
+2024-06-02T12:08:16.416+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:08:16.416+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:08:16.563+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:08:16.563+02:00  INFO 8208 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:08:17.137+02:00  INFO 8208 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:08:17.143+02:00  INFO 8208 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-02T12:08:17.146+02:00  INFO 8208 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-02T12:09:47.728+02:00  INFO 10376 --- [main] P.Banco.BancoApplicationTests            : Starting BancoApplicationTests using Java 21 with PID 10376 (started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:09:47.729+02:00  INFO 10376 --- [main] P.Banco.BancoApplicationTests            : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:09:48.362+02:00  INFO 10376 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:09:48.427+02:00  INFO 10376 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:09:49.132+02:00  INFO 10376 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:09:49.188+02:00  INFO 10376 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:09:49.228+02:00  INFO 10376 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:09:49.484+02:00  INFO 10376 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:09:49.553+02:00  INFO 10376 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:09:49.752+02:00  INFO 10376 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@69fe7090
+2024-06-02T12:09:49.754+02:00  INFO 10376 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:09:49.784+02:00  WARN 10376 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:09:50.753+02:00  INFO 10376 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:09:50.875+02:00  INFO 10376 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:09:51.564+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:09:51.568+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:09:51.807+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:09:51.817+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:09:51.844+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:09:51.882+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:09:51.919+02:00  WARN 10376 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:09:52.025+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:09:52.064+02:00  INFO 10376 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:09:52.943+02:00  INFO 10376 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6020cd42, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2b68c59b, org.springframework.security.web.context.SecurityContextHolderFilter@308d8de8, org.springframework.security.web.header.HeaderWriterFilter@39eea4f6, org.springframework.web.filter.CorsFilter@326d39fd, org.springframework.security.web.csrf.CsrfFilter@389fad5b, org.springframework.security.web.authentication.logout.LogoutFilter@3431cb1f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5b395ee, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c37c36, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2060df8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@403f6c04, org.springframework.security.web.access.ExceptionTranslationFilter@189fb01b, org.springframework.security.web.access.intercept.AuthorizationFilter@5b9c74a]
+2024-06-02T12:09:52.944+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:09:53.594+02:00  INFO 10376 --- [main] P.Banco.BancoApplicationTests            : Started BancoApplicationTests in 6.107 seconds (process running for 6.942)
+2024-06-02T12:09:53.596+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:09:53.597+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:09:53.751+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:09:53.751+02:00  INFO 10376 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:09:54.245+02:00  INFO 10376 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:09:54.247+02:00  INFO 10376 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-02T12:09:54.252+02:00  INFO 10376 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-02T12:24:34.957+02:00  INFO 11716 --- [main] P.Banco.BancoApplicationTests            : Starting BancoApplicationTests using Java 21 with PID 11716 (started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:24:34.959+02:00  INFO 11716 --- [main] P.Banco.BancoApplicationTests            : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:24:35.648+02:00  INFO 11716 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:24:35.713+02:00  INFO 11716 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:24:36.435+02:00  INFO 11716 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:24:36.506+02:00  INFO 11716 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:24:36.544+02:00  INFO 11716 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:24:36.841+02:00  INFO 11716 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:24:36.867+02:00  INFO 11716 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:24:37.063+02:00  INFO 11716 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@386e9fd8
+2024-06-02T12:24:37.065+02:00  INFO 11716 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:24:37.100+02:00  WARN 11716 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:24:38.148+02:00  INFO 11716 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:24:38.276+02:00  INFO 11716 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:24:39.239+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:24:39.244+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:24:39.505+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:24:39.516+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:24:39.540+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:24:39.582+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:24:39.623+02:00  WARN 11716 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:24:39.927+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:24:39.974+02:00  INFO 11716 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:24:41.118+02:00  INFO 11716 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@326d39fd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@403f6c04, org.springframework.security.web.context.SecurityContextHolderFilter@6c37c36, org.springframework.security.web.header.HeaderWriterFilter@4400026, org.springframework.web.filter.CorsFilter@2693e39c, org.springframework.security.web.csrf.CsrfFilter@285b63eb, org.springframework.security.web.authentication.logout.LogoutFilter@797c67c, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6020cd42, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5e38329d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@60be9fdf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4bbabec8, org.springframework.security.web.access.ExceptionTranslationFilter@77587422, org.springframework.security.web.access.intercept.AuthorizationFilter@24facb47]
+2024-06-02T12:24:41.119+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:24:41.959+02:00  INFO 11716 --- [main] P.Banco.BancoApplicationTests            : Started BancoApplicationTests in 7.253 seconds (process running for 8.178)
+2024-06-02T12:24:41.962+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:24:41.963+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:24:42.108+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:24:42.109+02:00  INFO 11716 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:24:42.592+02:00  INFO 11716 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:24:42.594+02:00  INFO 11716 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-02T12:24:42.597+02:00  INFO 11716 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-02T12:36:38.039+02:00  INFO 1784 --- [main] P.Banco.BancoApplicationTests            : Starting BancoApplicationTests using Java 21 with PID 1784 (started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:36:38.041+02:00  INFO 1784 --- [main] P.Banco.BancoApplicationTests            : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:36:38.780+02:00  INFO 1784 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:36:38.871+02:00  INFO 1784 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:36:39.645+02:00  INFO 1784 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:36:39.714+02:00  INFO 1784 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:36:39.761+02:00  INFO 1784 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:36:40.326+02:00  INFO 1784 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:36:40.353+02:00  INFO 1784 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:36:40.598+02:00  INFO 1784 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@52433946
+2024-06-02T12:36:40.603+02:00  INFO 1784 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:36:40.642+02:00  WARN 1784 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:36:41.607+02:00  INFO 1784 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:36:41.724+02:00  INFO 1784 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:36:42.422+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:36:42.424+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:36:42.626+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:36:42.642+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:36:42.661+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:36:42.699+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:36:42.728+02:00  WARN 1784 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:36:42.827+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:36:42.864+02:00  INFO 1784 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:36:43.590+02:00  INFO 1784 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1f41f259, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@648c80cb, org.springframework.security.web.context.SecurityContextHolderFilter@298cfe89, org.springframework.security.web.header.HeaderWriterFilter@546ca9da, org.springframework.web.filter.CorsFilter@4a9d6eb9, org.springframework.security.web.csrf.CsrfFilter@22bbbe6, org.springframework.security.web.authentication.logout.LogoutFilter@4f70b659, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3f523dae, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@49522bdf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@77587422, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@157a2c86, org.springframework.security.web.access.ExceptionTranslationFilter@7d018c58, org.springframework.security.web.access.intercept.AuthorizationFilter@64faf3d]
+2024-06-02T12:36:43.591+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:36:44.300+02:00  INFO 1784 --- [main] P.Banco.BancoApplicationTests            : Started BancoApplicationTests in 6.509 seconds (process running for 7.41)
+2024-06-02T12:36:44.306+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:36:44.307+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:36:44.447+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:36:44.447+02:00  INFO 1784 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:36:44.990+02:00  INFO 1784 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:36:44.992+02:00  INFO 1784 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-02T12:36:44.997+02:00  INFO 1784 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-02T12:49:23.927+02:00  INFO 15020 --- [main] P.Banco.BancoApplicationTests            : Starting BancoApplicationTests using Java 21 with PID 15020 (started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:49:23.930+02:00  INFO 15020 --- [main] P.Banco.BancoApplicationTests            : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:49:24.734+02:00  INFO 15020 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:49:24.828+02:00  INFO 15020 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 86 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:49:25.623+02:00  INFO 15020 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:49:25.689+02:00  INFO 15020 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:49:25.731+02:00  INFO 15020 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:49:26.041+02:00  INFO 15020 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:49:26.076+02:00  INFO 15020 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:49:26.397+02:00  INFO 15020 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7e2c6fd6
+2024-06-02T12:49:26.398+02:00  INFO 15020 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:49:26.434+02:00  WARN 15020 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:49:27.475+02:00  INFO 15020 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:49:27.605+02:00  INFO 15020 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:49:28.370+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:49:28.372+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:49:28.636+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:49:28.647+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:49:28.667+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:49:28.705+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:49:28.740+02:00  WARN 15020 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:49:28.880+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:49:28.930+02:00  INFO 15020 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:49:29.786+02:00  INFO 15020 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@77587422, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@39eea4f6, org.springframework.security.web.context.SecurityContextHolderFilter@74fd5fb0, org.springframework.security.web.header.HeaderWriterFilter@a904e64, org.springframework.web.filter.CorsFilter@5c94d4b8, org.springframework.security.web.csrf.CsrfFilter@2862bac6, org.springframework.security.web.authentication.logout.LogoutFilter@3e79473d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@189fb01b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4f96e484, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3cc5ca01, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4400026, org.springframework.security.web.access.ExceptionTranslationFilter@1aa64998, org.springframework.security.web.access.intercept.AuthorizationFilter@298cfe89]
+2024-06-02T12:49:29.787+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:49:30.472+02:00  INFO 15020 --- [main] P.Banco.BancoApplicationTests            : Started BancoApplicationTests in 6.826 seconds (process running for 7.75)
+2024-06-02T12:49:30.474+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:49:30.475+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:49:30.638+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:49:30.638+02:00  INFO 15020 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:49:31.195+02:00  INFO 15020 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:49:31.198+02:00  INFO 15020 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-02T12:49:31.207+02:00  INFO 15020 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-02T12:52:33.966+02:00  INFO 5648 --- [main] P.Banco.BancoApplicationTests            : Starting BancoApplicationTests using Java 21 with PID 5648 (started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:52:33.968+02:00  INFO 5648 --- [main] P.Banco.BancoApplicationTests            : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:52:34.651+02:00  INFO 5648 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:52:34.718+02:00  INFO 5648 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:52:35.442+02:00  INFO 5648 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:52:35.498+02:00  INFO 5648 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:52:35.549+02:00  INFO 5648 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:52:35.832+02:00  INFO 5648 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:52:35.862+02:00  INFO 5648 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:52:36.071+02:00  INFO 5648 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7e31d53b
+2024-06-02T12:52:36.073+02:00  INFO 5648 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:52:36.106+02:00  WARN 5648 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:52:37.024+02:00  INFO 5648 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:52:37.139+02:00  INFO 5648 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:52:37.822+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:52:37.823+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:52:38.056+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:52:38.067+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:52:38.092+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:52:38.119+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:52:38.152+02:00  WARN 5648 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:52:38.247+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:52:38.288+02:00  INFO 5648 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:52:39.009+02:00  INFO 5648 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@322399e6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2b551e7b, org.springframework.security.web.context.SecurityContextHolderFilter@389fad5b, org.springframework.security.web.header.HeaderWriterFilter@c8d20bb, org.springframework.web.filter.CorsFilter@36e95b7b, org.springframework.security.web.csrf.CsrfFilter@183e64a8, org.springframework.security.web.authentication.logout.LogoutFilter@49522bdf, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5069a91b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@285b63eb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a983f8a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1e5921ec, org.springframework.security.web.access.ExceptionTranslationFilter@789d45f7, org.springframework.security.web.access.intercept.AuthorizationFilter@4f5ad6b7]
+2024-06-02T12:52:39.009+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:52:39.613+02:00  INFO 5648 --- [main] P.Banco.BancoApplicationTests            : Started BancoApplicationTests in 5.894 seconds (process running for 6.804)
+2024-06-02T12:52:39.615+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:52:39.616+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:52:39.747+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:52:39.748+02:00  INFO 5648 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:52:40.250+02:00  INFO 5648 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:52:40.253+02:00  INFO 5648 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-02T12:52:40.256+02:00  INFO 5648 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-02T12:56:09.728+02:00  INFO 496 --- [main] P.Banco.BancoApplicationTests            : Starting BancoApplicationTests using Java 21 with PID 496 (started by Alex in C:\Users\Alex\Desktop\Banco)
+2024-06-02T12:56:09.730+02:00  INFO 496 --- [main] P.Banco.BancoApplicationTests            : No active profile set, falling back to 1 default profile: "default"
+2024-06-02T12:56:10.422+02:00  INFO 496 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T12:56:10.494+02:00  INFO 496 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 6 JPA repository interfaces.
+2024-06-02T12:56:11.226+02:00  INFO 496 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T12:56:11.287+02:00  INFO 496 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-06-02T12:56:11.321+02:00  INFO 496 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T12:56:11.589+02:00  INFO 496 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T12:56:11.619+02:00  INFO 496 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T12:56:11.841+02:00  INFO 496 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@b70fa38
+2024-06-02T12:56:11.843+02:00  INFO 496 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-02T12:56:11.881+02:00  WARN 496 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T12:56:12.907+02:00  INFO 496 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-02T12:56:13.020+02:00  INFO 496 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:56:13.679+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:56:13.680+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método passwordEncoder() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:56:13.881+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:56:13.893+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationProvider() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:56:13.917+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:56:13.958+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método authenticationManager() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:56:13.995+02:00  WARN 496 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-02T12:56:14.110+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:56:14.145+02:00  INFO 496 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-02T12:56:14.869+02:00  INFO 496 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1e5921ec, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@309b6768, org.springframework.security.web.context.SecurityContextHolderFilter@5a983f8a, org.springframework.security.web.header.HeaderWriterFilter@389fad5b, org.springframework.web.filter.CorsFilter@333e01c6, org.springframework.security.web.csrf.CsrfFilter@2044f708, org.springframework.security.web.authentication.logout.LogoutFilter@5c94d4b8, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2b551e7b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@54c1878b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@27f6e2c3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f70b659, org.springframework.security.web.access.ExceptionTranslationFilter@c8d20bb, org.springframework.security.web.access.intercept.AuthorizationFilter@322399e6]
+2024-06-02T12:56:14.870+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método filterChain() de la clase ProyectoFinal.Banco.seguridad.SeguridadConfig$$SpringCGLIB$$0
+2024-06-02T12:56:15.452+02:00  INFO 496 --- [main] P.Banco.BancoApplicationTests            : Started BancoApplicationTests in 5.96 seconds (process running for 6.87)
+2024-06-02T12:56:15.454+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:56:15.455+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Entrando en el método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:56:15.599+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método existsByNombreUsuario() de la clase jdk.proxy2.$Proxy123
+2024-06-02T12:56:15.599+02:00  INFO 496 --- [main] P.Banco.seguridad.LogAspecto             : Usuario: SinSesion - Saliendo del método onApplicationReady() de la clase ProyectoFinal.Banco.servicios.UsuarioServicioImpl
+2024-06-02T12:56:16.125+02:00  INFO 496 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-02T12:56:16.128+02:00  INFO 496 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-02T12:56:16.132+02:00  INFO 496 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

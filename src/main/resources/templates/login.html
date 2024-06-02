@@ -54,7 +54,7 @@
 	    mostrarNotificacion("¡Cuenta Creada!", "Se ha enviado a su direccion un correo de confirmacion", 'info');
 	</script>
 	<script th:if="${not #strings.isEmpty(mensajeExitoMailRecuperar)}">
-	    mostrarNotificacion("¡Confirmacion de mail enviada!", "Se ha enviado a su direccion un correo de confirmacion para cambiar la contraseña", 'info');
+	    mostrarNotificacion("¡Recuperacion de contraseña enviada!", "Se ha enviado a su direccion un correo de confirmacion para cambiar la contraseña", 'info');
 	</script>
 	<script th:if="${not #strings.isEmpty(cuentaVerificada)}">
 	    mostrarNotificacion("¡Cuenta Creada!", "Se ha Activado su cuenta correctamente", 'success');

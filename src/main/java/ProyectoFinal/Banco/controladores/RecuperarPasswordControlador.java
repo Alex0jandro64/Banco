@@ -19,7 +19,6 @@ import ProyectoFinal.Banco.servicios.IUsuarioServicio;
  * y que gestiona las solicitudes relacionadas con dichas vistas.
  */
 @Controller
-@RequestMapping("/auth")
 public class RecuperarPasswordControlador {
 
 	@Autowired
@@ -32,10 +31,10 @@ public class RecuperarPasswordControlador {
 	 * @param model El modelo en el que se añade como atributo un objeto usuarioDTO vacío para enviarlo a la vista.
 	 * @return La vista de inicioRecuperación.html
 	 */
-	@GetMapping("/iniciarRecuperacion")
+	@GetMapping("/auth/iniciarRecuperacion")
 	public String mostrarVistainiciarRecuperacion(Model model) {
 		model.addAttribute("usuarioDTO", new UsuarioDTO());
-		return "iniciarRecuperacion";
+		return "IniciarRecuperacion";
 	}
 
 	/**
@@ -46,7 +45,7 @@ public class RecuperarPasswordControlador {
 	 * @return La vista de login.html si el envío del email fue exitoso; 
 	 * 		   en caso contrario, la vista de inicio de recuperación.html
 	 */
-	@PostMapping("/iniciarRecuperacion")
+	@PostMapping("/auth/iniciarRecuperacion")
 	public String procesarInicioRecuperacion(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
 		
 		boolean envioConExito = usuarioServicio.iniciarResetPassConEmail(usuarioDTO.getEmailUsuario());
@@ -57,7 +56,7 @@ public class RecuperarPasswordControlador {
 		} else {
 	        model.addAttribute("mensajeErrorMail", "Error en el proceso de recuperacion.");
 		}
-		return "iniciarRecuperacion";
+		return "IniciarRecuperacion";
 	}
 	
 	/**
@@ -69,7 +68,7 @@ public class RecuperarPasswordControlador {
 	 * @return La vista de recuperación de contraseña (recuperar.html) si el token es válido;
 	 * 		   de lo contrario, la vista de inicioRecuperacion.html
 	 */
-	@GetMapping("/recuperar")
+	@GetMapping("/auth/recuperar")
 	public String mostrarVistaRecuperar(@RequestParam(name = "token") String token, Model model) {
 		UsuarioDTO usuario = usuarioServicio.obtenerUsuarioPorToken(token);
 		if(usuario != null) {
@@ -77,7 +76,7 @@ public class RecuperarPasswordControlador {
 		} else {
 	        model.addAttribute("usuarioDTO", new UsuarioDTO()); 
 	        model.addAttribute("mensajeErrorTokenValidez", "Token no válido o usuario no encontrado");
-	        return "iniciarRecuperacion";
+	        return "IniciarRecuperacion";
 		}
         return "recuperar";
 	}
@@ -89,18 +88,18 @@ public class RecuperarPasswordControlador {
 	 * @param model El modelo que se utiliza para enviar mensajes a la vista.
 	 * @return La vista de login.html si la modificación fue exitosa; de lo contrario, la vista de iniciarRecuperación.html
 	 */
-	@PostMapping("/recuperar")
+	@PostMapping("/auth/recuperar")
 	public String procesarRecuperacionContraseña(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
 		
 	    UsuarioDTO usuarioExistente = usuarioServicio.obtenerUsuarioPorToken(usuarioDTO.getToken());
 	    
 	    if (usuarioExistente == null) {
 	    	model.addAttribute("mensajeErrorTokenValidez", "Token no válido");
-	        return "iniciarRecuperacion";
+	        return "IniciarRecuperacion";
 	    }
 	    if (usuarioExistente.getExpiracionToken().before(Calendar.getInstance())) {
 	        model.addAttribute("mensajeErrorTokenExpirado", "El token ha expirado");
-	        return "iniciarRecuperacion";
+	        return "IniciarRecuperacion";
 	    }
 	    
 		boolean modificadaPassword = usuarioServicio.modificarContraseñaConToken(usuarioDTO);
@@ -110,7 +109,7 @@ public class RecuperarPasswordControlador {
 	        return "login";
 		} else {
 			model.addAttribute("contraseñaModificadaError", "Error al cambiar de contraseña");
-			return "iniciarRecuperacion";
+			return "IniciarRecuperacion";
 		}	
 	}
 

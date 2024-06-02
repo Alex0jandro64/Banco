@@ -123,6 +123,7 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
                 admin.setDniUsuario("-");
                 admin.setEmailUsuario("admin@admin.com");
                 admin.setRol("ROLE_ADMIN");
+                admin.setMailConfirmado(true);
 
                 CuentaBancaria cuentaAdmin = new CuentaBancaria();
                 cuentaAdmin.setUsuarioCuenta(admin);

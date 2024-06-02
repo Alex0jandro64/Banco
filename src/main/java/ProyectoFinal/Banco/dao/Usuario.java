@@ -120,9 +120,6 @@ public class Usuario {
 		return mailConfirmado;
 	}
     
-	public void setMailConfirmado(boolean mailConfirmado) {
-		this.mailConfirmado = mailConfirmado;
-	}
 
 	public void setMailConfirmado(Boolean mailConfirmado) {
 		this.mailConfirmado = mailConfirmado;

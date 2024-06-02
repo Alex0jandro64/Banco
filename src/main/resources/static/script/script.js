@@ -109,7 +109,7 @@ function confirmarEliminarUsu(event) {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = 'http://localhost:8080/privada/eliminar/' + idUsuario;
+            window.location.href = 'https://bodegas.alcerreca.es/privada/eliminar/' + idUsuario;
         }
     });
 }
@@ -118,7 +118,7 @@ function confirmarEliminar(event) {
     const idCita = event.currentTarget.getAttribute("data-id");
     confirmar().then(function (confirmado) {
         if (confirmado) {
-            window.location.href = 'http://localhost:8080/privada/eliminarCita/' + idCita;
+            window.location.href = 'https://bodegas.alcerreca.es/privada/eliminarCita/' + idCita;
         }
     });
 }
@@ -127,7 +127,7 @@ function confirmarRol(event) {
     const idUsuario = event.currentTarget.getAttribute("data-id");
     confirmarRolMensaje().then(function (confirmado) {
         if (confirmado) {
-            window.location.href = 'http://localhost:8080/privada/darRol/' + idUsuario;
+            window.location.href = 'https://bodegas.alcerreca.es/privada/darRol/' + idUsuario;
         }
     });
 }
