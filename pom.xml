@@ -35,11 +35,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.13.0</version> <!-- Use the latest version available -->
-</dependency>
-		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-core</artifactId>
 		</dependency>
@@ -69,12 +64,6 @@
 		    <artifactId>bootstrap</artifactId>
 		    <version>5.3.2</version>
 		</dependency>
-		
-		<dependency>
-    <groupId>com.itextpdf</groupId>
-    <artifactId>itextpdf</artifactId>
-    <version>5.5.13</version> <!-- o la versión más reciente disponible -->
-</dependency>
 				<!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery -->
 		<dependency>
 		    <groupId>org.webjars.bower</groupId>
@@ -92,8 +81,20 @@
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-mail</artifactId>
 	    </dependency>
-
+	    
+	    <!-- Generar PDF -->
+	    <dependency>
+		  <groupId>com.itextpdf</groupId>
+		  <artifactId>itextpdf</artifactId>
+		  <version>5.5.13</version>
+		</dependency>
+		<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.13.0</version> <!-- Use the latest version available -->
+</dependency>
 	</dependencies>
+	
 
 	<build>
 		<plugins>
