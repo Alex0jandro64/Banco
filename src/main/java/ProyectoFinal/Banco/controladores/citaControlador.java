@@ -1,5 +1,6 @@
 package ProyectoFinal.Banco.controladores;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class citaControlador {
 	 * Método para mostrar la lista de citas del usuario.
 	 */
 	@GetMapping("/privada/verCitas")
-    public String listarCitas(Model model, Authentication authentication) {
+    public String listarCitas(Model model, Authentication authentication, @ModelAttribute("mensajeCitaEditada") String mensajeCitaEditada,@ModelAttribute("ErrorEditarCita") String errorEditarCita) {
 		try {
     		String mail = authentication.getName();
         	Usuario usuario = usuarioServicio.buscarPorEmail(mail);
@@ -81,6 +82,8 @@ public class citaControlador {
         	}
         
         	model.addAttribute("usuario",usuario);
+        	model.addAttribute("mensajeCitaEditada",mensajeCitaEditada);
+        	model.addAttribute("ErrorEditarCita",errorEditarCita);
 		} catch (Exception e) {
         	model.addAttribute("errorMessage", "Error al cargar la página: " + e.getMessage());
     	}
@@ -121,4 +124,79 @@ public class citaControlador {
             return "redirect:/privada/verCitas";
         }
     }
+	
+	@GetMapping("/privada/editar-cita/{id}")
+	public String mostrarFormularioEdicion(@PathVariable Long id, Model model, HttpServletRequest request) {
+	    try {
+	        if (request.isUserInRole("ROLE_USER")) {
+	            model.addAttribute("noAdmin", "No tiene permiso para realizar esta accion");
+	            return "dashboard";
+	        } else {
+	            List<CitaDTO> citasDto = citaServicio.buscarTodos();
+	            CitaDTO citaDto = null;
+	            for (CitaDTO cita : citasDto) {
+	                if (cita.getIdCita() == id.longValue()) { // Convertimos el Long a long
+	                    citaDto = cita;
+	                    break;
+	                }
+	            }
+
+	            if (citaDto == null) {
+	                return "administracionUsuarios";
+	            }
+	            
+	            List<Oficina> oficinas = oficinaServicio.obtenerOficinas();
+	            List<OficinaDTO> oficinasDto = Util.listaOficinasToDto(oficinas);
+	        
+	            model.addAttribute("listaOficinas", oficinasDto);
+	            CitaDTOLong citaDtoLong = new CitaDTOLong();
+	            citaDtoLong.setIdCita(citaDto.getIdCita());
+	            citaDtoLong.setFechaCita(citaDto.getFechaCita());
+	            citaDtoLong.setMotivoCita(citaDto.getMotivoCita());
+	            citaDtoLong.setOficinaCita(citaDto.getOficinaCita().getIdOficina());
+	            citaDtoLong.setUsuarioCita(citaDto.getUsuarioCita());
+	            model.addAttribute("fechaSeleccionada", citaDto.getFechaCita().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
+
+	            model.addAttribute("citaDtoLong", citaDtoLong);
+	            
+	            // Establecer la oficina seleccionada por defecto
+	            model.addAttribute("oficinaSeleccionada", citaDto.getOficinaCita().getIdOficina());
+	            
+	            return "editarCita";
+	        }
+	    } catch (Exception e) {
+	        model.addAttribute("Error", "Ocurrió un error al obtener el usuario para editar");
+	        return "dashboard";
+	    }
+	}
+
+	/**
+	 * Gestiona la solicitud HTTP POST para la url /privada/procesar-editar y
+	 * procesa el formulario de edición del usuario.
+	 *
+	 * @param usuarioDTO UsuarioDTO con los datos editados.
+	 * @param model      Modelo que se utiliza para enviar mensajes y el listado
+	 *                   actualizado a la vista.
+	 * @return La vista de administración de usuarios con el resultado de la
+	 *         edición.
+	 */
+	@PostMapping("/privada/editarCita")
+	public String procesarFormularioEdicion(@RequestParam("idOficina") Long idOficina,
+            @ModelAttribute CitaDTOLong citaDTOLong,
+            Authentication authentication,
+            RedirectAttributes redirectAttributes) {
+		try {
+			String mail = authentication.getName();
+            Usuario usuario = usuarioServicio.buscarPorEmail(mail);
+            citaDTOLong.setUsuarioCita(usuario);
+            citaDTOLong.setOficinaCita(idOficina);
+			citaServicio.editarCita(citaDTOLong);
+			redirectAttributes.addFlashAttribute("mensajeCitaEditada", "La cita se ha editado correctamente");
+			return "redirect:/privada/verCitas";
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("ErrorEditarCita", "Ocurrió un error al editar la cita");
+			return "redirect:/privada/verCitas";
+		}
+	}
+	
 }

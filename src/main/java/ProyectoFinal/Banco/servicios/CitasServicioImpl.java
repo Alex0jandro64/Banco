@@ -54,6 +54,25 @@ public class CitasServicioImpl implements ICitasServicio {
             return -1; // Indica un error
         }
     }
+    
+    @Override
+    public int editarCita(CitaDTOLong citaDTOLong) {
+        try {
+            Cita citaDao = citaRepository.findFirstByIdCita(citaDTOLong.getIdCita());
+            Oficina oficina = oficinaRepository.findByIdOficina(citaDTOLong.getOficinaCita());
+            citaDao.setOficinaCita(oficina);
+            citaDao.setFechaCita(convertToCalendar(citaDTOLong.getFechaCita()));
+            citaDao.setMotivoCita(citaDTOLong.getMotivoCita());
+
+            int error = 0;
+            citaRepository.save(citaDao);
+            System.out.println("Cita modificada");
+            return error;
+        } catch (Exception e) {
+            System.out.println("[Error en CitasServicioImpl - editarCita()]: " + e.getMessage());
+            return -1; // Indica un error
+        }
+    }
 
     /** 
      * Elimina una cita por su ID

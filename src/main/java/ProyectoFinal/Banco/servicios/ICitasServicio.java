@@ -20,7 +20,7 @@ public interface ICitasServicio {
      *         Otro valor si ocurrió un error durante la operación.
      */
     public int registrarCita(CitaDTOLong citaDTOString);
-    
+    public int editarCita(CitaDTOLong citaDTOLong);
     /**
      * Elimina una cita bancaria.
      * 

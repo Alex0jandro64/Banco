@@ -2,6 +2,7 @@ package ProyectoFinal.Banco.dao;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,13 +35,13 @@ public class CuentaBancaria {
     @Column(name = "codigo_iban_cuenta", nullable = true, length = 100)
     private String codigoIban;
 
-    @OneToMany(mappedBy = "usuarioTransaccionRemitente")
+    @OneToMany(mappedBy = "usuarioTransaccionRemitente", cascade = CascadeType.ALL)
     private List<Transaccion> trasaccionesRemitentes;
 
-    @OneToMany(mappedBy = "usuarioTransaccionDestinatario")
+    @OneToMany(mappedBy = "usuarioTransaccionDestinatario", cascade = CascadeType.ALL)
     private List<Transaccion> trasaccionesDestinatarios;
     
-    @OneToMany(mappedBy = "cuentaBancariaPrestamo")
+    @OneToMany(mappedBy = "cuentaBancariaPrestamo", cascade = CascadeType.ALL)
     private List<Prestamo> prestamosCuenta;
 
     // CONSTRUCTORES

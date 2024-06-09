@@ -39,7 +39,8 @@
 
 		<div class="card bg-light">
 			<div class="card-header"><h3>Listado usuarios</h3></div>
-			<div class="card-body" >
+			<div class="card-body" >	
+			 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Buscar por email..." onkeyup="filtrarTabla()">
 
 				<h5 class="card-title text-center text-danger" th:if="${#lists.isEmpty(usuarios)}">No hay usuarios registrados</h5>
 
@@ -57,12 +58,12 @@
 							<th class="table-dark">email</th>
 							<th class="table-dark">DNI</th>
 							<th class="table-dark"sec:authorize="hasRole('ROLE_ADMIN')">Rol</th>
-							<th class="table-dark"sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+							<!--  <th class="table-dark"sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>-->
 							<th class="table-dark"sec:authorize="hasRole('ROLE_ADMIN')">Añadir Rol</th>
 							
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tablaUsu">
 						<tr th:each="usuario : ${usuarios}">
 							<td sec:authorize="hasRole('ROLE_USER')">
 								<a class="btn btn-dark" th:href="@{/privada/ver/} + ${usuario.id}" th:text="${usuario.id}"></a></td>
@@ -72,9 +73,9 @@
 							<td th:text="${usuario.dniUsuario}"></td>
 							
 							<td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${usuario.rolUsuario}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')">
+							  <!--  <td sec:authorize="hasRole('ROLE_ADMIN')">
     							<a class="btn btn-danger" th:attr="data-id=${usuario.id}" th:text="'eliminar'" onclick="confirmarEliminarUsu(event)"></a>
-							</td>
+							</td>-->
 							<td sec:authorize="hasRole('ROLE_ADMIN')">
     							<a class="btn btn-success" th:attr="data-id=${usuario.id}" th:text="'Añadir Rol'" onclick="confirmarRol(event)"></a>
 							</td>
@@ -85,6 +86,31 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	function filtrarTabla() {
+	    // Obtener el valor de la barra de búsqueda
+	    var input = document.getElementById("searchInput");
+	    var filter = input.value.toLowerCase();
+	    
+	    // Obtener la tabla y las filas
+	    var table = document.getElementById("tablaUsu");
+	    var tr = table.getElementsByTagName("tr");
+	    
+	    // Iterar sobre todas las filas de la tabla y ocultar las que no coinciden con el filtro
+	    for (var i = 0; i < tr.length; i++) {
+	        var td = tr[i].getElementsByTagName("td")[2]; // Columna de email
+	        if (td) {
+	            var txtValue = td.textContent || td.innerText;
+	            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+	                tr[i].style.display = "";
+	            } else {
+	                tr[i].style.display = "none";
+	            }
+	        }
+	        }
+	    }
+	</script>
+	
 	<script th:if="${not #strings.isEmpty(noSePuedeEliminar)}">
 	    mostrarNotificacion("¡Error!","No se puede eliminar a un usuario con permisos de administrador", 'error');
 	</script>

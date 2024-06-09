@@ -45,21 +45,27 @@
 				<table class="table table-striped table-bordered" th:if="${not #lists.isEmpty(citas)}">
 					<thead class="thead-inverse">
 						<tr>
-							<th class="table-dark" sec:authorize="hasRole('ROLE_ADMIN')">Usuario</th>
+							<th class="table-dark" sec:authorize="hasRole('ROLE_ADMIN')or hasRole('ROLE_TRABAJADOR')">Usuario</th>
 							<th class="table-dark">Fecha</th>
 							<th class="table-dark">Ubicacion</th>
 							<th class="table-dark">Motivo</th>
-							<th class="table-dark" sec:authorize="hasRole('ROLE_ADMIN')or hasRole('ROLE_TRABAJADOR')">eliminar</th>
+							<th class="table-dark" sec:authorize="hasRole('ROLE_ADMIN')or hasRole('ROLE_TRABAJADOR')">Modificar</th>
+							<th class="table-dark" sec:authorize="hasRole('ROLE_ADMIN')or hasRole('ROLE_TRABAJADOR')">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="cita : ${citas}">
-						<td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${cita.usuarioCita.nombreUsuario}"></td>
+						<td sec:authorize="hasRole('ROLE_ADMIN')or hasRole('ROLE_TRABAJADOR')" th:text="${cita.usuarioCita.nombreUsuario}"></td>
 							<td th:text="${#temporals.format(cita.fechaCita, 'dd-MM-yyyy HH:mm')}"></td>
 							<td th:text="${cita.oficinaCita.direccionOficina}"></td>
 							<td th:text="${cita.motivoCita}"></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')or hasRole('ROLE_TRABAJADOR')">
-    							<a class="btn btn-danger" th:attr="data-id=${cita.getIdCita()}" th:text="'eliminar'" onclick="confirmarEliminar(event)"></a>
+    							<a class="btn btn-success" th:href="@{/privada/editar-cita/} + ${cita.getIdCita()}">
+									<i class="bi bi-pencil-square"> Editar</i>
+								</a>
+							</td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')or hasRole('ROLE_TRABAJADOR')">
+    							<a class="btn btn-danger" th:attr="data-id=${cita.getIdCita()}" th:text="'Eliminar'" onclick="confirmarEliminar(event)"></a>
 							</td>
 
 						</tr>
@@ -68,6 +74,11 @@
 			</div>
 		</div>
 	</div>
-	
+	<script th:if="${not #strings.isEmpty(mensajeCitaEditada)}">
+        mostrarNotificacion("¡Cita Editada!", "A modificado la cita correctamente", 'success');
+    </script>
+    <script th:if="${not #strings.isEmpty(ErrorEditarCita)}">
+        mostrarNotificacion("¡Error Editar Cita!", "A ocurrido un error al modificar la cita, intentelo de nuevo mas tarde", 'error');
+    </script>
 </body>
 </html>
